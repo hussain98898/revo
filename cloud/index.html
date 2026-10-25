@@ -1,0 +1,169 @@
+<!doctype html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="utf-8">
+<title>ريڤو · نظام إدارة المطعم</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="نظام مطعم كامل بالعربية: الكاشير، المطبخ، المخزون، المشتريات، الخزنة، التقارير وموقع الطلبات. يعمل على الهاتف والكمبيوتر، متزامن بين الأجهزة، ويعمل بدون إنترنت.">
+<meta name="theme-color" content="#006AFF">
+<link rel="icon" href="app/icons/icon-192.png">
+<link rel="apple-touch-icon" href="app/icons/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap">
+<style>
+:root { --brand: #006AFF; --brand-ink: #004bb5; --brand-soft: #e8f1ff; --ink: #14181f; --ink-2: #4b5563; --muted: #6b7280; --line: #e5e7eb; --bg: #ffffff; --bg-2: #f6f8fb; --good: #0a7d2c; --good-soft: #e6f6ea; --radius: 16px; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --brand: #4d93ff; --brand-ink: #9ec2ff; --brand-soft: #0f2140; --ink: #eef2f7; --ink-2: #c3cad6; --muted: #8b94a3; --line: #263041; --bg: #0f1420; --bg-2: #161d2b; --good: #4ade80; --good-soft: #0f2a1a; color-scheme: dark; } }
+:root[data-theme="dark"] { --brand: #4d93ff; --brand-ink: #9ec2ff; --brand-soft: #0f2140; --ink: #eef2f7; --ink-2: #c3cad6; --muted: #8b94a3; --line: #263041; --bg: #0f1420; --bg-2: #161d2b; --good: #4ade80; --good-soft: #0f2a1a; color-scheme: dark; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: "IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", Tahoma, sans-serif; color: var(--ink); background: var(--bg); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+a { color: var(--brand); text-decoration: none; }
+.wrap { width: min(1080px, 100% - 32px); margin-inline: auto; }
+header.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.top .wrap { display: flex; align-items: center; gap: 16px; min-height: 64px; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 20px; color: var(--ink); }
+.logo { width: 38px; height: 38px; border-radius: 11px; background: var(--brand); color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 20px; }
+nav.links { display: flex; gap: 18px; margin-inline-start: 12px; font-size: 15px; color: var(--ink-2); }
+nav.links a { color: inherit; }
+.sp { flex: 1; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 20px; border-radius: 12px; font-weight: 600; font-size: 15px; border: 1px solid var(--line); color: var(--ink); background: var(--bg); cursor: pointer; transition: transform .08s, background .15s; }
+.btn:hover { background: var(--bg-2); } .btn:active { transform: translateY(1px); }
+.btn.primary { background: var(--brand); border-color: var(--brand); color: #fff; } .btn.primary:hover { background: var(--brand-ink); border-color: var(--brand-ink); }
+.btn.lg { padding: 16px 26px; font-size: 17px; border-radius: 14px; }
+.hero { padding-block: 72px 48px; display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center; }
+.hero h1 { font-size: clamp(32px, 5vw, 52px); line-height: 1.25; margin: 0 0 16px; text-wrap: balance; }
+.hero p.lead { font-size: 19px; color: var(--ink-2); margin: 0 0 28px; max-width: 34em; }
+.cta { display: flex; gap: 12px; flex-wrap: wrap; }
+.hero .note { margin-top: 18px; color: var(--muted); font-size: 14px; }
+.mock { background: var(--bg-2); border: 1px solid var(--line); border-radius: 22px; padding: 18px; display: grid; gap: 12px; box-shadow: 0 30px 60px -40px rgba(0,0,0,.35); }
+.mock .bar { display: flex; gap: 8px; align-items: center; } .mock .pill { background: var(--brand-soft); color: var(--brand); border-radius: 99px; padding: 4px 10px; font-size: 13px; font-weight: 600; }
+.mock .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.mock .tile { background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 12px; border-inline-start: 4px solid var(--brand); }
+.mock .tile b { display: block; font-size: 14px; } .mock .tile span { color: var(--muted); font-size: 13px; }
+.mock .total { display: flex; justify-content: space-between; align-items: center; background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; font-weight: 700; }
+section { padding-block: 56px; }
+section.alt { background: var(--bg-2); }
+h2 { font-size: clamp(24px, 3.4vw, 34px); margin: 0 0 8px; text-wrap: balance; }
+p.sub { color: var(--ink-2); margin: 0 0 32px; font-size: 17px; max-width: 42em; }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.card { background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; display: grid; gap: 8px; align-content: start; }
+.card .ic { width: 40px; height: 40px; border-radius: 12px; background: var(--brand-soft); color: var(--brand); display: grid; place-items: center; }
+.card .ic svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.card h3 { margin: 4px 0 0; font-size: 18px; } .card p { margin: 0; color: var(--ink-2); font-size: 15px; }
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; counter-reset: s; }
+.step { background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; display: grid; gap: 6px; }
+.step .n { width: 32px; height: 32px; border-radius: 50%; background: var(--brand); color: #fff; display: grid; place-items: center; font-weight: 700; }
+.step h3 { margin: 6px 0 0; font-size: 17px; } .step p { margin: 0; color: var(--ink-2); font-size: 15px; }
+.install { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.install .card b { color: var(--ink); }
+.install ol { margin: 6px 0 0; padding-inline-start: 18px; color: var(--ink-2); font-size: 15px; display: grid; gap: 4px; }
+.faq { display: grid; gap: 10px; max-width: 760px; }
+details { background: var(--bg); border: 1px solid var(--line); border-radius: 14px; padding: 14px 18px; }
+summary { cursor: pointer; font-weight: 600; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+summary::-webkit-details-marker { display: none; } summary::after { content: "+"; color: var(--muted); font-size: 20px; } details[open] summary::after { content: "−"; }
+details p { margin: 10px 0 0; color: var(--ink-2); }
+footer { border-top: 1px solid var(--line); padding-block: 28px; color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; }
+.rules { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.rule { background: var(--good-soft); color: var(--good); border-radius: var(--radius); padding: 18px 20px; font-weight: 600; display: flex; gap: 10px; align-items: flex-start; }
+.rule span { color: var(--ink-2); font-weight: 400; display: block; font-size: 14px; margin-top: 2px; }
+@media (max-width: 900px) { .hero { grid-template-columns: 1fr; padding-block: 40px 32px; } .grid, .steps, .install, .rules { grid-template-columns: 1fr 1fr; } nav.links { display: none; } }
+@media (max-width: 560px) { .grid, .steps, .install, .rules { grid-template-columns: 1fr; } .mock .tiles { grid-template-columns: 1fr 1fr; } .btn.lg { width: 100%; } }
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="#"><span class="logo">ر</span>ريڤو</a>
+  <nav class="links"><a href="#features">المزايا</a><a href="#how">كيف يعمل</a><a href="#install">التثبيت</a><a href="#faq">أسئلة</a></nav>
+  <span class="sp"></span>
+  <a class="btn" href="app/#demo">جرّب النسخة التجريبية</a>
+  <a class="btn primary" href="app/">فتح التطبيق</a>
+</div></header>
+
+<main>
+<section class="wrap hero">
+  <div>
+    <h1>نظام مطعم كامل، بالعربية، يعمل على أي جهاز وبدون إنترنت</h1>
+    <p class="lead">الكاشير، المطبخ، المخزون والوصفات، المشتريات، الخزنة وإقفال اليوم، التقارير، وموقع طلبات لزبائنك. كل جهاز في المطعم يرى الأرقام نفسها في اللحظة نفسها، وكل عملية تترك أثرًا لا يُعدَّل.</p>
+    <div class="cta">
+      <a class="btn primary lg" href="app/#signup">ابدأ مجانًا</a>
+      <a class="btn lg" href="app/#demo">جرّب مطعمًا تجريبيًا</a>
+    </div>
+    <p class="note">حساب واحد لصاحب المطعم، والموظفون ينضمون برابط دعوة. لا بطاقة بنكية ولا تثبيت معقد: يُفتح من المتصفح ويُثبَّت على الهاتف أو الكمبيوتر بضغطة.</p>
+  </div>
+  <div class="mock" aria-hidden="true">
+    <div class="bar"><span class="pill">الكاشير</span><span class="pill">الوردية مفتوحة</span></div>
+    <div class="tiles"><div class="tile"><b>برجر كلاسيك</b><span>30.000</span></div><div class="tile"><b>دبل تشيز</b><span>38.000</span></div><div class="tile"><b>بطاطس مقلية</b><span>8.000</span></div><div class="tile"><b>كولا</b><span>5.000</span></div><div class="tile"><b>راب دجاج</b><span>24.000</span></div><div class="tile"><b>بوكس العائلة</b><span>65.000</span></div></div>
+    <div class="total"><span>المطلوب</span><span>73.000 د.ل</span></div>
+  </div>
+</section>
+
+<section class="alt" id="features"><div class="wrap">
+  <h2>كل ما يحتاجه المطعم في مكان واحد</h2>
+  <p class="sub">صُمّم ليفهمه الكاشير في دقائق، ويطمئن إليه المحاسب وصاحب المطعم.</p>
+  <div class="grid">
+    <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div><h3>الكاشير</h3><p>بيع بضغطة، خيارات الأصناف، استلام وداخلي وتوصيل، نقد أو تحويل، إيصال وتذاكر مطبخ تُطبع تلقائيًا.</p></div>
+    <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 12h16M6 12a6 6 0 0 1 12 0M3 16h18"/></svg></div><h3>المطبخ والتحضير</h3><p>تذاكر لكل محطة على طابعتها، وتسجيل ما حُضّر فعلًا فيُخصم من المواد الخام.</p></div>
+    <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 7l9-4 9 4v10l-9 4-9-4z"/><path d="M3 7l9 4 9-4M12 11v10"/></svg></div><h3>المخزون والوصفات</h3><p>كل صنف وصفته، وكل بيع يخصم مواده. عدّ المخزون، الهدر، حد التنبيه وقائمة الشراء.</p></div>
+    <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M2 8h20v10H2zM6 8V5h12v3"/><circle cx="12" cy="13" r="2.5"/></svg></div><h3>الخزنة والورديات</h3><p>عدّ أعمى في نهاية الوردية، اعتماد التسليم برمز، إقفال اليوم وتوزيع الربح على الشركاء.</p></div>
+    <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 19V5M4 19h16M8 15v-4M12 15V8M16 15v-6"/></svg></div><h3>التقارير</h3><p>قائمة الدخل، المبيعات، النقد، بضاعة الفترة، وكشف لكل حساب. كل رقم يرجع إلى قيوده.</p></div>
+    <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></div><h3>موقع الطلبات</h3><p>زبائنك يطلبون من صفحة بسيطة وسريعة، والطلب يصل إلى شاشة الطلبات بانتظار القبول.</p></div>
+  </div>
+</div></section>
+
+<section id="how"><div class="wrap">
+  <h2>كيف يعمل</h2>
+  <p class="sub">أربع خطوات من الصفر إلى أول يوم مقفل، ودليل بدء داخل النظام يتابعها معك خطوة خطوة.</p>
+  <div class="steps">
+    <div class="step"><span class="n">1</span><h3>أنشئ حسابك</h3><p>بريد وكلمة مرور واسم المطعم. يُنشأ للمطعم حساب سحابي خاص به خلال ثوانٍ.</p></div>
+    <div class="step"><span class="n">2</span><h3>جهّز القائمة</h3><p>الأقسام والأصناف والمواد والوصفات، ثم المال في الخزنة وأول بضاعة. دليل البدء يشير إلى الخطوة التالية.</p></div>
+    <div class="step"><span class="n">3</span><h3>ادعُ الفريق</h3><p>رابط دعوة لكل موظف. يفتحه على هاتفه، ينشئ حسابه، ويدخل باسمه ورمزه كالمعتاد.</p></div>
+    <div class="step"><span class="n">4</span><h3>بِع وأقفل اليوم</h3><p>افتح الوردية، بِع، سلّم الطلبات، أنهِ الوردية بعدّ أعمى، وأقفل اليوم فتُوزَّع الأرباح.</p></div>
+  </div>
+</div></section>
+
+<section class="alt" id="install"><div class="wrap">
+  <h2>ثبّته كتطبيق على أي جهاز</h2>
+  <p class="sub">يعمل من المتصفح مباشرة، ويُثبَّت كتطبيق كامل الشاشة على الهاتف والكمبيوتر. يعمل بدون إنترنت ويرسل العمليات عند عودة الاتصال.</p>
+  <div class="install">
+    <div class="card"><b>أندرويد (Chrome)</b><ol><li>افتح <a href="app/">التطبيق</a>.</li><li>اضغط «تثبيت التطبيق» عندما تظهر، أو قائمة المتصفح ثم «إضافة إلى الشاشة الرئيسية».</li></ol></div>
+    <div class="card"><b>آيفون وآيباد (Safari)</b><ol><li>افتح <a href="app/">التطبيق</a> في سفاري.</li><li>زر المشاركة ثم «إضافة إلى الشاشة الرئيسية».</li></ol></div>
+    <div class="card"><b>ويندوز (Chrome أو Edge)</b><ol><li>افتح <a href="app/">التطبيق</a>.</li><li>أيقونة التثبيت في شريط العنوان، أو «تثبيت التطبيق» داخل النظام.</li></ol></div>
+    <div class="card"><b>ماك (Chrome أو Safari)</b><ol><li>افتح <a href="app/">التطبيق</a>.</li><li>Chrome: أيقونة التثبيت في شريط العنوان. Safari: ملف ثم «إضافة إلى Dock».</li></ol></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>قواعد لا تتغير</h2>
+  <p class="sub">بُني النظام على قواعد تحمي المال والأرقام، وتجعل كل شاشة تتفق مع الأخرى.</p>
+  <div class="rules">
+    <div class="rule">لا دين على الكاشير<span>لا يخرج طلب قبل دفعه، إلا طلبات تطبيقات التوصيل التي يحصّلها التطبيق.</span></div>
+    <div class="rule">كل عملية قيد لا يُعدَّل<span>التصحيح بعملية مضادة موثقة، فالتقارير تطابق سجلاتها دائمًا.</span></div>
+    <div class="rule">كل الأجهزة على سجل واحد<span>كاشيران يبيعان آخر وحدة في اللحظة نفسها: بيع واحد ورفض واضح للثاني.</span></div>
+  </div>
+</div></section>
+
+<section class="alt" id="faq"><div class="wrap">
+  <h2>أسئلة شائعة</h2>
+  <div class="faq">
+    <details><summary>هل يعمل بدون إنترنت؟</summary><p>نعم. يفتح التطبيق ويبيع ويطبع بدون اتصال، وتُحفظ العمليات على الجهاز ثم تُرسل بالترتيب عند عودة الاتصال. إن سبقه جهاز آخر على آخر وحدة، تُعرض العملية المرفوضة بوضوح ولا تُكرَّر.</p></details>
+    <details><summary>أين تُحفظ البيانات؟</summary><p>في قاعدة بيانات سحابية (Google Firebase) خاصة بالمطعم، لا يصل إليها إلا أعضاؤه بحساباتهم. نسخة من آخر حالة تبقى على كل جهاز للعمل بدون اتصال، وتستطيع تنزيل نسخة احتياطية كاملة في أي وقت من التقارير.</p></details>
+    <details><summary>كم جهازًا يمكن أن يعمل معًا؟</summary><p>بلا حد عملي: كاشيران أو أكثر، شاشة مطبخ، هاتف المحاسب، وجهاز صاحب المطعم. كلها على سجل عمليات واحد.</p></details>
+    <details><summary>كيف أضيف موظفًا؟</summary><p>من الإعدادات › المستخدمون: أضف المستخدم بدوره ورمزه، ثم «دعوة» وأرسل الرابط. يفتح الرابط على جهازه، ينشئ حسابه ببريده وكلمة مرور، ويصبح متصلًا بالمطعم.</p></details>
+    <details><summary>ماذا يحدث عند صدور تحديث؟</summary><p>يصلك إشعار «نسخة جديدة جاهزة» وتختار متى تُحدّث. البيانات لا تتأثر بالتحديث؛ يتعرّف النظام على الإصدار السابق ويرقّي السجل تلقائيًا.</p></details>
+    <details><summary>هل الطباعة مدعومة؟</summary><p>نعم: طابعات الإيصالات الحرارية (80 مم و58 مم) عبر USB من المتصفح، أو عبر الشبكة، أو نافذة الطباعة. تصميم الورقة قابل للتعديل.</p></details>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <span class="brand"><span class="logo" style="width:28px;height:28px;font-size:15px;border-radius:8px">ر</span>ريڤو</span>
+  <span>نظام إدارة المطعم</span>
+  <span class="sp"></span>
+  <a href="app/#demo">النسخة التجريبية</a>
+  <a href="app/">فتح التطبيق</a>
+  <span>الإصدار 202610251940</span>
+</div></footer>
+</body>
+</html>
