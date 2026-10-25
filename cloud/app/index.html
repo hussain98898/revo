@@ -1050,6 +1050,7 @@ h4.mt { margin: 14px 0 6px; font-size: 13px; color: var(--muted); font-weight: 6
 <div class="toasts" id="toasts" dir="rtl" lang="ar" aria-live="polite"></div>
 <div id="printarea" dir="rtl" lang="ar"></div>
 <script>document.documentElement.dir='rtl';document.documentElement.lang='ar';</script>
+<script>window.REVO_STORAGE = "cloud";</script>
 <script src="config.js"></script>
 <script src="firebase-bundle.js"></script>
 <script>
@@ -5484,11 +5485,14 @@ h4.mt { margin: 14px 0 6px; font-size: 13px; color: var(--muted); font-weight: 6
   const SyncLib = window.RevoSync;
   // The store on this device (IndexedDB). Every write waits for the browser to confirm it; a refused write is an error, never a silent fallback.
   // When the browser offers no durable storage at all, the page says so and runs in memory (nothing survives closing the tab).
+  // Each build keeps its own storage on a device: the cloud app (window.REVO_STORAGE = 'cloud') never shares keys or the database
+  // with a single-file copy served from the same site, so a demo tried on one never leaks into the other.
+  const STORE_NS = window.REVO_STORAGE ? String(window.REVO_STORAGE) + ':' : '';
   const KV = (() => {
     let dbp = null; const mem = new Map(); let durable = null; let lastErr = '';
     const open = () => dbp || (dbp = new Promise((res) => {
       try {
-        const r = indexedDB.open('revo5', 1);
+        const r = indexedDB.open(STORE_NS + 'revo5', 1);
         r.onupgradeneeded = () => r.result.createObjectStore('kv');
         r.onsuccess = () => { durable = true; res(r.result); };
         r.onerror = () => { durable = false; lastErr = (r.error && r.error.message) || 'indexedDB'; res(null); };
@@ -5539,9 +5543,9 @@ h4.mt { margin: 14px 0 6px; font-size: 13px; color: var(--muted); font-weight: 6
     };
   })();
   const LS = {
-    get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
-    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* storage may be blocked */ } },
-    ss(k, v) { try { if (v === undefined) { const x = sessionStorage.getItem(k); return x == null ? null : JSON.parse(x); } if (v === null) sessionStorage.removeItem(k); else sessionStorage.setItem(k, JSON.stringify(v)); } catch (e) { return null; } },
+    get(k, d) { try { const v = localStorage.getItem(STORE_NS + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+    set(k, v) { try { localStorage.setItem(STORE_NS + k, JSON.stringify(v)); } catch (e) { /* storage may be blocked */ } },
+    ss(k, v) { try { if (v === undefined) { const x = sessionStorage.getItem(STORE_NS + k); return x == null ? null : JSON.parse(x); } if (v === null) sessionStorage.removeItem(STORE_NS + k); else sessionStorage.setItem(STORE_NS + k, JSON.stringify(v)); } catch (e) { return null; } },
   };
 
   // This device: which mode it runs (demo or real data), which cashier station it is, its theme.
@@ -5558,7 +5562,7 @@ h4.mt { margin: 14px 0 6px; font-size: 13px; color: var(--muted); font-weight: 6
   // and a change made in one tab is seen by the others before they write (the head document announces it on a channel).
   function localDb(key) {
     const K = p => key + ':' + p;
-    const chan = (() => { try { return new BroadcastChannel('revo5:' + key); } catch (e) { return null; } })();
+    const chan = (() => { try { return new BroadcastChannel(STORE_NS + 'revo5:' + key); } catch (e) { return null; } })();
     const subs = new Map();
     const snap = (path, v) => ({ id: path.split('/').pop(), exists: v != null, data: () => (v == null ? v : JSON.parse(JSON.stringify(v))), metadata: { fromCache: false, hasPendingWrites: false } });
     const notify = (path, v) => (subs.get(path) || []).forEach(f => { try { f(snap(path, v)); } catch (e) { /* ignore */ } });

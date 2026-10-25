@@ -1,7 +1,7 @@
 /* Revo service worker: keeps the app shell on the device so it opens and works offline, and brings new versions in
    without ever swapping files under a running cashier (the page asks for the switch). Data never passes through here:
    the restaurant's records live in Firestore and in the device's own store. */
-const BUILD = '202610251940';
+const BUILD = '202610252004';
 const CACHE = 'revo-shell-' + BUILD;
 const PAGE = './'; // the app page is cached under one key, whatever address it was opened from
 const BASE = new URL('./', self.location.href).pathname; // the folder this worker serves, normally /app/
