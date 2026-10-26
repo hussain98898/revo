@@ -1,0 +1,101 @@
+# Builds the desktop apps (Mac .dmg and Windows .exe) and publishes them on the repository's Releases page.
+# Runs by itself whenever something under desktop/ changes on main, or by hand from the Actions tab (Run workflow).
+# The site's download buttons point at the latest release: https://github.com/hussain98898/revo/releases/latest
+name: Desktop apps
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version number, e.g. 1.0.1 (empty = the version in desktop/package.json)'
+        required: false
+        default: ''
+  push:
+    branches: [main]
+    paths: ['desktop/**', '.github/workflows/desktop.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: desktop-apps
+  cancel-in-progress: false
+
+jobs:
+  version:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.v.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: v
+        shell: bash
+        run: |
+          V="${{ github.event.inputs.version }}"
+          if [ -z "$V" ]; then V=$(node -p "require('./desktop/package.json').version"); fi
+          echo "version=$V" >> "$GITHUB_OUTPUT"
+          echo "Building desktop apps version $V"
+
+  build:
+    needs: version
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-latest
+            script: dist:mac
+            file: Revo.dmg
+          - os: windows-latest
+            script: dist:win
+            file: Revo-Setup.exe
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Set the version
+        working-directory: desktop
+        run: npm version ${{ needs.version.outputs.version }} --no-git-tag-version --allow-same-version
+      - name: Install
+        working-directory: desktop
+        run: npm ci --no-audit --no-fund
+      - name: Build
+        working-directory: desktop
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run ${{ matrix.script }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.file }}
+          path: desktop/release/${{ matrix.file }}
+          if-no-files-found: error
+
+  release:
+    needs: [version, build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: files
+          merge-multiple: true
+      - name: List
+        run: ls -la files
+      - uses: softprops/action-gh-release@v2
+        with:
+          tag_name: desktop-v${{ needs.version.outputs.version }}
+          name: Revo desktop ${{ needs.version.outputs.version }}
+          make_latest: true
+          body: |
+            تطبيق ريڤو للكمبيوتر، الإصدار ${{ needs.version.outputs.version }}
+
+            - ويندوز 10 أو أحدث (64 بت): Revo-Setup.exe
+            - macOS 12 أو أحدث (Apple Silicon وIntel): Revo.dmg
+
+            التطبيق غير مسجّل بعد لدى مايكروسوفت وآبل، فقد يظهر تنبيه عند أول تشغيل فقط.
+            ويندوز: «مزيد من المعلومات» ثم «التشغيل على أي حال». ماك: إعدادات النظام › الخصوصية والأمان › «فتح على أي حال».
+          files: |
+            files/Revo.dmg
+            files/Revo-Setup.exe
+          fail_on_unmatched_files: true
