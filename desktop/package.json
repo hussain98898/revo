@@ -1,0 +1,98 @@
+{
+  "name": "revo-desktop",
+  "productName": "Revo",
+  "version": "1.0.0",
+  "description": "ريڤو: نظام إدارة المطعم، تطبيق الكمبيوتر لويندوز وماك",
+  "main": "main.js",
+  "private": true,
+  "author": "Revo <huissenalkrimi@gmail.com>",
+  "homepage": "https://hussain98898.github.io/revo/cloud/",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "electron .",
+    "dist:mac": "electron-builder --mac --publish never",
+    "dist:win": "electron-builder --win --publish never",
+    "dist": "electron-builder --mac --win --publish never",
+    "test": "node test/printing.test.js"
+  },
+  "devDependencies": {
+    "electron": "44.7.0",
+    "electron-builder": "26.17.0"
+  },
+  "build": {
+    "appId": "ly.revo.desktop",
+    "productName": "Revo",
+    "copyright": "© 2026 Revo",
+    "publish": null,
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "offline.html",
+      "lib/**",
+      "build/icon.png",
+      "build/icon.ico",
+      "package.json"
+    ],
+    "mac": {
+      "category": "public.app-category.business",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "universal"
+          ]
+        }
+      ],
+      "artifactName": "Revo.${ext}",
+      "icon": "build/icon.png",
+      "identity": null,
+      "hardenedRuntime": false,
+      "gatekeeperAssess": false,
+      "darkModeSupport": true,
+      "minimumSystemVersion": "12.0"
+    },
+    "dmg": {
+      "title": "Revo",
+      "contents": [
+        {
+          "x": 140,
+          "y": 190
+        },
+        {
+          "x": 400,
+          "y": 190,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "Revo-Setup.${ext}",
+      "icon": "build/icon.ico",
+      "signAndEditExecutable": true
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": false,
+      "deleteAppDataOnUninstall": false,
+      "runAfterFinish": true,
+      "shortcutName": "ريڤو",
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "afterPack": "build/afterPack.js"
+  }
+}
