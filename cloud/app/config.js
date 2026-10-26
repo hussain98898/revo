@@ -9,5 +9,5 @@ window.REVO_CONFIG = {
     messagingSenderId: '1081252479211',
     appId: '1:1081252479211:web:ffe8c40e47edc846c73eae',
   },
-  build: '202610252004',
+  build: '202610260126',
 };
