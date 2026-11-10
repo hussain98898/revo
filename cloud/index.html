@@ -573,7 +573,7 @@ footer { border-top: 1px solid var(--line); padding-block: 40px 28px; color: var
     <div><h4>زيتو</h4><ul><li><a href="#pricing">الأسعار</a></li><li><a href="#desktop">تطبيق الكمبيوتر</a></li><li><a href="app/#signup">ابدأ مجانًا</a></li><li><a href="app/#signin">تسجيل الدخول</a></li><li><a href="app/#demo">النسخة التجريبية</a></li></ul></div>
     <div><h4>المساعدة</h4><ul><li><a href="#faq">أسئلة شائعة</a></li><li><a href="#offline">العمل بلا إنترنت</a></li><li><a href="#terms">شروط الاستخدام</a></li><li><a href="#privacy">الخصوصية</a></li></ul></div>
   </div>
-  <div class="fbot"><span>© 2026 زيتو (Zeto). جميع الحقوق محفوظة.</span><span class="sp"></span><span>الإصدار 202610261433</span></div>
+  <div class="fbot"><span>© 2026 زيتو (Zeto). جميع الحقوق محفوظة.</span><span class="sp"></span><span>الإصدار 202611100610</span></div>
 </div></footer>
 
 <script>
@@ -605,9 +605,9 @@ footer { border-top: 1px solid var(--line); padding-block: 40px 28px; color: var
   try {
     fetch('https://api.github.com/repos/hussain98898/revo/releases/latest', { headers: { Accept: 'application/vnd.github+json' } }).then(function (r) { return r.ok ? r.json() : null; }).then(function (rel) {
       if (!rel || !rel.assets) { vers.forEach(function (v) { v.textContent = 'النسخة قيد التجهيز، ستظهر هنا عند صدورها.'; }); document.querySelectorAll('[data-dl]').forEach(function (a) { a.href = 'https://github.com/hussain98898/revo/releases'; }); return; }
-      var tag = (rel.tag_name || '').replace(/^v/, ''), date = rel.published_at ? new Date(rel.published_at).toLocaleDateString('ar', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
+      var tag = (rel.tag_name || '').replace(/^desktop-v|^v/, ''), date = rel.published_at ? new Date(rel.published_at).toLocaleDateString('ar', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
       document.querySelectorAll('[data-dl]').forEach(function (a) {
-        var want = a.getAttribute('data-dl') === 'win' ? /\.exe$/i : /\.dmg$/i; var asset = rel.assets.filter(function (x) { return want.test(x.name); })[0];
+        var want = a.getAttribute('data-dl') === 'win' ? /\.exe$/i : /\.dmg$/i; var list = rel.assets.filter(function (x) { return want.test(x.name); }); var asset = list.filter(function (x) { return /^Zeto/i.test(x.name); })[0] || list.sort(function (a, b) { return new Date(b.updated_at || 0) - new Date(a.updated_at || 0); })[0];
         var v = a.parentNode.querySelector('[data-ver]');
         if (asset) { a.href = asset.browser_download_url; v.textContent = 'الإصدار ' + tag + (date ? ' · ' + date : '') + ' · ' + Math.round(asset.size / 1048576) + ' م.ب'; }
         else { v.textContent = 'النسخة قيد التجهيز، ستظهر هنا عند صدورها.'; a.href = rel.html_url || 'https://github.com/hussain98898/revo/releases'; }
