@@ -1,11 +1,11 @@
 {
-  "name": "revo-desktop",
-  "productName": "Revo",
+  "name": "zeto-desktop",
+  "productName": "Zeto",
   "version": "1.0.0",
-  "description": "ريڤو: نظام إدارة المطعم، تطبيق الكمبيوتر لويندوز وماك",
+  "description": "زيتو: نظام إدارة المطعم، تطبيق الكمبيوتر لويندوز وماك",
   "main": "main.js",
   "private": true,
-  "author": "Revo <huissenalkrimi@gmail.com>",
+  "author": "Zeto <huissenalkrimi@gmail.com>",
   "homepage": "https://hussain98898.github.io/revo/cloud/",
   "license": "UNLICENSED",
   "scripts": {
@@ -20,9 +20,9 @@
     "electron-builder": "26.17.0"
   },
   "build": {
-    "appId": "ly.revo.desktop",
-    "productName": "Revo",
-    "copyright": "© 2026 Revo",
+    "appId": "app.zeto.desktop",
+    "productName": "Zeto",
+    "copyright": "© 2026 Zeto",
     "publish": null,
     "directories": {
       "output": "release",
@@ -35,7 +35,8 @@
       "lib/**",
       "build/icon.png",
       "build/icon.ico",
-      "package.json"
+      "package.json",
+      "config.json"
     ],
     "mac": {
       "category": "public.app-category.business",
@@ -47,7 +48,7 @@
           ]
         }
       ],
-      "artifactName": "Revo.${ext}",
+      "artifactName": "Zeto.${ext}",
       "icon": "build/icon.png",
       "identity": null,
       "hardenedRuntime": false,
@@ -56,7 +57,7 @@
       "minimumSystemVersion": "12.0"
     },
     "dmg": {
-      "title": "Revo",
+      "title": "Zeto",
       "contents": [
         {
           "x": 140,
@@ -79,7 +80,7 @@
           ]
         }
       ],
-      "artifactName": "Revo-Setup.${ext}",
+      "artifactName": "Zeto-Setup.${ext}",
       "icon": "build/icon.ico",
       "signAndEditExecutable": true
     },
@@ -89,7 +90,7 @@
       "allowToChangeInstallationDirectory": false,
       "deleteAppDataOnUninstall": false,
       "runAfterFinish": true,
-      "shortcutName": "ريڤو",
+      "shortcutName": "زيتو",
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true
     },

@@ -28,6 +28,6 @@ const P = require('../lib/printing');
   ok(msg === P.MSG.noPrinter, 'empty printer name is refused');
   msg = ''; try { await P.printRawSystem('Ghost', bytes, [{ name: 'XP-80C' }]); } catch (e) { msg = e.message; }
   ok(msg === P.MSG.noPrinter, 'a name not in the installed list is refused without calling the tool');
-  for (const [k, v] of Object.entries(P.MSG)) ok(!v.includes('—'), 'no em dash in message ' + k);
+  for (const [k, v] of Object.entries(P.MSG)) ok(!v.includes('\u2014'), 'no em dash in message ' + k);
   console.log(fails ? fails + ' failure(s)' : 'all ok'); process.exit(fails ? 1 : 0);
 })().catch(e => { console.error(e); process.exit(1); });

@@ -48,7 +48,7 @@ const PS_RAW = `param([string]$Printer, [string]$File)
 $ErrorActionPreference = 'Stop'
 Add-Type -TypeDefinition @"
 using System; using System.IO; using System.Runtime.InteropServices;
-public class RevoRawPrinter {
+public class ZetoRawPrinter {
   [StructLayout(LayoutKind.Sequential, CharSet=CharSet.Unicode)]
   public class DOCINFOW { [MarshalAs(UnmanagedType.LPWStr)] public string pDocName; [MarshalAs(UnmanagedType.LPWStr)] public string pOutputFile; [MarshalAs(UnmanagedType.LPWStr)] public string pDataType; }
   [DllImport("winspool.drv", EntryPoint="OpenPrinterW", SetLastError=true, CharSet=CharSet.Unicode, ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -66,7 +66,7 @@ public class RevoRawPrinter {
   [DllImport("winspool.drv", EntryPoint="WritePrinter", SetLastError=true, ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
   public static extern bool WritePrinter(IntPtr hPrinter, IntPtr pBytes, Int32 dwCount, out Int32 dwWritten);
   public static int Send(string printer, byte[] bytes) {
-    IntPtr h; DOCINFOW di = new DOCINFOW(); di.pDocName = "Revo"; di.pDataType = "RAW";
+    IntPtr h; DOCINFOW di = new DOCINFOW(); di.pDocName = "Zeto"; di.pDataType = "RAW";
     if (!OpenPrinter(printer, out h, IntPtr.Zero)) return 2;
     int rc = 3;
     if (StartDocPrinter(h, 1, di)) {
@@ -82,7 +82,7 @@ public class RevoRawPrinter {
 }
 "@
 $bytes = [System.IO.File]::ReadAllBytes($File)
-$rc = [RevoRawPrinter]::Send($Printer, $bytes)
+$rc = [ZetoRawPrinter]::Send($Printer, $bytes)
 exit $rc
 `;
 

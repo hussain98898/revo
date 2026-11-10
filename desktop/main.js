@@ -1,16 +1,21 @@
-// Revo desktop: a thin shell around the hosted app (the same app, the same account) that adds what a browser cannot do:
+// Zeto desktop: a thin shell around the hosted app (the same app, the same account) that adds what a browser cannot do:
 // silent printing to the computer's printers, raw printing to network printers, a USB printer chooser, and a window that
 // remembers its size. The app itself updates on the server; this shell rarely needs to change.
 const { app, BrowserWindow, Menu, shell, session, ipcMain, dialog, net, nativeTheme } = require('electron');
 const path = require('path'); const fs = require('fs');
 const printing = require('./lib/printing'); const { windowState } = require('./lib/state');
 
-const APP_URL = process.env.REVO_URL || 'https://hussain98898.github.io/revo/cloud/app/';
+// The hosted app. desktop/config.json carries the address and any extra origins (a custom domain later), so a domain move
+// needs only that file changed; REVO_URL overrides it for local tests.
+let CFG = {}; try { CFG = JSON.parse(fs.readFileSync(path.join(__dirname, 'config.json'), 'utf8')); } catch (e) { CFG = {}; }
+const APP_URL = process.env.REVO_URL || CFG.appUrl || 'https://hussain98898.github.io/revo/cloud/app/';
 const APP_ORIGIN = new URL(APP_URL).origin;
+const ORIGINS = [APP_ORIGIN].concat((CFG.extraOrigins || []).map(u => { try { return new URL(u).origin; } catch (e) { return null; } }).filter(Boolean));
+const ours = origin => !origin || ORIGINS.some(o => String(origin).startsWith(o)) || String(origin).startsWith('file:');
 const RELEASES_API = 'https://api.github.com/repos/hussain98898/revo/releases/latest';
 const RELEASES_PAGE = 'https://github.com/hussain98898/revo/releases/latest';
 
-app.setAppUserModelId('ly.revo.desktop');
+app.setAppUserModelId('app.zeto.desktop');
 if (!app.requestSingleInstanceLock()) app.quit();
 
 let win = null;
@@ -21,7 +26,7 @@ function createWindow() {
   win = new BrowserWindow({
     x: st.x, y: st.y, width: st.width, height: st.height, minWidth: 720, minHeight: 540,
     show: false, autoHideMenuBar: true, backgroundColor: nativeTheme.shouldUseDarkColors ? '#0e1320' : '#ffffff',
-    title: 'ريڤو', icon: path.join(__dirname, 'build', process.platform === 'win32' ? 'icon.ico' : 'icon.png'),
+    title: 'زيتو', icon: path.join(__dirname, 'build', process.platform === 'win32' ? 'icon.ico' : 'icon.png'),
     webPreferences: { preload: path.join(__dirname, 'preload.js'), contextIsolation: true, nodeIntegration: false, sandbox: true, spellcheck: false },
   });
   state.track(win);
@@ -36,11 +41,11 @@ function createWindow() {
   // Links to other sites open in the system browser; the app itself stays in this window.
   win.webContents.setWindowOpenHandler(({ url }) => {
     // a preview of the restaurant's ordering site (same origin) opens in a phone-sized window; anything else goes to the system browser
-    if (url.startsWith(APP_ORIGIN)) return { action: 'allow', overrideBrowserWindowOptions: { width: 440, height: 860, autoHideMenuBar: true, webPreferences: { preload: undefined, sandbox: true, contextIsolation: true } } };
+    if (ours(url)) return { action: 'allow', overrideBrowserWindowOptions: { width: 440, height: 860, autoHideMenuBar: true, webPreferences: { preload: undefined, sandbox: true, contextIsolation: true } } };
     if (/^https?:/.test(url)) shell.openExternal(url);
     return { action: 'deny' };
   });
-  win.webContents.on('will-navigate', (e, url) => { if (/^https?:/.test(url) && !url.startsWith(APP_ORIGIN) && !url.startsWith('file:')) { e.preventDefault(); shell.openExternal(url); } });
+  win.webContents.on('will-navigate', (e, url) => { if (/^https?:/.test(url) && !ours(url)) { e.preventDefault(); shell.openExternal(url); } });
   win.webContents.on('page-title-updated', e => e.preventDefault());
   win.on('closed', () => { win = null; });
   win.loadURL(APP_URL);
@@ -48,7 +53,6 @@ function createWindow() {
 
 // Permissions: USB (the printers), notifications and full screen for our app; nothing else.
 function setupPermissions(ses) {
-  const ours = origin => !origin || origin.startsWith(APP_ORIGIN) || origin.startsWith('file:');
   const allowed = new Set(['usb', 'notifications', 'fullscreen', 'clipboard-sanitized-write', 'clipboard-read', 'window-management']);
   ses.setPermissionRequestHandler((wc, permission, cb, details) => cb(allowed.has(permission) && ours(details && details.requestingUrl)));
   ses.setPermissionCheckHandler((wc, permission, origin) => allowed.has(permission) && ours(origin));
@@ -104,7 +108,7 @@ async function checkShellUpdate() {
     const rel = await r.json(); const tag = String(rel.tag_name || '').replace(/^desktop-v|^v/, '');
     const newer = (a, b) => { const x = a.split('.').map(Number), y = b.split('.').map(Number); for (let i = 0; i < 3; i++) { if ((x[i] || 0) > (y[i] || 0)) return true; if ((x[i] || 0) < (y[i] || 0)) return false; } return false; };
     if (!/^\d+\.\d+\.\d+$/.test(tag) || !newer(tag, app.getVersion()) || !win) return;
-    const res = await dialog.showMessageBox(win, { type: 'info', message: 'نسخة جديدة من تطبيق الكمبيوتر (' + tag + ')', detail: 'بياناتك لا تتأثر. التنزيل من صفحة الإصدارات ثم التثبيت فوق النسخة الحالية.', buttons: ['تنزيل', 'لاحقًا'], cancelId: 1, noLink: true });
+    const res = await dialog.showMessageBox(win, { type: 'info', message: 'نسخة جديدة من تطبيق زيتو للكمبيوتر (' + tag + ')', detail: 'بياناتك لا تتأثر. التنزيل من صفحة الإصدارات ثم التثبيت فوق النسخة الحالية.', buttons: ['تنزيل', 'لاحقًا'], cancelId: 1, noLink: true });
     if (res.response === 0) shell.openExternal(rel.html_url || RELEASES_PAGE);
   } catch (e) { /* offline or rate limited: try another day */ }
 }
@@ -112,11 +116,11 @@ async function checkShellUpdate() {
 function buildMenu() {
   const isMac = process.platform === 'darwin';
   const tpl = [
-    ...(isMac ? [{ label: 'ريڤو', submenu: [{ role: 'about', label: 'عن ريڤو' }, { type: 'separator' }, { role: 'hide', label: 'إخفاء' }, { role: 'hideOthers', label: 'إخفاء الباقي' }, { role: 'unhide', label: 'إظهار الكل' }, { type: 'separator' }, { role: 'quit', label: 'إنهاء ريڤو' }] }] : []),
+    ...(isMac ? [{ label: 'زيتو', submenu: [{ role: 'about', label: 'عن زيتو' }, { type: 'separator' }, { role: 'hide', label: 'إخفاء' }, { role: 'hideOthers', label: 'إخفاء الباقي' }, { role: 'unhide', label: 'إظهار الكل' }, { type: 'separator' }, { role: 'quit', label: 'إنهاء زيتو' }] }] : []),
     { label: 'تحرير', submenu: [{ role: 'undo', label: 'تراجع' }, { role: 'redo', label: 'إعادة' }, { type: 'separator' }, { role: 'cut', label: 'قص' }, { role: 'copy', label: 'نسخ' }, { role: 'paste', label: 'لصق' }, { role: 'selectAll', label: 'تحديد الكل' }] },
     { label: 'عرض', submenu: [{ label: 'إعادة التحميل', accelerator: 'CmdOrCtrl+R', click: () => win && win.loadURL(APP_URL) }, { role: 'togglefullscreen', label: 'ملء الشاشة' }, { type: 'separator' }, { role: 'zoomIn', label: 'تكبير' }, { role: 'zoomOut', label: 'تصغير' }, { role: 'resetZoom', label: 'الحجم الطبيعي' }, { type: 'separator' }, { role: 'toggleDevTools', label: 'أدوات المطوّر' }] },
     { label: 'نافذة', submenu: [{ role: 'minimize', label: 'تصغير النافذة' }, ...(isMac ? [{ role: 'zoom', label: 'تكبير النافذة' }, { type: 'separator' }, { role: 'front', label: 'إحضار الكل للأمام' }] : [{ role: 'close', label: 'إغلاق' }])] },
-    { label: 'مساعدة', submenu: [{ label: 'موقع ريڤو', click: () => shell.openExternal(APP_ORIGIN + new URL(APP_URL).pathname.replace(/app\/$/, '')) }, { label: 'صفحة الإصدارات', click: () => shell.openExternal(RELEASES_PAGE) }, { type: 'separator' }, { label: 'الإصدار ' + app.getVersion(), enabled: false }] },
+    { label: 'مساعدة', submenu: [{ label: 'موقع زيتو', click: () => shell.openExternal(APP_ORIGIN + new URL(APP_URL).pathname.replace(/app\/$/, '')) }, { label: 'صفحة الإصدارات', click: () => shell.openExternal(RELEASES_PAGE) }, { type: 'separator' }, { label: 'الإصدار ' + app.getVersion(), enabled: false }] },
   ];
   Menu.setApplicationMenu(Menu.buildFromTemplate(tpl));
 }

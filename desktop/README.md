@@ -1,4 +1,4 @@
-# ريڤو لسطح المكتب (ويندوز وماك)
+# زيتو لسطح المكتب (ويندوز وماك)
 
 تطبيق كمبيوتر خفيف يفتح النظام المستضاف نفسه (الحساب نفسه والبيانات نفسها) ويضيف ما لا يستطيعه المتصفح:
 
@@ -15,7 +15,7 @@
 
 1. ارفع مجلد `desktop` إلى المستودع `hussain98898/revo` (الفرع main).
 2. أنشئ الملف `.github/workflows/desktop.yml` في المستودع (Add file › Create new file، اكتب هذا المسار، والصق محتوى `desktop/github-workflow-desktop.yml`).
-3. يبدأ البناء وحده. بعد نحو 15 دقيقة تظهر النسختان في صفحة Releases: `Revo-Setup.exe` لويندوز و`Revo.dmg` لماك.
+3. يبدأ البناء وحده. بعد نحو 15 دقيقة تظهر النسختان في صفحة Releases: `Zeto-Setup.exe` لويندوز و`Zeto.dmg` لماك.
 4. أزرار التنزيل في الموقع تشير دائمًا إلى آخر إصدار: `https://github.com/hussain98898/revo/releases/latest`.
 
 لإصدار نسخة جديدة: غيّر `version` في `desktop/package.json` (مثلًا 1.0.1) وارفع الملف، أو من تبويب Actions › Desktop apps › Run workflow واكتب رقم الإصدار.
@@ -28,8 +28,8 @@
 cd desktop
 npm ci
 npm start            # تشغيل مباشر للتجربة
-npm run dist:mac     # على ماك: release/Revo.dmg
-npm run dist:win     # على ويندوز: release/Revo-Setup.exe
+npm run dist:mac     # على ماك: release/Zeto.dmg
+npm run dist:win     # على ويندوز: release/Zeto-Setup.exe
 ```
 
 ## التوقيع
