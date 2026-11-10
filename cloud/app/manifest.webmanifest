@@ -1,6 +1,6 @@
 {
-  "name": "ريڤو · نظام المطعم",
-  "short_name": "ريڤو",
+  "name": "زيتو · نظام المطعم",
+  "short_name": "زيتو",
   "description": "نظام إدارة المطعم: الكاشير، المطبخ، المخزون، الخزنة والتقارير.",
   "start_url": "./",
   "scope": "./",
@@ -9,7 +9,7 @@
   "dir": "rtl",
   "lang": "ar",
   "background_color": "#ffffff",
-  "theme_color": "#006AFF",
+  "theme_color": "#0B5CFF",
   "icons": [
     {
       "src": "icons/icon-192.png",
