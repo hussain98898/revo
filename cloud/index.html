@@ -11,11 +11,15 @@
 <meta property="og:type" content="website">
 <link rel="icon" href="app/icons/icon-192.png">
 <link rel="apple-touch-icon" href="app/icons/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300..700&family=Alexandria:wght@500..800&display=swap">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="app/fonts/readex-ar.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="app/fonts/readex-lat.woff2">
 <style>
-:root { --brand: #0B5CFF; --brand-ink: #0046D1; --brand-deep: #002F8F; --brand-soft: #EAF1FF; --brand-glow: #CFE0FF; --ink: #0E1526; --ink-2: #4E5B73; --muted: #74809A; --line: #E4E9F1; --bg: #ffffff; --bg-2: #F5F7FB; --bg-3: #EAF0F8; --good: #0B7A3E; --good-soft: #E6F6EC; --warn: #8A4B00; --warn-soft: #FFF4DF; --radius: 18px; --shadow: 0 24px 60px -32px rgba(11, 60, 160, .35); --f: "Readex Pro", system-ui, -apple-system, "Segoe UI", Tahoma, sans-serif; --fd: "Alexandria", "Readex Pro", system-ui, sans-serif; }
+@font-face{font-family:'Readex Pro';font-style:normal;font-display:swap;font-weight:160 700;src:url(app/fonts/readex-ar.woff2) format('woff2-variations'),url(app/fonts/readex-ar.woff2) format('woff2');unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1}
+@font-face{font-family:'Readex Pro';font-style:normal;font-display:swap;font-weight:160 700;src:url(app/fonts/readex-lat.woff2) format('woff2-variations'),url(app/fonts/readex-lat.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Alexandria';font-style:normal;font-display:swap;font-weight:100 900;src:url(app/fonts/alex-ar.woff2) format('woff2-variations'),url(app/fonts/alex-ar.woff2) format('woff2');unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1}
+@font-face{font-family:'Alexandria';font-style:normal;font-display:swap;font-weight:100 900;src:url(app/fonts/alex-lat.woff2) format('woff2-variations'),url(app/fonts/alex-lat.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
+:root { --brand: #0B5CFF; --brand-ink: #0046D1; --brand-deep: #002F8F; --brand-soft: #EAF1FF; --brand-glow: #CFE0FF; --ink: #0E1526; --ink-2: #4E5B73; --muted: #606C85; --line: #E4E9F1; --bg: #ffffff; --bg-2: #F5F7FB; --bg-3: #EAF0F8; --good: #0B7A3E; --good-soft: #E6F6EC; --warn: #8A4B00; --warn-soft: #FFF4DF; --radius: 18px; --shadow: 0 24px 60px -32px rgba(11, 60, 160, .35); --f: "Readex Pro", system-ui, -apple-system, "Segoe UI", Tahoma, sans-serif; --fd: "Alexandria", "Readex Pro", system-ui, sans-serif; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --brand: #4d8dff; --brand-ink: #86b4ff; --brand-deep: #bcd4ff; --brand-soft: #112447; --brand-glow: #173466; --ink: #eef2f8; --ink-2: #c2cad8; --muted: #8e98ab; --line: #27314a; --bg: #0e1320; --bg-2: #151c2c; --bg-3: #1b2436; --good: #4ade80; --good-soft: #0f2a1a; --warn: #fbbf24; --warn-soft: #3a2a0a; --shadow: 0 24px 60px -32px rgba(0, 0, 0, .7); color-scheme: dark; } }
 :root[data-theme="dark"] { --brand: #4d8dff; --brand-ink: #86b4ff; --brand-deep: #bcd4ff; --brand-soft: #112447; --brand-glow: #173466; --ink: #eef2f8; --ink-2: #c2cad8; --muted: #8e98ab; --line: #27314a; --bg: #0e1320; --bg-2: #151c2c; --bg-3: #1b2436; --good: #4ade80; --good-soft: #0f2a1a; --warn: #fbbf24; --warn-soft: #3a2a0a; --shadow: 0 24px 60px -32px rgba(0, 0, 0, .7); color-scheme: dark; }
 * { box-sizing: border-box; }
@@ -210,6 +214,9 @@ section.alt .card { box-shadow: 0 1px 0 rgba(0,0,0,.02); }
 .dl .card.yours-on { border-color: var(--brand); } .dl .card.yours-on .yours { display: inline-block; }
 .dl .ver { font-size: 13px; color: var(--muted); min-height: 1.4em; }
 details.note { background: var(--bg-2); border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; font-size: 14px; margin-top: 22px; }
+/* a question opens with one tap: the whole line is the target, tall enough for a finger */
+details.q summary { min-height: 44px; }
+details.note summary, .legal summary { padding-block: 10px; margin-block: -10px; }
 details.note summary { cursor: pointer; font-weight: 600; } details.note p { margin: 8px 0 0; color: var(--ink-2); }
 
 /* faq */
@@ -573,7 +580,7 @@ footer { border-top: 1px solid var(--line); padding-block: 40px 28px; color: var
     <div><h4>زيتو</h4><ul><li><a href="#pricing">الأسعار</a></li><li><a href="#desktop">تطبيق الكمبيوتر</a></li><li><a href="app/#signup">ابدأ مجانًا</a></li><li><a href="app/#signin">تسجيل الدخول</a></li><li><a href="app/#demo">النسخة التجريبية</a></li></ul></div>
     <div><h4>المساعدة</h4><ul><li><a href="#faq">أسئلة شائعة</a></li><li><a href="#offline">العمل بلا إنترنت</a></li><li><a href="#terms">شروط الاستخدام</a></li><li><a href="#privacy">الخصوصية</a></li></ul></div>
   </div>
-  <div class="fbot"><span>© 2026 زيتو (Zeto). جميع الحقوق محفوظة.</span><span class="sp"></span><span>الإصدار 202611251459</span></div>
+  <div class="fbot"><span>© 2026 زيتو (Zeto). جميع الحقوق محفوظة.</span><span class="sp"></span><span>الإصدار 202611251724</span></div>
 </div></footer>
 
 <script>
@@ -594,6 +601,8 @@ footer { border-top: 1px solid var(--line); padding-block: 40px 28px; color: var
   document.querySelectorAll('[data-tab]').forEach(function (a) { a.addEventListener('click', function () { show(a.getAttribute('data-tab')); }); });
   // sections fade in as they come into view
   try { if ('IntersectionObserver' in window) { var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { rootMargin: '0px 0px -8% 0px' }); document.querySelectorAll('.rv').forEach(function (el) { io.observe(el); }); } else document.querySelectorAll('.rv').forEach(function (el) { el.classList.add('in'); }); } catch (e) { document.querySelectorAll('.rv').forEach(function (el) { el.classList.add('in'); }); }
+  // an account is already open on this browser: the sign-in links say what they will do
+  try { var ses = JSON.parse(localStorage.getItem('cloud:revo5.cloud.last') || 'null'); if (ses && ses.uid) Array.prototype.forEach.call(document.querySelectorAll('a[href="app/#signin"]'), function (a) { a.textContent = 'فتح النظام'; }); } catch (e) { /* storage blocked: the links stay as they are */ }
   // legal: open the section the link points to
   function openHash() { var el = location.hash && document.querySelector(location.hash); if (el && el.tagName === 'DETAILS') el.open = true; }
   window.addEventListener('hashchange', openHash); openHash();
