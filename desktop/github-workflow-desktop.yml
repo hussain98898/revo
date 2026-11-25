@@ -44,10 +44,10 @@ jobs:
         include:
           - os: macos-latest
             script: dist:mac
-            file: Zeto.dmg
+            glob: '*.dmg'
           - os: windows-latest
             script: dist:win
-            file: Zeto-Setup.exe
+            glob: '*.exe'
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -68,8 +68,8 @@ jobs:
         run: npm run ${{ matrix.script }}
       - uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.file }}
-          path: desktop/release/${{ matrix.file }}
+          name: installer-${{ matrix.os }}
+          path: desktop/release/${{ matrix.glob }}
           if-no-files-found: error
 
   release:
@@ -96,6 +96,6 @@ jobs:
             التطبيق غير مسجّل بعد لدى مايكروسوفت وآبل، فقد يظهر تنبيه عند أول تشغيل فقط.
             ويندوز: «مزيد من المعلومات» ثم «التشغيل على أي حال». ماك: إعدادات النظام › الخصوصية والأمان › «فتح على أي حال».
           files: |
-            files/Zeto.dmg
-            files/Zeto-Setup.exe
+            files/*.dmg
+            files/*.exe
           fail_on_unmatched_files: true

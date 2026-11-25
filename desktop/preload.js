@@ -14,6 +14,8 @@ contextBridge.exposeInMainWorld('revoDesktop', {
   printHtml: (printer, html, widthMm) => ipcRenderer.invoke('print:html', { printer: String(printer || ''), html: String(html || ''), widthMm: Number(widthMm) || 80 }),
   // Is the network printer answering right now?
   probe: (host, port) => ipcRenderer.invoke('print:probe', { host: String(host || ''), port: Number(port) || 9100 }),
+  // Search the local network for receipt printers (port 9100): { found: [{ host, port, ms }], scanned, subnets }
+  scanPrinters: opts => ipcRenderer.invoke('print:scan', opts || {}),
   openExternal: url => ipcRenderer.invoke('app:openExternal', String(url || '')),
   toggleFullscreen: () => ipcRenderer.invoke('app:fullscreen'),
   reload: () => ipcRenderer.invoke('app:reload'),

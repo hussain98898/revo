@@ -91,6 +91,8 @@ function setupIpc() {
   ipcMain.handle('printers:list', async e => { if (!okWin(e)) return []; try { const ps = await e.sender.getPrintersAsync(); return ps.map(p => ({ name: p.name, displayName: p.displayName || p.name, isDefault: !!p.isDefault, status: p.status })); } catch (err) { return []; } });
   ipcMain.handle('print:net', async (e, a) => { if (!okWin(e)) throw new Error('مرفوض'); return printing.printNet(a.host, a.port, a.bytes); });
   ipcMain.handle('print:probe', async (e, a) => { if (!okWin(e)) return false; return printing.probe(a.host, a.port); });
+  // The printer search: every address of this computer's local networks, tried on the raw printing port.
+  ipcMain.handle('print:scan', async (e, a) => { if (!okWin(e)) return { found: [], scanned: 0, subnets: [] }; return printing.scanNet({ port: a && a.port, timeoutMs: a && a.timeoutMs }); });
   ipcMain.handle('print:raw', async (e, a) => { if (!okWin(e)) throw new Error('مرفوض'); let list = []; try { list = await e.sender.getPrintersAsync(); } catch (err) { /* fine */ } return printing.printRawSystem(a.printer, a.bytes, list); });
   ipcMain.handle('print:html', async (e, a) => { if (!okWin(e)) throw new Error('مرفوض'); return printHtmlSilent(a.printer, String(a.html || ''), a.widthMm); });
   ipcMain.handle('app:openExternal', async (e, url) => { if (okWin(e) && /^https?:\/\//.test(String(url))) await shell.openExternal(String(url)); });
@@ -127,9 +129,11 @@ function buildMenu() {
 
 app.on('second-instance', () => { if (win) { if (win.isMinimized()) win.restore(); win.focus(); } });
 app.on('window-all-closed', () => { if (process.platform !== 'darwin') app.quit(); });
+app.on('before-quit', () => printing.shutdown());
 app.on('activate', () => { if (BrowserWindow.getAllWindows().length === 0) createWindow(); });
 app.on('web-contents-created', (e, wc) => { wc.on('will-attach-webview', ev => ev.preventDefault()); });
 app.whenReady().then(() => {
   setupPermissions(session.defaultSession); setupIpc(); buildMenu(); createWindow();
   setTimeout(checkShellUpdate, 25000);
+  setTimeout(() => printing.warmUp(), 4000); // Windows: the print helper starts ahead of the first paper
 });

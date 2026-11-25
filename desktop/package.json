@@ -1,7 +1,7 @@
 {
   "name": "zeto-desktop",
   "productName": "Zeto",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "زيتو: نظام إدارة المطعم، تطبيق الكمبيوتر لويندوز وماك",
   "main": "main.js",
   "private": true,
