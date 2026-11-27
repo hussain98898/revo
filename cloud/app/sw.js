@@ -1,11 +1,11 @@
 /* Revo service worker: keeps the app shell on the device so it opens and works offline, and brings new versions in
    without ever swapping files under a running cashier (the page asks for the switch). Data never passes through here:
    the restaurant's records live in Firestore and in the device's own store. */
-const BUILD = '202611271338';
+const BUILD = '202611271621';
 const CACHE = 'revo-shell-' + BUILD;
 const PAGE = './'; // the app page is cached under one key, whatever address it was opened from
 const BASE = new URL('./', self.location.href).pathname; // the folder this worker serves, normally /app/
-const SHELL = ['./config.js', './firebase-bundle.js', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png', './icons/maskable-512.png', './icons/apple-touch-icon.png', './fonts/readex-ar.woff2', './fonts/readex-lat.woff2', './fonts/alex-ar.woff2', './fonts/alex-lat.woff2', './fonts/plexmono-500.woff2', './fonts/plexmono-600.woff2'];
+const SHELL = ['./config.js', './firebase-bundle.js', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png', './icons/maskable-512.png', './icons/apple-touch-icon.png', './icons/favicon-32.png', './icons/favicon.svg', './fonts/readex-ar.woff2', './fonts/readex-lat.woff2', './fonts/alex-ar.woff2', './fonts/alex-lat.woff2', './fonts/plexmono-500.woff2', './fonts/plexmono-600.woff2'];
 const NEVER = /googleapis\.com|firebaseio\.com|firebase\.com|gstatic\.com\/firebasejs|identitytoolkit|securetoken/;
 
 // A response that came through a redirect (the host turns /app/index.html into /app/) may not be served to a navigation

@@ -11,5 +11,5 @@ window.REVO_CONFIG = {
     messagingSenderId: 'PASTE_SENDER_ID',
     appId: 'PASTE_APP_ID',
   },
-  build: '202611271338',
+  build: '202611271621',
 };
