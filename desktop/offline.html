@@ -4,31 +4,35 @@
 <meta charset="utf-8">
 <title>زيتو</title>
 <style>
-:root { --brand: #0B5CFF; --ink: #0f1522; --ink-2: #44506a; --bg: #ffffff; --bg-2: #f4f7fb; --line: #e3e8f0; }
-@media (prefers-color-scheme: dark) { :root { --ink: #eef2f8; --ink-2: #c2cad8; --bg: #0e1320; --bg-2: #151c2c; --line: #27314a; color-scheme: dark; } }
+/* The page the computer app shows when it has never reached the server: the same colours and the same mark as the system. */
+:root { --bg: #F5F6F1; --card: #FFFFFF; --line: #E2E5DB; --ink: #10231A; --ink-2: #44524A; --ink-3: #56645B; --action: #0F2A1B; --on-action: #F5F3E8; --focus: #1B5E3A; }
+@media (prefers-color-scheme: dark) { :root { --bg: #0B110D; --card: #131B16; --line: #25322A; --ink: #EEF3EA; --ink-2: #AEBBB0; --ink-3: #93A196; --action: #C8F25A; --on-action: #0D2416; --focus: #C8F25A; color-scheme: dark; } }
 * { box-sizing: border-box; }
-body { margin: 0; min-height: 100vh; display: grid; place-items: center; font-family: "IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", Tahoma, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.7; padding: 24px; }
-.card { max-width: 440px; width: 100%; background: var(--bg-2); border: 1px solid var(--line); border-radius: 20px; padding: 32px 28px; text-align: center; display: grid; gap: 12px; justify-items: center; }
-.logo { width: 56px; height: 56px; border-radius: 16px; background: var(--brand); color: #fff; display: grid; place-items: center; font-size: 28px; font-weight: 700; }
-h1 { margin: 6px 0 0; font-size: 22px; }
+body { margin: 0; min-height: 100vh; display: grid; place-items: center; font-family: "Readex Pro", "SF Arabic", "Segoe UI", Tahoma, system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.7; padding: 24px; }
+.card { max-width: 440px; width: 100%; background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: 32px 28px; text-align: start; display: grid; gap: 12px; }
+.mark { width: 56px; height: 56px; border-radius: 28%; background: #C8F25A; display: block; }
+.mark svg { width: 100%; height: 100%; display: block; }
+h1 { margin: 6px 0 0; font-size: 22px; line-height: 1.3; }
 p { margin: 0; color: var(--ink-2); font-size: 15px; }
-button { font: inherit; font-weight: 600; font-size: 16px; padding: 12px 24px; border-radius: 12px; border: 0; background: var(--brand); color: #fff; cursor: pointer; margin-top: 8px; }
-button:active { transform: translateY(1px); }
-small { color: var(--ink-2); font-size: 12px; }
+button { font: inherit; font-weight: 600; font-size: 16px; min-height: 52px; padding: 12px 24px; border-radius: 999px; border: 0; background: var(--action); color: var(--on-action); cursor: pointer; margin-top: 8px; width: 100%; }
+button:active { transform: scale(.98); }
+button:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+small { color: var(--ink-3); font-size: 12px; }
+small:empty { display: none; }
 </style>
 </head>
 <body>
 <div class="card">
-  <div class="logo"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7.5h10c-4 1-8 5-10 9h10"/></svg></div>
+  <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="#0F2A1B" d="M10.67 19.56Q7.85 19.56 5.9 18.62Q3.95 17.68 3.07 15.97Q2.2 14.26 2.6 12.01Q3 9.73 4.47 8.03Q5.95 6.32 8.23 5.38Q10.51 4.44 13.33 4.44Q16.15 4.44 18.1 5.38Q20.05 6.32 20.93 8.03Q21.8 9.73 21.4 12.01Q21 14.26 19.53 15.97Q18.05 17.68 15.77 18.62Q13.49 19.56 10.67 19.56Z"/><path fill="#C8F25A" d="M7.45 15.63L7.84 13.43L12.46 10.62L8.36 10.62L8.76 8.37L16.85 8.37L16.46 10.57L11.84 13.38L15.99 13.38L15.59 15.63Z"/></svg></span>
   <h1>لا يمكن الوصول إلى الخادم الآن</h1>
-  <p>لم يُفتح التطبيق على هذا الكمبيوتر من قبل، فهو يحتاج إلى الإنترنت في المرة الأولى فقط. بعدها يعمل بلا اتصال.</p>
+  <p>لم يفتح التطبيق على هذا الكمبيوتر من قبل، فهو يحتاج إلى الإنترنت في المرة الأولى فقط. بعدها يعمل بلا اتصال.</p>
   <p>تأكد من الاتصال بالإنترنت ثم اضغط «إعادة المحاولة».</p>
   <button id="retry">إعادة المحاولة</button>
   <small id="code"></small>
 </div>
 <script>
 (function () {
-  var q = new URLSearchParams(location.search); var url = q.get('url') || 'https://hussain98898.github.io/revo/cloud/app/';
+  var q = new URLSearchParams(location.search); var url = q.get('url') || 'https://zeto.my/app/';
   var code = q.get('code'); if (code) document.getElementById('code').textContent = 'رمز الخطأ ' + code;
   var go = function () { location.replace(url); };
   document.getElementById('retry').addEventListener('click', go);

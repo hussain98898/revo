@@ -8,7 +8,7 @@ const printing = require('./lib/printing'); const { windowState } = require('./l
 // The hosted app. desktop/config.json carries the address and any extra origins (a custom domain later), so a domain move
 // needs only that file changed; REVO_URL overrides it for local tests.
 let CFG = {}; try { CFG = JSON.parse(fs.readFileSync(path.join(__dirname, 'config.json'), 'utf8')); } catch (e) { CFG = {}; }
-const APP_URL = process.env.REVO_URL || CFG.appUrl || 'https://hussain98898.github.io/revo/cloud/app/';
+const APP_URL = process.env.REVO_URL || CFG.appUrl || 'https://zeto.my/app/';
 const APP_ORIGIN = new URL(APP_URL).origin;
 const ORIGINS = [APP_ORIGIN].concat((CFG.extraOrigins || []).map(u => { try { return new URL(u).origin; } catch (e) { return null; } }).filter(Boolean));
 const ours = origin => !origin || ORIGINS.some(o => String(origin).startsWith(o)) || String(origin).startsWith('file:');
@@ -25,7 +25,7 @@ function createWindow() {
   const st = state.get();
   win = new BrowserWindow({
     x: st.x, y: st.y, width: st.width, height: st.height, minWidth: 720, minHeight: 540,
-    show: false, autoHideMenuBar: true, backgroundColor: nativeTheme.shouldUseDarkColors ? '#0e1320' : '#ffffff',
+    show: false, autoHideMenuBar: true, backgroundColor: nativeTheme.shouldUseDarkColors ? '#0B110D' : '#F5F6F1',
     title: 'زيتو', icon: path.join(__dirname, 'build', process.platform === 'win32' ? 'icon.ico' : 'icon.png'),
     webPreferences: { preload: path.join(__dirname, 'preload.js'), contextIsolation: true, nodeIntegration: false, sandbox: true, spellcheck: false },
   });

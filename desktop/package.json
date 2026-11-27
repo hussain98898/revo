@@ -1,12 +1,12 @@
 {
   "name": "zeto-desktop",
   "productName": "Zeto",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "زيتو: نظام إدارة المطعم، تطبيق الكمبيوتر لويندوز وماك",
   "main": "main.js",
   "private": true,
   "author": "Zeto <huissenalkrimi@gmail.com>",
-  "homepage": "https://hussain98898.github.io/revo/cloud/",
+  "homepage": "https://zeto.my/",
   "license": "UNLICENSED",
   "scripts": {
     "start": "electron .",

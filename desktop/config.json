@@ -1,4 +1,8 @@
 {
-  "appUrl": "https://hussain98898.github.io/revo/cloud/app/",
-  "extraOrigins": []
+  "appUrl": "https://zeto.my/app/",
+  "extraOrigins": [
+    "https://www.zeto.my",
+    "https://revo-pos.web.app",
+    "https://revo-pos.firebaseapp.com"
+  ]
 }
