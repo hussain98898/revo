@@ -2,12 +2,13 @@
 <html dir="rtl" lang="ar">
 <head>
 <meta charset="utf-8">
-<title>زيتو · نظام إدارة المطعم</title>
+<title>زيتو · نظام إدارة المطاعم</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="نظام مطعم كامل بالعربية: الكاشير، المطبخ، المخزون، المشتريات، الخزنة، التقارير وموقع الطلبات. يعمل على الهاتف والكمبيوتر، متزامن بين الأجهزة، ويعمل بدون إنترنت. مجاني الآن.">
-<meta name="theme-color" content="#0B5CFF">
-<meta property="og:title" content="زيتو · نظام إدارة المطعم">
-<meta property="og:description" content="الكاشير، المطبخ، المخزون، الخزنة والتقارير وموقع الطلبات في نظام واحد يعمل حتى بلا إنترنت. مجاني الآن.">
+<meta name="description" content="زيتو نظام عربي لإدارة المطاعم: كاشير، مطبخ، مخزون، حسابات، وموقع طلبات باسم مطعمك. يعمل على أي جهاز وحتى بدون إنترنت. ابدأ مجانًا.">
+<meta name="theme-color" content="#F5F3E8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B110D" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="زيتو · نظام إدارة المطاعم">
+<meta property="og:description" content="نظام واحد يدير مطعمك كله: الكاشير والمطبخ والمخزون والحسابات وموقع الطلبات. ابدأ مجانًا.">
 <meta property="og:type" content="website">
 <link rel="icon" href="app/icons/icon-192.png">
 <link rel="apple-touch-icon" href="app/icons/apple-touch-icon.png">
@@ -19,610 +20,661 @@
 @font-face{font-family:'Alexandria';font-style:normal;font-display:swap;font-weight:100 900;src:url(app/fonts/alex-ar.woff2) format('woff2-variations'),url(app/fonts/alex-ar.woff2) format('woff2');unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1}
 @font-face{font-family:'Alexandria';font-style:normal;font-display:swap;font-weight:100 900;src:url(app/fonts/alex-lat.woff2) format('woff2-variations'),url(app/fonts/alex-lat.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 
-:root { --brand: #0B5CFF; --brand-ink: #0046D1; --brand-deep: #002F8F; --brand-soft: #EAF1FF; --brand-glow: #CFE0FF; --ink: #0E1526; --ink-2: #4E5B73; --muted: #606C85; --line: #E4E9F1; --bg: #ffffff; --bg-2: #F5F7FB; --bg-3: #EAF0F8; --good: #0B7A3E; --good-soft: #E6F6EC; --warn: #8A4B00; --warn-soft: #FFF4DF; --radius: 18px; --shadow: 0 24px 60px -32px rgba(11, 60, 160, .35); --f: "Readex Pro", system-ui, -apple-system, "Segoe UI", Tahoma, sans-serif; --fd: "Alexandria", "Readex Pro", system-ui, sans-serif; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --brand: #4d8dff; --brand-ink: #86b4ff; --brand-deep: #bcd4ff; --brand-soft: #112447; --brand-glow: #173466; --ink: #eef2f8; --ink-2: #c2cad8; --muted: #8e98ab; --line: #27314a; --bg: #0e1320; --bg-2: #151c2c; --bg-3: #1b2436; --good: #4ade80; --good-soft: #0f2a1a; --warn: #fbbf24; --warn-soft: #3a2a0a; --shadow: 0 24px 60px -32px rgba(0, 0, 0, .7); color-scheme: dark; } }
-:root[data-theme="dark"] { --brand: #4d8dff; --brand-ink: #86b4ff; --brand-deep: #bcd4ff; --brand-soft: #112447; --brand-glow: #173466; --ink: #eef2f8; --ink-2: #c2cad8; --muted: #8e98ab; --line: #27314a; --bg: #0e1320; --bg-2: #151c2c; --bg-3: #1b2436; --good: #4ade80; --good-soft: #0f2a1a; --warn: #fbbf24; --warn-soft: #3a2a0a; --shadow: 0 24px 60px -32px rgba(0, 0, 0, .7); color-scheme: dark; }
+/* Zeto website, version 26.
+   One structure from top to bottom: a 12 column grid, one spacing scale (8 16 24 32 48 72 112), three corner sizes (16 24 32),
+   one easing. The pictures of the product are small pieces of interface built here in HTML, in the product's own colours.
+   Motion adds to a page that is already complete: under "reduce motion" nothing moves and nothing is missing. */
+:root {
+  --night: #0F2A1B; --grove: #1B5E3A; --zest: #C8F25A; --cream: #F5F3E8;
+  --bg: #F5F3E8; --card: #FFFFFF; --soft: #ECE9DA; --ink: #0F2A1B; --ink-2: #3F5247; --ink-3: #56645B; --line: #DAD6C4; --edge: #7A867C;
+  --deep: #0F2A1B; --deep-2: #17382A; --on-deep: #F5F3E8; --on-deep-2: #B9C7BB; --deep-line: #2A4635;
+  --acc: #C8F25A; --on-acc: #0F2A1B; --link: #1B5E3A; --cta: #0F2A1B; --on-cta: #C8F25A;
+  /* the product's own surface, for the interface pieces */
+  --s-bg: #FFFFFF; --s-fill: #F1F2EC; --s-line: #E2E5DB; --s-ink: #10231A; --s-ink2: #56645B; --s-act: #1B5E3A; --s-on-act: #FFFFFF;
+  --s-good: #0B6B37; --s-good-bg: #DDF3E4; --s-warn: #7A4E00; --s-warn-bg: #FBEFCF; --s-acc: #1B5E3A; --s-acc-bg: #E3F0E7;
+  --shadow: 0 32px 80px -44px rgba(15, 42, 27, .5); --shadow-s: 0 12px 32px -20px rgba(15, 42, 27, .45);
+  --f: 'Readex Pro', 'Segoe UI', Tahoma, system-ui, sans-serif; --fd: 'Alexandria', 'Readex Pro', 'Segoe UI', Tahoma, system-ui, sans-serif;
+  --ease: cubic-bezier(.2, .8, .2, 1); --r-s: 16px; --r: 24px; --r-l: 32px;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0B110D; --card: #131B16; --soft: #1A241D; --ink: #EEF3EA; --ink-2: #AAB7AC; --ink-3: #93A196; --line: #25322A; --edge: #6E8275;
+  --deep: #16291E; --deep-2: #1F3829; --on-deep: #EEF3EA; --on-deep-2: #AFC0B3; --deep-line: #2F4A3A;
+  --link: #C8F25A; --cta: #C8F25A; --on-cta: #0D2416;
+  --s-bg: #18221C; --s-fill: #222F27; --s-line: #2E3D34; --s-ink: #EEF3EA; --s-ink2: #A6B4A9; --s-act: #C8F25A; --s-on-act: #0D2416;
+  --s-good: #86E3AB; --s-good-bg: #173A27; --s-warn: #F2C867; --s-warn-bg: #3A2E10; --s-acc: #C8F25A; --s-acc-bg: #2A3A1C;
+  --shadow: 0 32px 80px -44px rgba(0, 0, 0, .85); --shadow-s: 0 12px 32px -20px rgba(0, 0, 0, .75); color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0B110D; --card: #131B16; --soft: #1A241D; --ink: #EEF3EA; --ink-2: #AAB7AC; --ink-3: #93A196; --line: #25322A; --edge: #6E8275;
+  --deep: #16291E; --deep-2: #1F3829; --on-deep: #EEF3EA; --on-deep-2: #AFC0B3; --deep-line: #2F4A3A;
+  --link: #C8F25A; --cta: #C8F25A; --on-cta: #0D2416;
+  --s-bg: #18221C; --s-fill: #222F27; --s-line: #2E3D34; --s-ink: #EEF3EA; --s-ink2: #A6B4A9; --s-act: #C8F25A; --s-on-act: #0D2416;
+  --s-good: #86E3AB; --s-good-bg: #173A27; --s-warn: #F2C867; --s-warn-bg: #3A2E10; --s-acc: #C8F25A; --s-acc-bg: #2A3A1C;
+  --shadow: 0 32px 80px -44px rgba(0, 0, 0, .85); --shadow-s: 0 12px 32px -20px rgba(0, 0, 0, .75); color-scheme: dark; }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 84px; }
-body { margin: 0; font-family: var(--f); color: var(--ink); background: var(--bg); line-height: 1.75; -webkit-font-smoothing: antialiased; font-size: 16px; }
-h1, h2, h3, .brand, .plan .amt b, .stat b, .chart .ct b, .fin .l.net { font-family: var(--fd); }
-a { color: var(--brand); text-decoration: none; }
-img, svg { max-width: 100%; }
-main { overflow-x: clip; }
-button { font: inherit; }
-.wrap { width: min(1120px, 100% - 32px); margin-inline: auto; }
-.num { font-variant-numeric: tabular-nums; }
-.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-
-/* top banner */
-.banner { background: var(--brand); color: #fff; font-size: 14px; text-align: center; padding: 9px 16px; }
-.banner a { color: #fff; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; margin-inline-start: 6px; }
-
-/* header */
-header.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
-header.top .wrap { display: flex; align-items: center; gap: 14px; min-height: 66px; }
-.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 21px; color: var(--ink); }
-.logo { width: 38px; height: 38px; border-radius: 11px; background: linear-gradient(145deg, #2F7DFF, #0B5CFF 55%, #0747C9); color: #fff; display: grid; place-items: center; flex: none; box-shadow: 0 6px 14px -6px rgba(11, 92, 255, .6); }
-.logo svg { width: 62%; height: 62%; stroke: #fff; fill: none; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
-nav.links { display: flex; gap: 22px; margin-inline-start: 18px; font-size: 15px; color: var(--ink-2); font-weight: 500; }
-nav.links a { color: inherit; } nav.links a:hover { color: var(--brand); }
-.sp { flex: 1; }
-.hdr-actions { display: flex; align-items: center; gap: 8px; }
-.menu-btn { display: none; width: 42px; height: 42px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); cursor: pointer; align-items: center; justify-content: center; }
-.menu-btn svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; }
-.menu { display: none; border-bottom: 1px solid var(--line); background: var(--bg); }
-.menu .wrap { display: grid; gap: 4px; padding-block: 10px 14px; }
-.menu a { padding: 11px 12px; border-radius: 10px; color: var(--ink); font-weight: 500; } .menu a:hover { background: var(--bg-2); }
-.menu .btn { justify-content: center; margin-top: 6px; }
-header.top.open + .menu { display: block; }
-
+html { scroll-behavior: smooth; scroll-padding-top: 104px; -webkit-text-size-adjust: 100%; overflow-x: clip; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--f); font-size: 17px; line-height: 1.75; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+h1, h2, h3, p, ul, ol { margin: 0; padding: 0; } ul, ol { list-style: none; }
+h1, h2, h3 { font-family: var(--fd); font-weight: 800; line-height: 1.2; text-wrap: balance; letter-spacing: 0; }
+h1 { font-size: clamp(38px, 5.4vw, 72px); line-height: 1.14; }
+h2 { font-size: clamp(30px, 3.9vw, 52px); }
+h3 { font-size: clamp(20px, 1.9vw, 24px); line-height: 1.35; font-weight: 700; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--link); outline-offset: 3px; border-radius: 10px; }
+.skip { position: absolute; inset-inline-start: 16px; top: -80px; z-index: 99; background: var(--cta); color: var(--on-cta); padding: 12px 18px; border-radius: 12px; font-weight: 700; text-decoration: none; } .skip:focus { top: 16px; }
+.wrap { width: min(1200px, 100% - 40px); margin-inline: auto; }
+section { padding-block: clamp(64px, 8vw, 112px); position: relative; }
+.num { font-variant-numeric: tabular-nums; direction: ltr; unicode-bidi: isolate; display: inline-block; }
+/* section heading: the title on one side, the sentence that explains it on the other, so the row is always full */
+.sh { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px 24px; align-items: end; margin-bottom: clamp(32px, 4vw, 56px); }
+.sh > div { grid-column: span 7; } .sh > .lead { grid-column: span 5; }
+.kicker { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 14px; color: var(--link); margin-bottom: 12px; }
+.kicker::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--acc); box-shadow: 0 0 0 1px var(--on-acc) inset; }
+.lead { font-size: clamp(17px, 1.35vw, 19px); color: var(--ink-2); max-width: 48ch; }
 /* buttons */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 11px 18px; border-radius: 12px; font-weight: 600; font-size: 15px; border: 1px solid var(--line); color: var(--ink); background: var(--bg); cursor: pointer; transition: transform .08s, background .15s, border-color .15s, box-shadow .15s; white-space: nowrap; }
-.btn:hover { background: var(--bg-2); } .btn:active { transform: translateY(1px); }
-.btn.primary { background: var(--brand); border-color: var(--brand); color: #fff; box-shadow: 0 10px 24px -12px var(--brand); } .btn.primary:hover { background: var(--brand-ink); border-color: var(--brand-ink); transform: translateY(-1px); }
-.btn.ghost { border-color: transparent; background: transparent; color: var(--ink-2); } .btn.ghost:hover { background: var(--bg-2); color: var(--ink); }
-.btn.lg { padding: 15px 26px; font-size: 17px; border-radius: 14px; }
-.btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 54px; padding: 0 28px; border-radius: 999px; font: 700 16.5px var(--f); text-decoration: none; border: 1.5px solid var(--edge); background: transparent; color: var(--ink); cursor: pointer; white-space: nowrap; transition: transform .25s var(--ease), background .25s var(--ease), border-color .25s var(--ease), box-shadow .25s var(--ease); }
+.btn:hover { border-color: var(--ink); transform: translateY(-2px); } .btn:active { transform: scale(.97); }
+.btn.pri { background: var(--cta); border-color: var(--cta); color: var(--on-cta); box-shadow: var(--shadow-s); }
+.btn.acc { background: var(--acc); border-color: var(--acc); color: var(--on-acc); }
+.btn.sm { min-height: 44px; padding: 0 20px; font-size: 15px; }
+.btn svg { width: 18px; height: 18px; flex: none; }
+.btns { display: flex; flex-wrap: wrap; gap: 12px; }
+/* the bar */
+.top { position: fixed; inset-inline: 0; top: 0; z-index: 50; padding-top: calc(12px + env(safe-area-inset-top, 0px)); transition: transform .5s var(--ease); pointer-events: none; }
+.top.away { transform: translateY(-120%); }
+.bar { pointer-events: auto; position: relative; display: flex; align-items: center; gap: 8px; height: 64px; padding-inline: 24px 10px; background: color-mix(in srgb, var(--card) 86%, transparent); -webkit-backdrop-filter: blur(18px) saturate(1.5); backdrop-filter: blur(18px) saturate(1.5); border: 1px solid var(--line); border-radius: 999px; box-shadow: var(--shadow-s); }
+.brand { display: inline-flex; align-items: center; min-height: 44px; color: var(--ink); text-decoration: none; flex: none; } .wm { height: 24px; width: auto; display: block; } .wm .o { fill: var(--link); }
+.nav { display: flex; align-items: center; gap: 2px; margin-inline: auto; }
+.nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 999px; font-weight: 600; font-size: 15px; color: var(--ink-2); text-decoration: none; transition: background .2s var(--ease), color .2s var(--ease); }
+.nav a:hover { background: var(--soft); color: var(--ink); } .nav .m-only { display: none; }
+.bar-end { display: flex; align-items: center; gap: 6px; flex: none; }
+.signin { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px; font-weight: 700; font-size: 15px; text-decoration: none; color: var(--ink); } .signin:hover { background: var(--soft); }
+.menu-btn { display: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--soft); cursor: pointer; place-items: center; }
+.menu-btn i { display: block; width: 18px; height: 2px; border-radius: 2px; background: var(--ink); transition: transform .3s var(--ease), opacity .2s; } .menu-btn i + i { margin-top: 5px; }
+.top.open .menu-btn i:nth-child(1) { transform: translateY(7px) rotate(45deg); } .top.open .menu-btn i:nth-child(2) { opacity: 0; } .top.open .menu-btn i:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 /* hero */
-.hero { padding-block: 64px 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
-.eyebrow { display: inline-flex; align-items: center; gap: 8px; background: var(--brand-soft); color: var(--brand-ink); border-radius: 99px; padding: 6px 14px; font-size: 13.5px; font-weight: 600; margin-bottom: 18px; border: 1px solid color-mix(in srgb, var(--brand) 18%, transparent); }
-.eyebrow i { width: 8px; height: 8px; border-radius: 50%; background: var(--brand); display: inline-block; }
-.hero h1 { font-size: clamp(32px, 4.6vw, 54px); line-height: 1.2; margin: 0 0 18px; text-wrap: balance; letter-spacing: -.01em; }
-.hero p.lead { font-size: 18.5px; color: var(--ink-2); margin: 0 0 28px; max-width: 32em; }
-.cta { display: flex; gap: 12px; flex-wrap: wrap; }
-.ticks { display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 22px 0 0; padding: 0; list-style: none; color: var(--ink-2); font-size: 14.5px; }
-.ticks li { display: flex; align-items: center; gap: 7px; } .ticks svg { width: 18px; height: 18px; color: var(--good); stroke: currentColor; fill: none; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; flex: none; }
-
-/* the dashboard mockup */
-.shot { position: relative; }
-.shot::before { content: ""; position: absolute; inset: 10% 3% -6% 3%; background: radial-gradient(60% 60% at 50% 40%, var(--brand-glow), transparent 70%); z-index: -1; filter: blur(12px); opacity: .95; }
-.hero-wash { position: absolute; inset: 0 0 auto 0; height: 560px; background: radial-gradient(70% 80% at 85% 10%, color-mix(in srgb, var(--brand) 14%, transparent), transparent 60%), radial-gradient(40% 60% at 10% 30%, color-mix(in srgb, var(--brand) 8%, transparent), transparent 60%); pointer-events: none; z-index: -1; }
-.rv { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; } .rv.in { opacity: 1; transform: none; }
-@media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; transition: none; } }
-.win { background: var(--bg); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); overflow: hidden; }
-.win .tb { display: flex; align-items: center; gap: 8px; padding: 12px 16px; border-bottom: 1px solid var(--line); background: var(--bg-2); font-size: 13px; color: var(--muted); }
-.win .tb i { width: 10px; height: 10px; border-radius: 50%; background: var(--line); display: inline-block; } .win .tb i:first-child { background: #fb7185; } .win .tb i:nth-child(2) { background: #fbbf24; } .win .tb i:nth-child(3) { background: #34d399; }
-.win .tb span { margin-inline-start: auto; }
-.dash { padding: 16px; display: grid; gap: 12px; }
-.dash .hd { display: flex; align-items: center; justify-content: space-between; font-weight: 700; } .dash .hd small { color: var(--muted); font-weight: 500; font-size: 13px; }
-.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-.stat { background: var(--bg-2); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; min-width: 0; }
-.stat small { display: block; color: var(--muted); font-size: 12px; } .stat b { font-size: 16px; white-space: nowrap; }
-.stat b em { font-style: normal; font-size: 11px; color: var(--muted); margin-inline-start: 3px; font-weight: 500; }
-.chart { background: var(--bg-2); border: 1px solid var(--line); border-radius: 12px; padding: 12px 12px 8px; }
-.chart .ct { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); margin-bottom: 8px; } .chart .ct b { color: var(--ink); }
-.bars { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; height: 92px; align-items: end; }
-.bars div { background: var(--brand-soft); border-radius: 5px 5px 2px 2px; position: relative; height: var(--h); min-height: 4px; }
-.bars div.hi { background: var(--brand); }
-.bars div::after { content: attr(data-d); position: absolute; top: 100%; inset-inline: 0; text-align: center; font-size: 11px; color: var(--muted); margin-top: 4px; }
-.bars { margin-bottom: 20px; }
-.recent { display: grid; gap: 6px; font-size: 13px; }
-.recent .row { display: grid; grid-template-columns: 1fr auto auto; gap: 10px; align-items: center; padding: 8px 10px; border: 1px solid var(--line); border-radius: 10px; }
-.recent .row b { font-weight: 600; } .recent .row span { color: var(--muted); }
-.chip { font-size: 11.5px; font-weight: 600; border-radius: 99px; padding: 2px 9px; background: var(--brand-soft); color: var(--brand-ink); } .chip.ok { background: var(--good-soft); color: var(--good); } .chip.wait { background: var(--warn-soft); color: var(--warn); }
-
-/* works on strip */
-.works { border-block: 1px solid var(--line); background: var(--bg-2); padding-block: 18px; }
-.works .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px 34px; color: var(--ink-2); font-size: 14.5px; font-weight: 500; }
-.works .lbl { color: var(--muted); font-weight: 400; }
-.works span.d { display: inline-flex; align-items: center; gap: 8px; } .works svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; color: var(--brand); }
-
-/* sections */
-section { padding-block: 72px; }
-section.alt { background: var(--bg-2); }
-.sh { max-width: 720px; margin-bottom: 36px; }
-.sh.center { margin-inline: auto; text-align: center; }
-.kicker { color: var(--brand); font-weight: 700; font-size: 14px; letter-spacing: .02em; margin: 0 0 8px; }
-h2 { font-size: clamp(26px, 3.4vw, 38px); margin: 0 0 10px; text-wrap: balance; line-height: 1.25; letter-spacing: -.01em; }
-p.sub { color: var(--ink-2); margin: 0; font-size: 17px; }
-.grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
-.grid.three { grid-template-columns: repeat(3, 1fr); }
-.card { background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; display: grid; gap: 8px; align-content: start; min-width: 0; }
-section.alt .card { box-shadow: 0 1px 0 rgba(0,0,0,.02); }
-.card .ic { width: 44px; height: 44px; border-radius: 13px; background: var(--brand-soft); color: var(--brand); display: grid; place-items: center; }
-.card .ic svg { width: 23px; height: 23px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.card h3 { margin: 6px 0 0; font-size: 18px; line-height: 1.35; } .card p { margin: 0; color: var(--ink-2); font-size: 15px; }
-
-/* tabs showcase */
-.tabs { display: flex; gap: 6px; flex-wrap: wrap; border-bottom: 1px solid var(--line); margin-bottom: 28px; }
-.tabs button { background: none; border: 0; border-bottom: 2px solid transparent; margin-bottom: -1px; padding: 12px 16px; font-weight: 600; color: var(--ink-2); cursor: pointer; font-size: 15px; border-radius: 8px 8px 0 0; }
-.tabs button:hover { color: var(--ink); background: var(--bg-2); }
-.tabs button[aria-selected="true"] { color: var(--brand); border-bottom-color: var(--brand); }
-.panel { display: none; grid-template-columns: .9fr 1.1fr; gap: 40px; align-items: center; }
-.panel.on { display: grid; }
-.panel h3 { font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
-.panel p.sub { font-size: 16px; margin-bottom: 18px; }
-.list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; color: var(--ink-2); font-size: 15.5px; }
-.list li { display: flex; gap: 10px; align-items: flex-start; }
-.list svg { width: 20px; height: 20px; flex: none; margin-top: 3px; color: var(--brand); stroke: currentColor; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
-.panel .win { font-size: 14px; }
-
-/* register mockup */
-.reg { display: grid; grid-template-columns: 1.4fr 1fr; min-height: 300px; }
-.reg .menu-g { padding: 14px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; align-content: start; border-inline-end: 1px solid var(--line); }
-.reg .cat { grid-column: 1 / -1; display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 4px; } .reg .cat span { padding: 4px 10px; border-radius: 99px; background: var(--bg-2); font-size: 12px; color: var(--ink-2); } .reg .cat span.on { background: var(--brand); color: #fff; }
-.reg .it { background: var(--bg-2); border: 1px solid var(--line); border-radius: 10px; padding: 10px; display: grid; gap: 2px; min-height: 60px; } .reg .it b { font-size: 13px; } .reg .it span { color: var(--muted); font-size: 12px; }
-.reg .cart { padding: 14px; display: grid; gap: 8px; align-content: start; }
-.reg .cart .l { display: flex; justify-content: space-between; gap: 8px; font-size: 13px; } .reg .cart .l span:last-child { color: var(--muted); }
-.reg .cart .tot { margin-top: 6px; border-top: 1px solid var(--line); padding-top: 10px; display: flex; justify-content: space-between; font-weight: 700; font-size: 15px; }
-.reg .cart .pay { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 4px; } .reg .cart .pay span { text-align: center; padding: 9px; border-radius: 9px; font-weight: 600; font-size: 13px; border: 1px solid var(--line); } .reg .cart .pay span.p { background: var(--brand); color: #fff; border-color: var(--brand); }
-
-/* kitchen mockup */
-.kit { padding: 14px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-.tk { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
-.tk .th { padding: 8px 10px; background: var(--bg-2); display: flex; justify-content: space-between; font-weight: 700; font-size: 13px; } .tk .th span { color: var(--muted); font-weight: 500; }
-.tk .th.hot { background: var(--warn-soft); } .tk .th.hot span { color: var(--warn); }
-.tk ul { list-style: none; margin: 0; padding: 8px 10px; display: grid; gap: 4px; font-size: 13px; } .tk li small { color: var(--muted); display: block; font-size: 12px; }
-.tk .done { margin: 0 10px 10px; text-align: center; padding: 7px; border-radius: 8px; background: var(--good-soft); color: var(--good); font-weight: 600; font-size: 12.5px; }
-
-/* stock mockup */
-.stk { padding: 8px 14px 14px; }
-.stk .r { display: grid; grid-template-columns: 1.6fr 1fr 1fr auto; gap: 10px; align-items: center; padding: 9px 4px; border-bottom: 1px solid var(--line); font-size: 13.5px; }
-.stk .r.h { color: var(--muted); font-size: 12px; font-weight: 600; } .stk .r:last-child { border-bottom: 0; }
-.stk .r span:nth-child(2), .stk .r span:nth-child(3) { white-space: nowrap; }
-.bar { height: 6px; border-radius: 99px; background: var(--bg-3); width: 90px; overflow: hidden; } .bar i { display: block; height: 100%; background: var(--brand); width: var(--w); } .bar.low i { background: #ef4444; }
-
-/* finance mockup */
-.fin { padding: 14px; display: grid; gap: 6px; font-size: 13.5px; }
-.fin .l { display: flex; justify-content: space-between; padding: 7px 6px; border-radius: 8px; } .fin .l span:last-child { white-space: nowrap; }
-.fin .l.sum { background: var(--bg-2); font-weight: 700; } .fin .l.net { background: var(--brand-soft); color: var(--brand-ink); font-weight: 700; font-size: 15px; }
-.fin .l.in { padding-inline-start: 18px; color: var(--ink-2); }
-
-/* site (phone) mockup */
-.phone-wrap { display: flex; justify-content: center; padding: 18px; }
-.phone { width: 250px; border: 8px solid #1b2130; border-radius: 34px; background: var(--bg); overflow: hidden; box-shadow: var(--shadow); }
-.phone .ph { background: linear-gradient(160deg, var(--brand), var(--brand-ink)); color: #fff; padding: 26px 14px 14px; } .phone .ph b { display: block; font-size: 16px; } .phone .ph span { font-size: 12px; opacity: .9; }
-.phone .cats { display: flex; gap: 6px; padding: 10px 12px 0; } .phone .cats span { font-size: 11.5px; padding: 4px 9px; border-radius: 99px; background: var(--bg-2); } .phone .cats span.on { background: var(--brand); color: #fff; }
-.phone .dish { display: grid; grid-template-columns: 1fr auto; gap: 8px; padding: 10px 12px; border-bottom: 1px solid var(--line); font-size: 13px; align-items: center; } .phone .dish small { display: block; color: var(--muted); font-size: 11.5px; } .phone .dish .add { width: 28px; height: 28px; border-radius: 9px; background: var(--brand); color: #fff; display: grid; place-items: center; font-weight: 700; }
-.phone .ft { margin: 10px 12px 12px; padding: 10px; border-radius: 12px; background: var(--brand); color: #fff; font-weight: 700; font-size: 13px; display: flex; justify-content: space-between; }
-
-/* offline */
-.off .card { background: var(--bg); }
-.sync { padding: 14px; display: grid; gap: 8px; font-size: 13.5px; }
-.sync .st { display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-radius: 10px; background: var(--warn-soft); color: var(--warn); font-weight: 600; } .sync .st i { width: 9px; height: 9px; border-radius: 50%; background: currentColor; display: inline-block; }
-.sync .st.ok { background: var(--good-soft); color: var(--good); }
-.sync .q { display: flex; justify-content: space-between; padding: 8px 10px; border: 1px solid var(--line); border-radius: 9px; } .sync .q span:last-child { color: var(--muted); }
-
-/* business types */
-.types { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-.type { background: var(--bg); border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; display: grid; gap: 4px; color: var(--ink); transition: border-color .15s, transform .15s; }
-.type:hover { border-color: var(--brand); transform: translateY(-2px); }
-.type b { font-size: 16px; } .type span { color: var(--ink-2); font-size: 14px; } .type em { color: var(--brand); font-style: normal; font-size: 13.5px; font-weight: 600; margin-top: 4px; }
-
-/* pricing */
-.price { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; max-width: 940px; margin-inline: auto; }
-.plan { background: var(--bg); border: 2px solid var(--brand); border-radius: 22px; padding: 28px; display: grid; gap: 14px; position: relative; box-shadow: var(--shadow); }
-.plan .tag { position: absolute; top: -14px; inset-inline-start: 24px; background: var(--brand); color: #fff; font-size: 13px; font-weight: 700; border-radius: 99px; padding: 4px 12px; }
-.plan h3 { margin: 0; font-size: 22px; }
-.plan .amt { display: flex; align-items: baseline; gap: 8px; } .plan .amt b { font-size: 48px; line-height: 1; letter-spacing: -.02em; } .plan .amt span { color: var(--muted); }
-.plan .was { color: var(--ink-2); font-size: 15px; }
-.plan .list { font-size: 15px; }
-.soon { display: grid; gap: 14px; }
-.soon .card { background: var(--bg-2); border-style: dashed; }
-.soon .card h3 { font-size: 17px; }
-.soon .card p { font-size: 14.5px; }
-
-/* downloads */
-.dl { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-.dl .card { position: relative; }
-.dl .card .os { display: flex; align-items: center; gap: 10px; } .dl .card .os svg { width: 28px; height: 28px; fill: currentColor; color: var(--ink); }
-.dl .card .req { color: var(--muted); font-size: 13.5px; }
-.dl ol { margin: 8px 0 0; padding-inline-start: 18px; color: var(--ink-2); font-size: 14.5px; display: grid; gap: 4px; }
-.dl .btn { margin-top: 10px; justify-content: center; }
-.dl .yours { position: absolute; top: 14px; inset-inline-end: 14px; font-size: 12px; font-weight: 700; color: var(--brand-ink); background: var(--brand-soft); border-radius: 99px; padding: 3px 10px; display: none; }
-.dl .card.yours-on { border-color: var(--brand); } .dl .card.yours-on .yours { display: inline-block; }
-.dl .ver { font-size: 13px; color: var(--muted); min-height: 1.4em; }
-details.note { background: var(--bg-2); border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; font-size: 14px; margin-top: 22px; }
-/* a question opens with one tap: the whole line is the target, tall enough for a finger */
-details.q summary { min-height: 44px; }
-details.note summary, .legal summary { padding-block: 10px; margin-block: -10px; }
-details.note summary { cursor: pointer; font-weight: 600; } details.note p { margin: 8px 0 0; color: var(--ink-2); }
-
-/* faq */
-.faq { display: grid; gap: 10px; max-width: 780px; margin-inline: auto; }
-details.q { background: var(--bg); border: 1px solid var(--line); border-radius: 14px; padding: 14px 18px; }
-details.q summary { cursor: pointer; font-weight: 600; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 16px; }
-details.q summary::-webkit-details-marker { display: none; } details.q summary::after { content: "+"; color: var(--brand); font-size: 22px; line-height: 1; flex: none; } details.q[open] summary::after { content: "−"; }
-details.q p { margin: 10px 0 0; color: var(--ink-2); font-size: 15px; }
-
-/* final cta */
-.final { background: linear-gradient(160deg, var(--brand), var(--brand-deep)); color: #fff; border-radius: 28px; padding: 56px 32px; text-align: center; display: grid; gap: 14px; justify-items: center; }
-.final h2 { color: #fff; } .final p { margin: 0; opacity: .92; font-size: 17px; max-width: 36em; }
-.final .btn.primary { background: #fff; color: var(--brand-ink); border-color: #fff; box-shadow: none; } .final .btn.primary:hover { background: #eef4ff; }
-.final .btn.ghost { color: #fff; border-color: rgba(255,255,255,.5); } .final .btn.ghost:hover { background: rgba(255,255,255,.12); color: #fff; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .final { background: linear-gradient(160deg, #1d4ed8, #0b2a6b); } }
-:root[data-theme="dark"] .final { background: linear-gradient(160deg, #1d4ed8, #0b2a6b); }
-
-/* footer */
-footer { border-top: 1px solid var(--line); padding-block: 40px 28px; color: var(--muted); font-size: 14px; }
-.fgrid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 28px; margin-bottom: 28px; }
-.fgrid p { margin: 8px 0 0; color: var(--ink-2); max-width: 28em; }
-.fgrid h4 { margin: 0 0 10px; color: var(--ink); font-size: 15px; }
-.fgrid ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; } .fgrid a { color: var(--ink-2); } .fgrid a:hover { color: var(--brand); }
-.fbot { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center; border-top: 1px solid var(--line); padding-top: 18px; }
-.legal { display: grid; gap: 10px; max-width: 780px; margin-inline: auto; }
-.legal details { background: var(--bg); border: 1px solid var(--line); border-radius: 14px; padding: 14px 18px; } .legal summary { font-weight: 600; cursor: pointer; } .legal p { color: var(--ink-2); margin: 8px 0 0; font-size: 15px; }
-
-@media (max-width: 980px) { .hero { grid-template-columns: 1fr; padding-block: 44px 28px; gap: 36px; } .grid, .types, .dl { grid-template-columns: 1fr 1fr; } .panel { grid-template-columns: 1fr; gap: 24px; } .fgrid { grid-template-columns: 1fr 1fr; } .price { grid-template-columns: 1fr; } nav.links, .hdr-actions .ghost { display: none; } .menu-btn { display: inline-flex; } }
-@media (max-width: 600px) { body { font-size: 15.5px; } section { padding-block: 52px; } .grid, .grid.three, .types, .dl { grid-template-columns: 1fr; } .stats { grid-template-columns: 1fr 1fr; } .btn.lg { width: 100%; } .reg { grid-template-columns: 1fr; } .reg .menu-g { border-inline-end: 0; border-bottom: 1px solid var(--line); } .kit { grid-template-columns: 1fr 1fr; } .kit .tk:last-child { display: none; } .fgrid { grid-template-columns: 1fr; } .final { padding: 40px 20px; border-radius: 22px; } .hdr-actions .primary { padding: 9px 13px; font-size: 14px; } .tabs { border-bottom: 0; gap: 8px; margin-bottom: 22px; } .tabs button { border: 1px solid var(--line); border-radius: 99px; padding: 8px 14px; margin: 0; font-size: 14px; } .tabs button[aria-selected="true"] { background: var(--brand); color: #fff; border-color: var(--brand); } }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .type, .btn { transition: none; } }
+.hero { padding-top: calc(128px + env(safe-area-inset-top, 0px)); padding-bottom: clamp(48px, 6vw, 88px); }
+.hero-g { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 32px 24px; align-items: center; }
+.hero-t { grid-column: span 6; } .hero-v { grid-column: span 6; }
+.hero .lead { margin-top: 20px; font-size: clamp(17px, 1.5vw, 20px); max-width: 44ch; }
+.hero .btns { margin-top: 32px; }
+.ticks { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 28px; font-size: 14.5px; font-weight: 600; color: var(--ink-2); }
+.ticks li { display: inline-flex; align-items: center; gap: 8px; } .ticks svg { width: 18px; height: 18px; color: var(--link); flex: none; }
+.hv { position: relative; margin-inline-start: auto; width: min(100%, 540px); }
+.hv::before { content: ''; position: absolute; inset: 10% -4% -4% 14%; background: var(--acc); border-radius: var(--r-l); transform: rotate(-4deg); }
+.hv .ph { position: relative; border-radius: var(--r-l); overflow: hidden; aspect-ratio: 5 / 6; background: var(--soft); box-shadow: var(--shadow); }
+.hv .ph img { width: 100%; height: 100%; object-fit: cover; object-position: 58% 40%; }
+.hv .ui { position: absolute; z-index: 2; }
+.hv .u-order { inset-inline-start: -44px; bottom: 36px; width: 252px; } .hv .u-sales { inset-inline-end: -28px; top: 44px; width: 208px; } .hv .u-paid { inset-inline-end: 20px; bottom: -18px; }
+/* interface pieces: the product's own look, in small */
+.ui { background: var(--s-bg); color: var(--s-ink); border: 1px solid var(--s-line); border-radius: 20px; padding: 14px; font-size: 13px; line-height: 1.5; box-shadow: var(--shadow-s); text-align: start; }
+.ui b, .ui strong { font-weight: 700; } .ui .mut { color: var(--s-ink2); }
+.u-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.u-h { font-family: var(--fd); font-weight: 700; font-size: 14px; }
+.chip { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; line-height: 1.6; background: var(--s-fill); color: var(--s-ink); white-space: nowrap; }
+.chip.good { background: var(--s-good-bg); color: var(--s-good); } .chip.warn { background: var(--s-warn-bg); color: var(--s-warn); } .chip.act { background: var(--s-acc-bg); color: var(--s-acc); }
+.chip.dot::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.u-btn { display: flex; align-items: center; justify-content: center; gap: 6px; height: 36px; padding: 0 14px; border-radius: 999px; background: var(--s-act); color: var(--s-on-act); font-weight: 700; font-size: 13px; }
+.u-btn svg { width: 14px; height: 14px; }
+.u-sep { height: 1px; background: var(--s-line); margin: 10px 0; }
+.u-lines > div { display: flex; justify-content: space-between; gap: 10px; padding: 3px 0; } .u-lines .q { color: var(--s-ink2); margin-left: 6px; }
+.u-total { display: flex; justify-content: space-between; align-items: baseline; font-weight: 700; } .u-total .num { font-family: var(--fd); font-size: 16px; }
+.bars { display: flex; align-items: flex-end; gap: 5px; height: 44px; } .bars i { flex: 1; border-radius: 4px 4px 2px 2px; background: color-mix(in srgb, var(--s-act) 20%, var(--s-fill)); height: var(--h); transform-origin: bottom; } .bars i.on { background: var(--s-act); }
+.u-paid { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px 9px 16px; border-radius: 999px; font-weight: 700; }
+.u-paid .ok { width: 22px; height: 22px; border-radius: 50%; background: var(--s-good-bg); color: var(--s-good); display: grid; place-items: center; } .u-paid .ok svg { width: 13px; height: 13px; }
+/* sectors */
+.sect { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
+.sect figure { margin: 0; } .sect .ph { border-radius: var(--r); overflow: hidden; aspect-ratio: 4 / 5; background: var(--soft); }
+.sect .ph img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); } .sect figure:hover .ph img { transform: scale(1.04); }
+.sect figcaption { padding-top: 16px; } .sect figcaption p { color: var(--ink-2); font-size: 15.5px; margin-top: 4px; }
+/* features: one card shape for all */
+.bento { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; }
+.fc { grid-column: span 4; display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--line); border-radius: var(--r-l); overflow: hidden; transition: transform .5s var(--ease), box-shadow .5s var(--ease); }
+.fc.w7 { grid-column: span 7; } .fc.w5 { grid-column: span 5; }
+.fc:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.fc-ui { position: relative; margin: 12px 12px 0; padding: 24px; border-radius: 22px; background: var(--soft); min-height: 264px; display: grid; place-items: center; overflow: hidden; }
+.fc-t { padding: 24px 28px 28px; } .fc-t .k { font-size: 13.5px; font-weight: 700; color: var(--link); } .fc-t h3 { margin-top: 4px; } .fc-t p { margin-top: 8px; color: var(--ink-2); font-size: 16px; }
+/* cashier */
+.pos { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 12px; width: 100%; max-width: 520px; }
+.pos .cats { display: flex; gap: 6px; margin-bottom: 8px; } .pos .cats .chip.on { background: var(--s-ink); color: var(--s-bg); }
+.tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.tl { position: relative; background: var(--s-fill); border-radius: 14px; padding: 10px 12px; min-height: 60px; display: flex; flex-direction: column; justify-content: space-between; font-weight: 600; font-size: 12.5px; line-height: 1.4; }
+.tl .num { color: var(--s-ink2); font-weight: 600; font-size: 12px; align-self: flex-start; }
+.tl.hit { box-shadow: 0 0 0 2px var(--s-act) inset; }
+.cart { display: flex; flex-direction: column; }
+.cart .u-lines { flex: 1; }
+/* orders */
+.ords { position: relative; width: 100%; max-width: 380px; display: grid; gap: 8px; }
+.ord { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 10px; align-items: center; background: var(--s-bg); border: 1px solid var(--s-line); border-radius: 16px; padding: 10px 14px; font-size: 13px; color: var(--s-ink); }
+.ord b { font-family: var(--fd); font-size: 13.5px; } .ord .mut { grid-column: 1; color: var(--s-ink2); font-size: 12px; } .ord .chip { grid-row: 1 / span 2; grid-column: 2; }
+/* paper slips: always paper */
+.slip { background: #FFFEF7; color: #1D1D1B; width: 150px; padding: 12px 12px 18px; font-size: 11.5px; line-height: 1.55; box-shadow: 0 14px 28px -16px rgba(0, 0, 0, .45); -webkit-mask: linear-gradient(#000 0 0) top / 100% calc(100% - 7px) no-repeat, radial-gradient(circle at 50% 0, #000 4.5px, transparent 5px) bottom / 10px 7px repeat-x; mask: linear-gradient(#000 0 0) top / 100% calc(100% - 7px) no-repeat, radial-gradient(circle at 50% 0, #000 4.5px, transparent 5px) bottom / 10px 7px repeat-x; }
+.slip .c { text-align: center; } .slip b { font-weight: 700; } .slip .big { font-family: var(--fd); font-weight: 800; font-size: 15px; } .slip hr { border: 0; border-top: 1px dashed #9a9a92; margin: 6px 0; }
+.slip .ln { display: flex; justify-content: space-between; gap: 8px; }
+.slips { display: flex; align-items: flex-start; justify-content: center; gap: 18px; } .slips .slip:first-child { transform: rotate(2.5deg); } .slips .slip:last-child { transform: rotate(-3deg); margin-top: 22px; }
+/* stock, report, shift, team */
+.stk { width: 100%; max-width: 330px; display: grid; gap: 12px; }
+.stk .r { display: grid; gap: 5px; } .stk .u-row { font-size: 13px; font-weight: 600; } .stk .u-row .mut { font-weight: 500; }
+.meter { height: 6px; border-radius: 6px; background: var(--s-fill); overflow: hidden; } .meter i { display: block; height: 100%; width: var(--w); border-radius: 6px; background: var(--s-act); transform-origin: right; } .meter.low i { background: var(--s-warn); }
+[dir="ltr"] .meter i { transform-origin: left; }
+.rep { width: 100%; max-width: 330px; } .rep .bars { height: 72px; margin: 12px 0 4px; } .rep .days { display: flex; gap: 5px; font-size: 10.5px; color: var(--s-ink2); } .rep .days span { flex: 1; text-align: center; }
+.rep .u-lines { margin-top: 10px; } .rep .net { color: var(--s-good); font-weight: 700; }
+.shift { width: 100%; max-width: 330px; } .shift .who { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.av { width: 34px; height: 34px; border-radius: 50%; background: var(--s-acc-bg); color: var(--s-acc); display: grid; place-items: center; font-family: var(--fd); font-weight: 700; font-size: 14px; flex: none; }
+.team { width: 100%; max-width: 360px; display: grid; gap: 8px; } .team .ord { grid-template-columns: auto minmax(0, 1fr) auto; } .team .ord .mut { grid-column: 2; } .team .ord .av { grid-row: 1 / span 2; } .team .ord .chip { grid-column: 3; }
+/* a day in the restaurant */
+.day-g { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 32px 24px; align-items: stretch; }
+.day-p { grid-column: span 5; } .day-p .ph { height: 100%; min-height: 420px; border-radius: var(--r-l); overflow: hidden; background: var(--soft); } .day-p .ph img { width: 100%; height: 100%; object-fit: cover; }
+.day-l { grid-column: span 7; display: grid; gap: 16px; align-content: center; }
+.mo { display: grid; grid-template-columns: 76px minmax(0, 1fr) auto; gap: 4px 20px; align-items: center; background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 20px 24px; transition: transform .5s var(--ease), box-shadow .5s var(--ease); }
+.mo:hover { transform: translateX(-6px); box-shadow: var(--shadow-s); }
+.mo .tm { grid-row: 1 / span 2; font-family: var(--fd); font-weight: 800; font-size: 22px; color: var(--link); } .mo h3 { font-size: 19px; } .mo p { grid-column: 2; color: var(--ink-2); font-size: 15.5px; } .mo .chip { grid-row: 1 / span 2; grid-column: 3; font-size: 12.5px; padding: 5px 12px; }
+/* the ordering site */
+.site-g { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 32px 24px; align-items: center; }
+.site-t { grid-column: span 5; } .site-m { grid-column: span 4; display: grid; justify-items: center; gap: 20px; } .site-p { grid-column: span 3; align-self: stretch; }
+.site-t .lead { margin-top: 16px; } .pts { display: grid; gap: 14px; margin-top: 28px; }
+.pts li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 12px; align-items: start; font-weight: 600; font-size: 16px; }
+.pts li i { width: 28px; height: 28px; border-radius: 50%; background: var(--acc); color: var(--on-acc); display: grid; place-items: center; } .pts li svg { width: 15px; height: 15px; }
+.site-p .ph { height: 100%; min-height: 380px; border-radius: var(--r-l); overflow: hidden; background: var(--soft); } .site-p .ph img { width: 100%; height: 100%; object-fit: cover; }
+.phone { --pa: #1B5E3A; --pon: #FFFFFF; --p-bg: #FFFFFF; --p-fill: #F4F4F1; --p-ink: #151515; --p-ink2: #5F5F5A; --p-line: #E7E7E2; width: 272px; border-radius: 44px; padding: 10px; background: #0E0E0E; box-shadow: var(--shadow); }
+.phone[data-mode="dark"] { --p-bg: #141414; --p-fill: #1F1F1F; --p-ink: #F3F3F0; --p-ink2: #A9A9A3; --p-line: #2B2B2B; }
+.scr { border-radius: 34px; overflow: hidden; background: var(--p-bg); color: var(--p-ink); font-size: 12.5px; line-height: 1.5; text-align: start; transition: background .4s var(--ease), color .4s var(--ease); }
+.scr .cover { height: 92px; background: var(--pa); color: var(--pon); padding: 14px 16px; display: flex; flex-direction: column; justify-content: flex-end; transition: background .4s var(--ease), color .4s var(--ease); }
+.scr .cover b { font-family: var(--fd); font-size: 17px; font-weight: 800; } .scr .cover span { font-size: 11.5px; font-weight: 600; opacity: .92; }
+.scr .pc { display: flex; gap: 6px; padding: 12px 14px 4px; } .scr .pc span { padding: 4px 11px; border-radius: 999px; background: var(--p-fill); font-weight: 600; font-size: 11.5px; white-space: nowrap; transition: background .4s var(--ease), color .4s var(--ease); } .scr .pc span.on { background: var(--pa); color: var(--pon); }
+.dish { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 10px; align-items: center; padding: 11px 14px; border-bottom: 1px solid var(--p-line); }
+.dish b { font-weight: 700; font-size: 13px; } .dish small { grid-column: 1; color: var(--p-ink2); font-size: 11px; } .dish .num { grid-column: 1; font-weight: 700; font-size: 12.5px; }
+.dish .add { grid-column: 2; grid-row: 1 / span 3; width: 30px; height: 30px; border-radius: 50%; background: var(--pa); color: var(--pon); display: grid; place-items: center; font-weight: 700; font-size: 17px; line-height: 1; transition: background .4s var(--ease), color .4s var(--ease); }
+.scr .go { margin: 12px 14px 14px; height: 42px; border-radius: 999px; background: var(--pa); color: var(--pon); display: flex; align-items: center; justify-content: space-between; padding: 0 16px; font-weight: 700; transition: background .4s var(--ease), color .4s var(--ease); }
+.tune { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 16px; }
+.dots { display: flex; gap: 4px; } .dots button { width: 40px; height: 40px; border-radius: 50%; border: 0; background: transparent; cursor: pointer; display: grid; place-items: center; }
+.dots button i { width: 24px; height: 24px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 1px var(--line); transition: transform .25s var(--ease), box-shadow .25s var(--ease); } .dots button[aria-pressed="true"] i { transform: scale(1.12); box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--ink); }
+.mode { display: inline-flex; padding: 3px; border-radius: 999px; background: var(--soft); border: 1px solid var(--line); } .mode button { min-height: 40px; padding: 0 16px; border-radius: 999px; border: 0; background: transparent; font-weight: 700; font-size: 14px; color: var(--ink-2); cursor: pointer; } .mode button[aria-pressed="true"] { background: var(--card); color: var(--ink); box-shadow: var(--shadow-s); }
+/* deep sections */
+.deep { background: var(--deep); color: var(--on-deep); border-radius: var(--r-l); padding: clamp(32px, 5vw, 72px); }
+.deep .kicker { color: var(--acc); } .deep .lead { color: var(--on-deep-2); }
+.off-g { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 32px 24px; align-items: center; }
+.off-t { grid-column: span 6; } .off-v { grid-column: span 6; position: relative; }
+.off-t .lead { margin-top: 16px; } .off-t .pts { margin-top: 24px; } .off-t .pts li { color: var(--on-deep); }
+.off-v .ph { border-radius: var(--r); overflow: hidden; aspect-ratio: 4 / 3; background: var(--deep-2); } .off-v .ph img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; }
+.off-v .ui { position: absolute; inset-inline-start: -28px; bottom: -28px; width: 280px; }
+.queue { display: grid; gap: 6px; margin-top: 10px; } .queue > div { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 7px 10px; border-radius: 12px; background: var(--s-fill); font-weight: 600; }
+.swap { display: inline-grid; } .swap > * { grid-area: 1 / 1; justify-self: end; }
+/* saving */
+.calc { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; }
+.calc-in { grid-column: span 7; background: var(--card); border: 1px solid var(--line); border-radius: var(--r-l); padding: clamp(24px, 3vw, 40px); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 32px; align-content: space-between; }
+.calc-in .share { grid-column: 1 / -1; padding-top: 20px; border-top: 1px solid var(--line); }
+.calc-out { grid-column: span 5; background: var(--deep); color: var(--on-deep); border-radius: var(--r-l); padding: clamp(24px, 3vw, 40px); display: flex; flex-direction: column; gap: 20px; }
+.rng label { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-weight: 600; font-size: 16px; } .rng output { font-family: var(--fd); font-weight: 800; font-size: 20px; }
+.rng input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 44px; background: transparent; margin: 0; cursor: pointer; direction: rtl; }
+.rng input[type=range]::-webkit-slider-runnable-track { height: 8px; border-radius: 8px; background: linear-gradient(to left, var(--link) var(--p, 50%), var(--soft) var(--p, 50%)); }
+.rng input[type=range]::-moz-range-track { height: 8px; border-radius: 8px; background: linear-gradient(to left, var(--link) var(--p, 50%), var(--soft) var(--p, 50%)); }
+.rng input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 28px; height: 28px; margin-top: -10px; border-radius: 50%; background: var(--card); border: 3px solid var(--link); box-shadow: var(--shadow-s); }
+.rng input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--card); border: 3px solid var(--link); }
+.share { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px; } .share > span { font-weight: 600; font-size: 16px; } .share .mode button { min-height: 44px; min-width: 72px; }
+.calc-out .lbl { font-size: 15px; font-weight: 600; color: var(--on-deep-2); } .calc-out .big { font-family: var(--fd); font-weight: 800; font-size: clamp(40px, 5vw, 64px); line-height: 1.1; color: var(--acc); } .calc-out .big small { font-size: .38em; font-weight: 700; color: var(--on-deep); margin-inline-start: 8px; }
+.calc-out .yr { font-size: 16px; color: var(--on-deep); } .calc-out .yr b { font-family: var(--fd); }
+.cmp { display: grid; gap: 10px; padding-top: 20px; border-top: 1px solid var(--deep-line); font-size: 14.5px; }
+.cmp .u-row b { font-family: var(--fd); } .cmp .track { height: 8px; border-radius: 8px; background: var(--deep-2); overflow: hidden; } .cmp .track i { display: block; height: 100%; border-radius: 8px; background: var(--on-deep-2); transition: width .5s var(--ease); } .cmp .track.aft i { background: var(--acc); }
+.fine-n { font-size: 13.5px; color: var(--on-deep-2); margin-top: auto; }
+/* steps */
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; counter-reset: st; }
+.step { background: var(--card); border: 1px solid var(--line); border-radius: var(--r-l); padding: 12px 12px 28px; counter-increment: st; }
+.step .fc-ui { margin: 0; min-height: 190px; } .step h3 { margin: 22px 16px 0; display: flex; align-items: center; gap: 12px; } .step h3::before { content: counter(st); width: 34px; height: 34px; border-radius: 50%; background: var(--acc); color: var(--on-acc); display: grid; place-items: center; font-size: 16px; font-weight: 800; flex: none; }
+.step p { margin: 8px 16px 0; color: var(--ink-2); font-size: 16px; }
+.form { width: 100%; max-width: 260px; display: grid; gap: 8px; } .form .in { height: 38px; border-radius: 12px; border: 1px solid var(--s-line); background: var(--s-bg); display: flex; align-items: center; padding: 0 12px; color: var(--s-ink2); font-size: 12.5px; } .form .in.f { color: var(--s-ink); font-weight: 600; border-color: var(--s-act); box-shadow: 0 0 0 3px var(--s-acc-bg); }
+.menu-l { width: 100%; max-width: 260px; display: grid; gap: 8px; } .menu-l .ord { padding: 9px 12px; } .menu-l .new { height: 38px; border-radius: 12px; border: 1.5px dashed var(--s-line); display: flex; align-items: center; justify-content: center; gap: 6px; color: var(--s-ink2); font-weight: 600; font-size: 12.5px; }
+.sell { display: grid; gap: 12px; justify-items: center; } .sell .u-btn { height: 48px; padding: 0 36px; font-size: 16px; }
+/* devices */
+.dev { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.dv { background: var(--card); border: 1px solid var(--line); border-radius: var(--r-l); padding: 28px; display: flex; flex-direction: column; gap: 10px; }
+.dv .ic { width: 52px; height: 52px; border-radius: 16px; background: var(--soft); display: grid; place-items: center; margin-bottom: 8px; } .dv .ic svg { width: 26px; height: 26px; }
+.dv p { color: var(--ink-2); font-size: 16px; } .dv .btn { margin-top: auto; align-self: flex-start; } .dv .gap { flex: 1; min-height: 12px; }
+.dv.yours-on { border-color: var(--link); box-shadow: 0 0 0 1px var(--link); } .dv .yours { display: none; align-self: flex-start; } .dv.yours-on .yours { display: inline-flex; }
+/* price */
+.price { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; }
+.plan { grid-column: span 7; background: var(--card); border: 1px solid var(--line); border-radius: var(--r-l); padding: clamp(24px, 3vw, 40px); display: grid; gap: 24px; }
+.plan .amt { display: flex; align-items: baseline; gap: 12px; } .plan .amt b { font-family: var(--fd); font-weight: 800; font-size: clamp(52px, 6vw, 80px); line-height: 1; } .plan .amt span { font-weight: 600; color: var(--ink-2); }
+.incl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 24px; } .incl li { display: flex; gap: 10px; align-items: flex-start; font-weight: 600; font-size: 16px; } .incl svg { width: 20px; height: 20px; color: var(--link); flex: none; margin-top: 4px; }
+.perks { grid-column: span 5; display: grid; gap: 24px; } .perk { background: var(--soft); border-radius: var(--r); padding: 24px 28px; display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 4px 16px; align-items: center; }
+.perk i { grid-row: 1 / span 2; width: 44px; height: 44px; border-radius: 14px; background: var(--card); display: grid; place-items: center; } .perk svg { width: 22px; height: 22px; } .perk b { font-family: var(--fd); font-weight: 700; font-size: 18px; } .perk span { grid-column: 2; color: var(--ink-2); font-size: 15.5px; }
+/* questions */
+.faq-g { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 32px 24px; align-items: start; }
+.faq-t { grid-column: span 4; position: sticky; top: 112px; } .faq-t .lead { margin-top: 16px; } .faq-t .btn { margin-top: 28px; } .faq-l { grid-column: span 8; display: grid; gap: 12px; }
+.faq-l details { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
+.faq-l summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 68px; padding: 14px 24px; font-family: var(--fd); font-weight: 700; font-size: 18px; } .faq-l summary::-webkit-details-marker { display: none; }
+.faq-l summary::after { content: ''; width: 12px; height: 12px; border-inline-end: 2.5px solid var(--ink-2); border-bottom: 2.5px solid var(--ink-2); transform: rotate(45deg); margin: -4px 4px 0; flex: none; transition: transform .35s var(--ease); } .faq-l details[open] summary::after { transform: rotate(-135deg); margin-top: 6px; }
+.faq-l details p { padding: 0 24px 22px; color: var(--ink-2); max-width: 68ch; }
+/* closing */
+.end-g { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 32px 24px; align-items: center; }
+.end-t { grid-column: span 6; } .end-t .lead { margin-top: 16px; } .end-t .btns { margin-top: 32px; } .end-t .btn { border-color: var(--on-deep-2); color: var(--on-deep); } .end-t .btn.acc { border-color: var(--acc); color: var(--on-acc); }
+.end-v { grid-column: span 6; } .end-v .ph { border-radius: var(--r); overflow: hidden; aspect-ratio: 16 / 10; background: var(--deep-2); } .end-v .ph img { width: 100%; height: 100%; object-fit: cover; }
+/* foot */
+footer { padding-block: 56px 40px; }
+.foot { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 32px 24px; padding-bottom: 32px; border-bottom: 1px solid var(--line); }
+.foot .about { grid-column: span 5; } .foot .about p { margin-top: 14px; color: var(--ink-2); max-width: 36ch; } .foot nav { grid-column: span 2; display: grid; gap: 4px; align-content: start; } .foot .legal { grid-column: span 3; display: grid; gap: 8px; align-content: start; }
+.foot h3 { font-size: 15px; font-family: var(--f); font-weight: 700; color: var(--ink-3); margin-bottom: 6px; } .foot nav a { display: flex; align-items: center; min-height: 40px; text-decoration: none; font-weight: 600; font-size: 15.5px; } .foot nav a:hover { color: var(--link); }
+.legal details { border: 1px solid var(--line); border-radius: var(--r-s); background: var(--card); } .legal summary { cursor: pointer; min-height: 48px; display: flex; align-items: center; padding: 0 16px; font-weight: 700; font-size: 15px; list-style: none; } .legal summary::-webkit-details-marker { display: none; } .legal details p { padding: 0 16px 16px; font-size: 14.5px; color: var(--ink-2); }
+.fine { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; padding-top: 24px; font-size: 14px; color: var(--ink-3); }
+/* motion: parts settle as they are reached; pieces of interface play a short loop while in view */
+.pre { opacity: 0; transform: translateY(24px); }
+.rv { transition: opacity .8s var(--ease), transform .8s var(--ease); transition-delay: var(--d, 0s); }
+.float { animation: float 7s ease-in-out infinite alternate; animation-play-state: paused; } .float.b { animation-duration: 8.5s; animation-delay: -3s; } .float.c { animation-duration: 6s; animation-delay: -1.5s; }
+.play .float, .float.play { animation-play-state: running; }
+@keyframes float { from { translate: 0 -5px; } to { translate: 0 6px; } }
+.play .bars i { animation: grow .9s var(--ease) both; animation-delay: calc(var(--i, 0) * 70ms); } @keyframes grow { from { transform: scaleY(.08); } }
+.play .meter i { animation: fill 1.1s var(--ease) both; animation-delay: calc(var(--i, 0) * 120ms); } @keyframes fill { from { transform: scaleX(.04); } }
+.play .tl.hit { animation: tap 3.2s var(--ease) infinite; } @keyframes tap { 0%, 70%, 100% { transform: scale(1); } 78% { transform: scale(.94); } 86% { transform: scale(1.02); } }
+.play .slip.out { animation: feed 5s var(--ease) infinite; } @keyframes feed { 0%, 100% { translate: 0 0; } 50% { translate: 0 7px; } }
+.swap .a, .swap .b { transition: opacity .5s var(--ease); } .swap .a { opacity: 0; }
+.play .swap .a { animation: swA 7s var(--ease) infinite; animation-delay: var(--sd, 0s); } .play .swap .b { animation: swB 7s var(--ease) infinite; animation-delay: var(--sd, 0s); }
+@keyframes swA { 0%, 38% { opacity: 1; } 46%, 100% { opacity: 0; } } @keyframes swB { 0%, 38% { opacity: 0; } 46%, 100% { opacity: 1; } }
+@media print { .pre { opacity: 1; transform: none; } .top { position: static; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } .pre { opacity: 1; transform: none; } }
+/* tablets */
+@media (max-width: 1040px) {
+  .hv .u-order { inset-inline-start: -16px; } .hv .u-sales { inset-inline-end: -12px; }
+  .fc, .fc.w7, .fc.w5 { grid-column: span 6; } .fc.w7:first-child { grid-column: span 12; }
+  .site-t { grid-column: span 7; } .site-m { grid-column: span 5; } .site-p { display: none; }
+  .sect { grid-template-columns: repeat(2, minmax(0, 1fr)); } .sect .ph { aspect-ratio: 5 / 4; }
+  .calc-in, .calc-out, .plan, .perks { grid-column: span 12; } .perks { grid-template-columns: repeat(3, minmax(0, 1fr)); } .perk { grid-template-columns: minmax(0, 1fr); } .perk i { grid-row: auto; } .perk span { grid-column: 1; }
+  .foot .about { grid-column: span 12; } .foot nav { grid-column: span 3; } .foot .legal { grid-column: span 6; }
+}
+/* phones and small tablets */
+@media (max-width: 860px) {
+  .nav { display: none; position: absolute; inset-inline: -1px; top: calc(100% + 8px); margin: 0; padding: 8px; flex-direction: column; align-items: stretch; gap: 2px; background: var(--card); border: 1px solid var(--line); border-radius: var(--r); box-shadow: var(--shadow); }
+  .top.open .nav { display: flex; animation: drop .35s var(--ease); } @keyframes drop { from { opacity: 0; transform: translateY(-8px); } }
+  .nav a { min-height: 52px; padding: 0 16px; font-size: 16.5px; border-radius: 14px; color: var(--ink); } .nav .m-only { display: flex; justify-content: center; margin-top: 6px; background: var(--soft); font-weight: 700; }
+  .signin { display: none; } .menu-btn { display: grid; } .bar { padding-inline: 20px 8px; height: 60px; } .bar-end { margin-inline-start: auto; gap: 8px; } .bar .btn.sm { padding: 0 16px; font-size: 14.5px; }
+  .sh > div, .sh > .lead, .hero-t, .hero-v, .site-t, .site-m, .off-t, .off-v, .faq-t, .faq-l, .end-t, .end-v, .day-p, .day-l { grid-column: span 12; }
+  .day-p .ph { min-height: 0; aspect-ratio: 16 / 10; } .calc-in { grid-template-columns: minmax(0, 1fr); }
+  .hero { padding-top: calc(108px + env(safe-area-inset-top, 0px)); } .hv { margin-inline: auto; width: min(100%, 440px); } .hv .ph { aspect-ratio: 1 / 1; }
+  .hv .u-order { inset-inline-start: 12px; bottom: 16px; width: 228px; } .hv .u-sales { inset-inline-end: 12px; top: 16px; width: 176px; } .hv .u-paid { inset-inline-end: 12px; bottom: -16px; }
+  .faq-t { position: static; } .steps, .dev { grid-template-columns: minmax(0, 1fr); } .perks { grid-template-columns: minmax(0, 1fr); } .perk { grid-template-columns: 44px minmax(0, 1fr); } .perk i { grid-row: 1 / span 2; } .perk span { grid-column: 2; }
+  .off-v .ui { inset-inline-start: 12px; bottom: -20px; width: min(280px, 100% - 24px); } .off-v { margin-bottom: 20px; }
+  .deep { padding: 28px 22px 36px; border-radius: var(--r); }
+}
+@media (max-width: 640px) {
+  .fc, .fc.w7, .fc.w5 { grid-column: span 12; } .bento, .calc, .price, .sect, .steps, .dev { gap: 16px; } .fc-ui { padding: 18px; min-height: 232px; } .fc-t { padding: 20px 22px 24px; }
+  .sect { grid-template-columns: minmax(0, 1fr); } .sect figure { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 16px; align-items: center; } .sect .ph { aspect-ratio: 1 / 1; border-radius: 20px; } .sect figcaption { padding: 0; }
+  .mo { grid-template-columns: 62px minmax(0, 1fr); padding: 16px 18px; gap: 4px 14px; } .mo .tm { font-size: 18px; } .mo .chip { grid-column: 2; grid-row: auto; justify-self: start; margin-top: 6px; }
+  .incl { grid-template-columns: minmax(0, 1fr); } .hero .btns .btn { flex: 1 1 100%; } .end-t .btns .btn { flex: 1 1 100%; }
+  .pos { grid-template-columns: minmax(0, 1fr); } .tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); } .tl { min-height: 56px; padding: 8px 10px; font-size: 12px; }
+  .foot nav { grid-column: span 6; } .foot .legal { grid-column: span 12; } .faq-l summary { font-size: 16.5px; padding: 12px 18px; } .faq-l details p { padding: 0 18px 18px; }
+  .slip { width: 136px; } .slips { gap: 10px; }
+}
+@media (max-width: 360px) { .bar { padding-inline: 16px 6px; } .bar .btn.sm { padding: 0 14px; font-size: 14px; } .wm { height: 22px; } .wrap { width: calc(100% - 32px); } }
 </style>
 </head>
 <body>
-<div class="banner">زيتو مجاني الآن لكل المطاعم: كل الشاشات، أجهزة بلا حد، بلا بطاقة بنكية. <a href="#pricing">التفاصيل ›</a></div>
-<header class="top" id="top"><div class="wrap">
-  <a class="brand" href="#"><span class="logo"><svg viewBox="0 0 24 24"><path d="M7 7.5h10c-4 1-8 5-10 9h10"/></svg></span>زيتو</a>
-  <nav class="links" aria-label="أقسام الصفحة"><a href="#features">المزايا</a><a href="#system">النظام</a><a href="#desktop">تطبيق الكمبيوتر</a><a href="#pricing">الأسعار</a><a href="#faq">أسئلة</a></nav>
-  <span class="sp"></span>
-  <div class="hdr-actions">
-    <a class="btn ghost" href="app/#signin">تسجيل الدخول</a>
-    <a class="btn primary" href="app/#signup">ابدأ مجانًا</a>
-    <button class="menu-btn" type="button" aria-label="القائمة" aria-expanded="false" aria-controls="menu" id="menuBtn"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-  </div>
-</div></header>
-<div class="menu" id="menu"><div class="wrap">
-  <a href="#features">المزايا</a><a href="#system">النظام</a><a href="#offline">العمل بلا إنترنت</a><a href="#desktop">تطبيق الكمبيوتر</a><a href="#pricing">الأسعار</a><a href="#faq">أسئلة شائعة</a>
-  <a class="btn" href="app/#signin">تسجيل الدخول</a>
-  <a class="btn" href="app/#demo">جرّب مطعمًا تجريبيًا</a>
-</div></div>
+<a class="skip" href="#main">انتقل إلى المحتوى</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m6-6l-6 6 6 6"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></symbol>
+  <symbol id="i-screen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M9 20h6m-3-4v4"/></symbol>
+  <symbol id="i-laptop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="10" rx="1.6"/><path d="M2.5 19h19"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m-5-5l5 5 5-5M5 20h14"/></symbol>
+  <symbol id="i-card" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M3 10h18M4 4l16 16"/></symbol>
+  <symbol id="i-pct" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"/><circle cx="7.5" cy="7.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/></symbol>
+  <symbol id="i-box" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3zm0 9l8-4.5M12 12L4 7.5M12 12v9"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16V11a6 6 0 1112 0v5l1.5 2h-15L6 16zm4 5h4"/></symbol>
+</svg>
 
-<main>
-<div class="hero-wash" aria-hidden="true"></div>
-<section class="wrap hero">
-  <div>
-    <span class="eyebrow"><i></i>مجاني الآن · بلا بطاقة بنكية</span>
-    <h1>نظام المطعم الكامل، من الكاشير إلى إقفال اليوم</h1>
-    <p class="lead">الكاشير، المطبخ، المخزون والوصفات، المشتريات، الخزنة والتقارير، وموقع طلبات لزبائنك. كل الأجهزة على سجل واحد، والكاشير يستمر في البيع إذا انقطع الإنترنت.</p>
-    <div class="cta">
-      <a class="btn primary lg" href="app/#signup">ابدأ مجانًا</a>
-      <a class="btn lg" href="app/#demo">جرّب مطعمًا تجريبيًا</a>
-    </div>
+<header class="top" id="top"><div class="wrap"><div class="bar">
+  <a class="brand" href="#main" aria-label="زيتو، أعلى الصفحة"><svg class="wm" viewBox="0 0 2781.8 754" role="img" aria-label="Zeto"><path fill="currentColor" d="M2 734L32.7 560L399 337L74 337L105.4 159L746.4 159L715.7 333L349.4 556L678.4 556L647 734ZM1035.8 752Q928.8 752 851.1 713.5Q773.4 675 736.7 605.5Q699.9 536 716.1 444Q732.2 353 791.7 285Q851.2 217 939.9 179Q1028.6 141 1130.6 141Q1237.6 141 1304.8 185Q1372 229 1397.9 309.5Q1423.7 390 1404.3 500L966.3 500Q968 507 972 513Q987.1 546 1028.2 563Q1069.2 580 1136.2 580Q1201.2 580 1265.6 563.5Q1330 547 1387.4 516L1362 660Q1290.1 705 1204.5 728.5Q1118.8 752 1035.8 752ZM979.9 383L1200.9 383Q1198.5 368 1193.7 356Q1183.2 330 1161.1 316.5Q1139 303 1105 303Q1067 303 1037.5 320Q1008 337 989.9 366Q984.5 374 979.9 383ZM1418.8 344L1438 235L1561 178L1703.1 2L1846.1 2L1818.4 159L2043.4 159L2010.8 344L1785.8 344L1765 462Q1755.3 517 1772.3 539.5Q1789.3 562 1854.3 562Q1894.3 562 1926.8 556.5Q1959.3 551 1985.7 543L1953.2 727Q1917.5 737 1866.6 744.5Q1815.8 752 1761.8 752Q1659.8 752 1598.2 721.5Q1536.6 691 1513.8 633Q1491 575 1505.1 495L1531.8 344Z"/><path class="o" fill-rule="evenodd" d="M2329.8 752Q2215.8 752 2137 714Q2058.2 676 2022.9 607Q1987.6 538 2003.6 447Q2019.8 355 2079.5 286Q2139.2 217 2231.4 179Q2323.6 141 2437.6 141Q2551.6 141 2630.4 179Q2709.2 217 2744.5 286Q2779.8 355 2763.6 447Q2747.6 538 2687.9 607Q2628.2 676 2536 714Q2443.8 752 2329.8 752ZM2362.4 567Q2402.4 567 2432.4 553Q2462.4 539 2481.6 512Q2500.9 485 2507.6 447Q2514.5 408 2504.7 381Q2495 354 2470 340Q2444.9 326 2404.9 326Q2365.9 326 2335.5 340Q2305 354 2285.7 381Q2266.5 408 2259.8 446Q2252.9 485 2262.6 512Q2272.4 539 2297.9 553Q2323.4 567 2362.4 567Z"/></svg></a>
+  <nav class="nav" id="menu" aria-label="أقسام الصفحة">
+    <a href="#system">المزايا</a>
+    <a href="#site">موقع الطلبات</a>
+    <a href="#pricing">الأسعار</a>
+    <a href="#desktop">التحميل</a>
+    <a href="#faq">الأسئلة الشائعة</a>
+    <a class="m-only" href="app/#signin">تسجيل الدخول</a>
+  </nav>
+  <div class="bar-end">
+    <a class="signin" href="app/#signin">تسجيل الدخول</a>
+    <a class="btn pri sm" href="app/#signup">ابدأ مجانًا</a>
+    <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu" aria-label="القائمة"><span aria-hidden="true"><i></i><i></i><i></i></span></button>
+  </div>
+</div></div></header>
+
+<main id="main">
+<section class="hero"><div class="wrap hero-g">
+  <div class="hero-t">
+    <p class="kicker">نظام إدارة المطاعم</p>
+    <h1>نظام واحد يدير مطعمك كله</h1>
+    <p class="lead">الكاشير والمطبخ والمخزون والحسابات، ومعها موقع طلبات باسم مطعمك. عربي بالكامل، سهل من أول يوم، ويعمل حتى بدون إنترنت.</p>
+    <div class="btns"><a class="btn pri" href="app/#signup">ابدأ مجانًا</a><a class="btn" href="app/#demo">جرّب النظام</a></div>
     <ul class="ticks">
-      <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>حساب في دقيقة واحدة</li>
-      <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>يعمل على الهاتف والكمبيوتر</li>
-      <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>بياناتك لك، بنسخة احتياطية في أي وقت</li>
+      <li><svg aria-hidden="true"><use href="#i-check"/></svg>بدون بطاقة ائتمان</li>
+      <li><svg aria-hidden="true"><use href="#i-check"/></svg>جاهز في دقائق</li>
+      <li><svg aria-hidden="true"><use href="#i-check"/></svg>على الجوال والكمبيوتر</li>
     </ul>
   </div>
-  <div class="shot" aria-hidden="true">
-    <div class="win">
-      <div class="tb"><i></i><i></i><i></i><span>زيتو · لوحة اليوم</span></div>
-      <div class="dash">
-        <div class="hd">مطعم الريف <small>السبت 25 أكتوبر · الوردية مفتوحة</small></div>
-        <div class="stats">
-          <div class="stat"><small>مبيعات اليوم</small><b class="num">2,480.000<em>د.ل</em></b></div>
-          <div class="stat"><small>الطلبات</small><b class="num">61</b></div>
-          <div class="stat"><small>طلبات الموقع</small><b class="num">9</b></div>
-          <div class="stat"><small>متوسط الطلب</small><b class="num">40.656<em>د.ل</em></b></div>
-        </div>
-        <div class="chart">
-          <div class="ct"><span>المبيعات آخر 7 أيام</span><b class="num">18,770.000 د.ل</b></div>
-          <div class="bars">
-            <div style="--h:64%" data-d="ح"></div><div style="--h:56%" data-d="ن"></div><div style="--h:76%" data-d="ث"></div><div style="--h:90%" data-d="ر"></div><div style="--h:100%" data-d="خ"></div><div style="--h:83%" data-d="ج"></div><div class="hi" style="--h:71%" data-d="اليوم"></div>
-          </div>
-        </div>
-        <div class="recent">
-          <div class="row"><b>#1042 · توصيل · 2 برجر كلاسيك</b><span class="num">73.000</span><span class="chip wait">في التحضير</span></div>
-          <div class="row"><b>#1041 · استلام · بوكس العائلة</b><span class="num">65.000</span><span class="chip ok">سُلِّم</span></div>
-          <div class="row"><b>#1040 · طاولة 4 · 3 أصناف</b><span class="num">52.500</span><span class="chip">مدفوع</span></div>
-        </div>
-      </div>
+  <div class="hero-v"><div class="hv" id="stage">
+    <div class="ph"><img src="img/film/hero.webp" width="1600" height="1073" alt="كاشير يسلّم طلبًا لزبون أمام شاشة الكاشير" fetchpriority="high"></div>
+    <div class="ui u-order float" data-par="14" aria-hidden="true">
+      <div class="u-row"><b class="u-h num">K2-0528</b><span class="chip act dot">طلب جديد</span></div>
+      <div class="mut">استلام من المطعم · سالم</div>
+      <div class="u-sep"></div>
+      <div class="u-lines"><div><span><span class="q num">2×</span>برجر كلاسيك</span><span class="num">60.000</span></div><div><span><span class="q num">1×</span>بطاطس مقلية</span><span class="num">8.000</span></div></div>
+      <div class="u-sep"></div>
+      <div class="u-total"><span>المجموع</span><span><span class="num">68.000</span> د.ل</span></div>
     </div>
-  </div>
-</section>
+    <div class="ui u-sales float b" data-par="-10" aria-hidden="true">
+      <div class="mut">مبيعات اليوم</div>
+      <div class="u-total"><span><span class="num">1,284.500</span> د.ل</span></div>
+      <div class="bars" style="margin-top:10px"><i style="--h:38%;--i:0"></i><i style="--h:52%;--i:1"></i><i style="--h:44%;--i:2"></i><i style="--h:70%;--i:3"></i><i style="--h:58%;--i:4"></i><i style="--h:82%;--i:5"></i><i class="on" style="--h:100%;--i:6"></i></div>
+    </div>
+    <div class="ui u-paid float c" data-par="8" aria-hidden="true"><span class="ok"><svg><use href="#i-check"/></svg></span>تم الدفع نقدًا</div>
+  </div></div>
+</div></section>
 
-<div class="works"><div class="wrap">
-  <span class="lbl">يعمل على</span>
-  <span class="d"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>الهاتف: أندرويد وآيفون</span>
-  <span class="d"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M12 17h.01"/></svg>التابلت</span>
-  <span class="d"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>الكمبيوتر: ويندوز وماك</span>
-  <span class="d"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>أي متصفح حديث</span>
-  <span class="d"><svg viewBox="0 0 24 24"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="7"/></svg>الطابعات الحرارية 80 و58 مم</span>
-</div></div>
-
-<section id="features"><div class="wrap">
-  <div class="sh rv"><p class="kicker">المزايا</p><h2>مبني لطريقة عمل المطعم فعلًا</h2><p class="sub">لا حاجة لتدريب طويل: الكاشير يفهمه في دقائق، والمحاسب وصاحب المطعم يطمئنان إلى أرقامه.</p></div>
-  <div class="grid">
-    <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M5 12.5a7 7 0 0 1 14 0M8 16a4 4 0 0 1 8 0M12 20h.01"/><path d="M3 3l18 18"/></svg></div><h3>يستمر البيع بلا إنترنت</h3><p>يفتح ويبيع ويطبع بلا اتصال، وتُحفظ العمليات على الجهاز ثم تُرسل بالترتيب عند عودته.</p></div>
-    <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h10M4 17h7"/><circle cx="18" cy="16" r="3"/></svg></div><h3>عربي أولًا</h3><p>كل شاشة بالعربية، الدينار بثلاث خانات، نقد أو تحويل بضغطة واحدة، وتطبيقات التوصيل تُحصّل عنك وتُسوّى في وقتها.</p></div>
-    <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="13" height="10" rx="2"/><rect x="17" y="8" width="5" height="11" rx="1.5"/><path d="M6 19h5"/></svg></div><h3>على كل جهاز</h3><p>هاتف الكاشير، تابلت المطبخ، كمبيوتر المحاسب. يُثبَّت كتطبيق بضغطة، أو كبرنامج على ويندوز وماك.</p></div>
-    <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="9"/></svg></div><h3>أرقام واحدة للجميع</h3><p>كل الأجهزة على سجل عمليات واحد. لا تُعدَّل عملية مسجّلة؛ التصحيح بعملية مضادة موثقة، فالتقارير تطابق سجلاتها دائمًا.</p></div>
+<section id="who" aria-labelledby="who-h"><div class="wrap">
+  <div class="sh rv"><div><p class="kicker">لمن زيتو؟</p><h2 id="who-h">لكل من يبيع الطعام</h2></div><p class="lead">مطعم، مقهى، مخبز أو محل. زيتو يناسب طريقة عملك كما هي، ويكبر معك.</p></div>
+  <div class="sect">
+    <figure class="rv"><div class="ph"><img src="img/film/kitchen.webp" width="776" height="969" loading="lazy" alt="طاهٍ يقرأ تذاكر الطلبات في مطبخ مطعم"></div><figcaption><h3>المطاعم</h3><p>الصالة والاستلام والتوصيل من شاشة واحدة، وتذاكر واضحة للمطبخ.</p></figcaption></figure>
+    <figure class="rv" style="--d:.08s"><div class="ph"><img src="img/film/cafe.webp" width="800" height="993" loading="lazy" alt="صاحب مقهى يحمل جهازًا لوحيًا خلف الكاونتر"></div><figcaption><h3>المقاهي</h3><p>طلب سريع بضغطة، وطابور أقصر في ساعات الزحام.</p></figcaption></figure>
+    <figure class="rv" style="--d:.16s"><div class="ph"><img src="img/film/bakery.webp" width="800" height="993" loading="lazy" alt="خبّاز يرتّب الخبز أمام شاشة الكاشير"></div><figcaption><h3>المخابز والحلويات</h3><p>تحضير اليوم ومخزون المواد في مكان واحد، بدون ورق.</p></figcaption></figure>
+    <figure class="rv" style="--d:.24s"><div class="ph"><img src="img/film/retail.webp" width="772" height="965" loading="lazy" alt="بائع يسلّم كيسًا لزبون في محل مواد غذائية"></div><figcaption><h3>محلات الأطعمة</h3><p>بيع سريع على الكاشير، ومخزون يتحدّث مع كل فاتورة.</p></figcaption></figure>
   </div>
 </div></section>
 
-<section class="alt" id="system"><div class="wrap">
-  <div class="sh rv"><p class="kicker">النظام</p><h2>نظام واحد، من الكاشير إلى الدفاتر</h2><p class="sub">خمس شاشات تعمل معًا: ما يُباع يُخصم من المخزون، وما يُقبض يدخل الخزنة، وكل ذلك يظهر في التقارير فورًا.</p></div>
-  <div class="tabs" role="tablist" aria-label="شاشات النظام">
-    <button role="tab" aria-selected="true" aria-controls="p-pos" id="t-pos" type="button">الكاشير</button>
-    <button role="tab" aria-selected="false" aria-controls="p-kit" id="t-kit" type="button" tabindex="-1">المطبخ</button>
-    <button role="tab" aria-selected="false" aria-controls="p-stk" id="t-stk" type="button" tabindex="-1">المخزون والمشتريات</button>
-    <button role="tab" aria-selected="false" aria-controls="p-fin" id="t-fin" type="button" tabindex="-1">الخزنة والتقارير</button>
-    <button role="tab" aria-selected="false" aria-controls="p-web" id="t-web" type="button" tabindex="-1">موقع الطلبات</button>
-  </div>
-
-  <div class="panel on" id="p-pos" role="tabpanel" aria-labelledby="t-pos">
-    <div>
-      <h3>كاشير سريع يفهمه الجميع</h3>
-      <p class="sub">أصناف كبيرة واضحة، خيارات لكل صنف، ودفع بضغطة واحدة. الإيصال وتذاكر المطبخ تُطبع وحدها.</p>
-      <ul class="list">
-        <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>استلام، داخلي على الطاولات، أو توصيل، بالشاشة نفسها</li>
-        <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>نقد أو تحويل بضغطة، وطلبات تطبيقات التوصيل تُسجَّل على التطبيق</li>
-        <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>الوردية تُفتح وتُقفل بعدّ أعمى، والتسليم يُعتمد برمز</li>
-        <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>زبائن بأرقامهم وعناوينهم، تُستكمل تلقائيًا في طلب التوصيل</li>
-      </ul>
-    </div>
-    <div class="win" aria-hidden="true"><div class="tb"><i></i><i></i><i></i><span>الكاشير · الوردية مفتوحة</span></div>
-      <div class="reg">
-        <div class="menu-g">
-          <div class="cat"><span class="on">الكل</span><span>برجر</span><span>سندويتش</span><span>مشروبات</span><span>إضافات</span></div>
-          <div class="it"><b>برجر كلاسيك</b><span class="num">30.000</span></div><div class="it"><b>دبل تشيز</b><span class="num">38.000</span></div><div class="it"><b>راب دجاج</b><span class="num">24.000</span></div>
-          <div class="it"><b>بطاطس</b><span class="num">8.000</span></div><div class="it"><b>كولا</b><span class="num">5.000</span></div><div class="it"><b>بوكس العائلة</b><span class="num">65.000</span></div>
+<section id="system" aria-labelledby="sys-h"><div class="wrap">
+  <div class="sh rv"><div><p class="kicker">المزايا</p><h2 id="sys-h">كل أدوات مطعمك في مكان واحد</h2></div><p class="lead">بدل دفتر للمخزون وآلة للكاشير وجدول للحسابات، نظام واحد يربطها كلها ببعض.</p></div>
+  <div class="bento">
+    <article class="fc w7 rv">
+      <div class="fc-ui" aria-hidden="true"><div class="pos">
+        <div>
+          <div class="cats"><span class="chip on">برجر</span><span class="chip">دجاج</span><span class="chip">مشروبات</span></div>
+          <div class="tiles"><div class="tl hit">برجر كلاسيك<span class="num">30.000</span></div><div class="tl">دبل تشيز برجر<span class="num">38.000</span></div><div class="tl">برجر دجاج كرسبي<span class="num">26.000</span></div><div class="tl">بطاطس مقلية<span class="num">8.000</span></div><div class="tl">راب دجاج<span class="num">22.000</span></div><div class="tl">مشروب غازي<span class="num">5.000</span></div></div>
         </div>
-        <div class="cart">
-          <div class="l"><span>2 × برجر كلاسيك</span><span class="num">60.000</span></div>
-          <div class="l"><span>بطاطس · كبير</span><span class="num">8.000</span></div>
-          <div class="l"><span>كولا</span><span class="num">5.000</span></div>
-          <div class="tot"><span>المطلوب</span><span class="num">73.000 د.ل</span></div>
-          <div class="pay"><span class="p">نقد</span><span>تحويل</span></div>
+        <div class="ui cart">
+          <div class="u-row"><b class="u-h">الطلب</b><span class="chip">صالة</span></div>
+          <div class="u-sep"></div>
+          <div class="u-lines"><div><span><span class="q num">2×</span>برجر كلاسيك</span><span class="num">60.000</span></div><div><span><span class="q num">1×</span>بطاطس مقلية</span><span class="num">8.000</span></div></div>
+          <div class="u-sep"></div>
+          <div class="u-total" style="margin-bottom:10px"><span>المجموع</span><span><span class="num">68.000</span> د.ل</span></div>
+          <div class="u-btn">نقدًا</div>
         </div>
+      </div></div>
+      <div class="fc-t"><span class="k">الكاشير</span><h3>بيع أسرع في وقت الزحام</h3><p>اضغط الصنف ثم «نقدًا». يطبع الإيصال وتخرج تذكرة المطبخ تلقائيًا.</p></div>
+    </article>
+    <article class="fc w5 rv" style="--d:.08s">
+      <div class="fc-ui" aria-hidden="true"><div class="ords">
+        <div class="ord"><b class="num">W-0108</b><span class="mut">استلام · من موقع الطلبات</span><span class="chip act dot">جديد</span></div>
+        <div class="ord"><b class="num">K2-0531</b><span class="mut">صالة · طاولة 4</span><span class="chip warn">في المطبخ</span></div>
+        <div class="ord"><b class="num">K1-0412</b><span class="mut">توصيل · حي الأندلس</span><span class="chip good">جاهز</span></div>
+      </div></div>
+      <div class="fc-t"><span class="k">الطلبات</span><h3>كل طلب تحت نظرك</h3><p>الصالة والاستلام والتوصيل في شاشة واحدة، من لحظة الطلب حتى التسليم.</p></div>
+    </article>
+    <article class="fc rv">
+      <div class="fc-ui" aria-hidden="true"><div class="ui stk">
+        <div class="r"><div class="u-row"><span>خبز برجر</span><span class="mut"><span class="num">164</span> حبة</span></div><div class="meter"><i style="--w:82%;--i:0"></i></div></div>
+        <div class="r"><div class="u-row"><span>لحم بقري مفروم</span><span class="mut"><span class="num">47.9</span> كجم</span></div><div class="meter"><i style="--w:64%;--i:1"></i></div></div>
+        <div class="r"><div class="u-row"><span>جبن شيدر</span><span class="mut"><span class="num">334</span> شريحة</span></div><div class="meter"><i style="--w:90%;--i:2"></i></div></div>
+        <div class="r"><div class="u-row"><span>خبز تورتيلا</span><span class="chip warn">تحت حد التنبيه</span></div><div class="meter low"><i style="--w:16%;--i:3"></i></div></div>
+      </div></div>
+      <div class="fc-t"><span class="k">المخزون</span><h3>مخزون يتحدّث مع كل بيع</h3><p>كل صنف يخصم مواده حسب وصفته، وننبّهك قبل أن تنقص أي مادة.</p></div>
+    </article>
+    <article class="fc rv" style="--d:.08s">
+      <div class="fc-ui" aria-hidden="true"><div class="ui rep">
+        <div class="u-row"><b class="u-h">هذا الأسبوع</b><span class="chip good">ربح</span></div>
+        <div class="bars"><i style="--h:46%;--i:0"></i><i style="--h:58%;--i:1"></i><i style="--h:52%;--i:2"></i><i style="--h:64%;--i:3"></i><i style="--h:78%;--i:4"></i><i class="on" style="--h:100%;--i:5"></i><i style="--h:88%;--i:6"></i></div>
+        <div class="days"><span>س</span><span>ح</span><span>ن</span><span>ث</span><span>ر</span><span>خ</span><span>ج</span></div>
+        <div class="u-lines"><div><span class="mut">المبيعات</span><span class="num">42,867.600</span></div><div><span class="mut">التكاليف والمصروفات</span><span class="num">38,244.825</span></div><div class="net"><span>صافي الربح</span><span class="num">4,622.775</span></div></div>
+      </div></div>
+      <div class="fc-t"><span class="k">التقارير</span><h3>اعرف ربحك كل يوم</h3><p>المبيعات والتكاليف والمصروفات وصافي الربح، لأي فترة تختارها.</p></div>
+    </article>
+    <article class="fc rv" style="--d:.16s">
+      <div class="fc-ui" aria-hidden="true"><div class="ui shift">
+        <div class="who"><span class="av">أ</span><div><b>وردية أيمن</b><div class="mut">كاشير 2 · 8 ساعات</div></div></div>
+        <div class="u-lines"><div><span class="mut">المتوقع في الدرج</span><span class="num">1,240.000</span></div><div><span class="mut">المعدود</span><span class="num">1,240.000</span></div></div>
+        <div class="u-sep"></div>
+        <div class="u-row"><b>الفرق <span class="num">0.000</span></b><span class="chip good">مطابق</span></div>
+      </div></div>
+      <div class="fc-t"><span class="k">الخزنة والورديات</span><h3>درج مضبوط آخر كل وردية</h3><p>يعدّ الكاشير الدرج ويعتمده المحاسب، وأي فرق يظهر في لحظته.</p></div>
+    </article>
+    <article class="fc w5 rv">
+      <div class="fc-ui" aria-hidden="true"><div class="team">
+        <div class="ord"><span class="av">أ</span><b>أيمن</b><span class="mut">يبيع ويسلّم الطلبات</span><span class="chip">كاشير</span></div>
+        <div class="ord"><span class="av">ك</span><b>كريم</b><span class="mut">يحضّر ويتابع المخزون</span><span class="chip">مطبخ</span></div>
+        <div class="ord"><span class="av">ط</span><b>طارق</b><span class="mut">يراجع الخزنة والمصروفات</span><span class="chip">محاسب</span></div>
+      </div></div>
+      <div class="fc-t"><span class="k">الفريق</span><h3>لكل موظف دوره وصلاحياته</h3><p>يدخل كل موظف برمزه الخاص، ويرى ما يخصّ عمله فقط.</p></div>
+    </article>
+    <article class="fc w7 rv" style="--d:.08s">
+      <div class="fc-ui" aria-hidden="true"><div class="slips">
+        <div class="slip"><div class="c"><b class="big">مطعم الواحة</b><br>إيصال <span class="num">K2-0528</span></div><hr><div class="ln"><span><span class="num">2×</span> برجر كلاسيك</span><span class="num">60.000</span></div><div class="ln"><span><span class="num">1×</span> بطاطس مقلية</span><span class="num">8.000</span></div><hr><div class="ln"><b>المجموع</b><b><span class="num">68.000</span> د.ل</b></div><div class="c" style="margin-top:6px">شكرًا لزيارتكم</div></div>
+        <div class="slip out"><div class="c"><b class="big">المطبخ</b><br>صالة · طاولة 4</div><hr><div><b><span class="num">2×</span> برجر كلاسيك</b></div><div>بدون بصل</div><div><b><span class="num">1×</span> بطاطس مقلية</b></div><hr><div class="c num">K2-0531 · 13:42</div></div>
+      </div></div>
+      <div class="fc-t"><span class="k">الطباعة</span><h3>إيصال للزبون وتذكرة للمطبخ</h3><p>يعمل مع طابعات الإيصالات الحرارية، وكل محطة في المطبخ تستلم تذكرتها.</p></div>
+    </article>
+  </div>
+</div></section>
+
+<section id="day" aria-labelledby="day-h"><div class="wrap">
+  <div class="sh rv"><div><p class="kicker">يوم في مطعمك</p><h2 id="day-h">من فتح الوردية إلى إقفال اليوم</h2></div><p class="lead">زيتو معك في كل ساعة من يوم العمل، من أول طلب حتى آخر حساب.</p></div>
+  <div class="day-g">
+    <div class="day-p rv"><div class="ph"><img src="img/film/hands.webp" width="776" height="969" loading="lazy" alt="يد صاحب مطعم تسجّل طلبًا على جهاز لوحي فوق الكاونتر"></div></div>
+    <ol class="day-l">
+      <li class="mo rv"><span class="tm num">08:00</span><h3>افتح الوردية</h3><p>يكتب الكاشير ما في الدرج ويبدأ البيع.</p><span class="chip good dot" aria-hidden="true">الوردية مفتوحة</span></li>
+      <li class="mo rv" style="--d:.08s"><span class="tm num">13:30</span><h3>وقت الزحام</h3><p>الطلبات تتوالى، وتذاكر المطبخ تخرج تلقائيًا.</p><span class="chip warn" aria-hidden="true"><span class="num">12</span> طلبًا في المطبخ</span></li>
+      <li class="mo rv" style="--d:.16s"><span class="tm num">19:00</span><h3>طلبات الموقع</h3><p>زبائنك يطلبون من جوالهم، وتصلك الطلبات بتنبيه.</p><span class="chip act dot" aria-hidden="true">طلب جديد من الموقع</span></li>
+      <li class="mo rv" style="--d:.24s"><span class="tm num">23:30</span><h3>أقفل اليوم</h3><p>اعتمد الورديات، ونحسب لك صافي الربح ونصيب كل شريك.</p><span class="chip good" aria-hidden="true">صافي اليوم <span class="num">583.600</span> د.ل</span></li>
+    </ol>
+  </div>
+</div></section>
+
+<section id="site" aria-labelledby="site-h"><div class="wrap site-g">
+  <div class="site-t rv">
+    <p class="kicker">موقع الطلبات</p>
+    <h2 id="site-h">موقع طلبات باسم مطعمك</h2>
+    <p class="lead">زبائنك يطلبون منك مباشرة من جوالهم. بدون عمولة على أي طلب، وبألوان مطعمك.</p>
+    <ul class="pts">
+      <li><i><svg aria-hidden="true"><use href="#i-check"/></svg></i>الطلب يصل الكاشير والمطبخ فورًا مع تنبيه</li>
+      <li><i><svg aria-hidden="true"><use href="#i-check"/></svg></i>استلام من المطعم أو توصيل إلى مناطقك</li>
+      <li><i><svg aria-hidden="true"><use href="#i-check"/></svg></i>رابط واحد تشاركه على إنستغرام وواتساب</li>
+    </ul>
+  </div>
+  <div class="site-m rv" style="--d:.08s">
+    <div class="phone float" id="phone" data-mode="light" aria-hidden="true"><div class="scr">
+      <div class="cover"><b>مطعم الواحة</b><span>مفتوح الآن · التوصيل خلال 30 دقيقة</span></div>
+      <div class="pc"><span class="on">الأكثر طلبًا</span><span>برجر</span><span>مشروبات</span></div>
+      <div class="dish"><b>برجر كلاسيك</b><small>لحم مشوي وجبن وخس</small><span class="num">30.000</span><span class="add">+</span></div>
+      <div class="dish"><b>دبل تشيز برجر</b><small>قطعتا لحم وجبن شيدر</small><span class="num">38.000</span><span class="add">+</span></div>
+      <div class="dish"><b>بطاطس مقلية</b><small>مقرمشة مع صوص</small><span class="num">8.000</span><span class="add">+</span></div>
+      <div class="go"><span>عرض السلة · <span class="num">2</span></span><span><span class="num">68.000</span> د.ل</span></div>
+    </div></div>
+    <div class="tune">
+      <div class="dots" id="dots" role="group" aria-label="لون الموقع">
+        <button type="button" aria-pressed="true" aria-label="أخضر" data-c="#1B5E3A"><i style="--c:#1B5E3A"></i></button>
+        <button type="button" aria-pressed="false" aria-label="أحمر" data-c="#C8102E"><i style="--c:#C8102E"></i></button>
+        <button type="button" aria-pressed="false" aria-label="برتقالي" data-c="#E8590C"><i style="--c:#E8590C"></i></button>
+        <button type="button" aria-pressed="false" aria-label="أزرق" data-c="#1D4ED8"><i style="--c:#1D4ED8"></i></button>
+        <button type="button" aria-pressed="false" aria-label="أصفر" data-c="#FFC700"><i style="--c:#FFC700"></i></button>
+      </div>
+      <div class="mode" id="pmode" role="group" aria-label="مظهر الموقع"><button type="button" aria-pressed="true" data-m="light">فاتح</button><button type="button" aria-pressed="false" data-m="dark">داكن</button></div>
+    </div>
+  </div>
+  <div class="site-p rv" style="--d:.16s"><div class="ph"><img src="img/film/phone.webp" width="776" height="969" loading="lazy" alt="صديقان يطلبان الطعام من الجوال في البيت"></div></div>
+</div></section>
+
+<section id="offline" aria-labelledby="off-h"><div class="wrap"><div class="deep off-g">
+  <div class="off-t rv">
+    <p class="kicker">بدون إنترنت</p>
+    <h2 id="off-h">انقطع الإنترنت؟ واصل البيع</h2>
+    <p class="lead">زيتو يحفظ كل طلب على جهازك، ويرسله تلقائيًا عند عودة الاتصال. لا يتوقف عملك ولا يضيع طلب.</p>
+    <ul class="pts">
+      <li><i><svg aria-hidden="true"><use href="#i-check"/></svg></i>البيع والطباعة مستمران كالمعتاد</li>
+      <li><i><svg aria-hidden="true"><use href="#i-check"/></svg></i>كل أجهزتك تتطابق تلقائيًا عند عودة الاتصال</li>
+    </ul>
+  </div>
+  <div class="off-v rv" style="--d:.08s">
+    <div class="ph"><img src="img/film/night.webp" width="800" height="993" loading="lazy" alt="صاحب مطعم يراجع حسابات اليوم على حاسوبه بعد الإغلاق"></div>
+    <div class="ui float b" aria-hidden="true">
+      <div class="u-row"><b class="u-h">طلبات اليوم</b><span class="swap"><span class="chip warn dot a">بدون اتصال</span><span class="chip good dot b">متصل</span></span></div>
+      <div class="queue">
+        <div><span class="num">K2-0529</span><span class="swap" style="--sd:.3s"><span class="mut a">محفوظ على الجهاز</span><span class="chip good b">تم الإرسال</span></span></div>
+        <div><span class="num">K2-0530</span><span class="swap" style="--sd:.6s"><span class="mut a">محفوظ على الجهاز</span><span class="chip good b">تم الإرسال</span></span></div>
+        <div><span class="num">K2-0531</span><span class="swap" style="--sd:.9s"><span class="mut a">محفوظ على الجهاز</span><span class="chip good b">تم الإرسال</span></span></div>
       </div>
     </div>
   </div>
+</div></div></section>
 
-  <div class="panel" id="p-kit" role="tabpanel" aria-labelledby="t-kit" hidden>
-    <div>
-      <h3>المطبخ يرى ما يخصّه فقط</h3>
-      <p class="sub">كل محطة لها طابعتها وتذاكرها. وما يُحضَّر فعلًا يُسجَّل فيُخصم من المواد الخام بدقة.</p>
-      <ul class="list">
-        <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>تذاكر مطبخ تلقائية لكل محطة: الشواية، المقلاة، المشروبات</li>
-        <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>شاشة مطبخ تعرض ما لم يُسلَّم بعد مع وقته</li>
-        <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>تحضير مسبق بالكمية الفعلية، وخطة تحضير تحسب ما ينقص</li>
-        <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>الهدر يُسجَّل بسببه، فيظهر في تكلفة الفترة</li>
-      </ul>
+<section id="saving" aria-labelledby="sav-h"><div class="wrap">
+  <div class="sh rv"><div><p class="kicker">احسب توفيرك</p><h2 id="sav-h">كم تأخذ منك تطبيقات التوصيل؟</h2></div><p class="lead">حرّك الأرقام وشاهد ما توفّره حين يطلب جزء من زبائنك من موقعك مباشرة.</p></div>
+  <div class="calc">
+    <div class="calc-in rv">
+      <div class="rng"><label for="k-o"><span>طلبات التوصيل في اليوم</span><output id="o-o" class="num">40</output></label><input type="range" id="k-o" min="5" max="200" step="5" value="40"></div>
+      <div class="rng"><label for="k-a"><span>متوسط قيمة الطلب (د.ل)</span><output id="o-a" class="num">45</output></label><input type="range" id="k-a" min="10" max="150" step="5" value="45"></div>
+      <div class="rng"><label for="k-s"><span>منها عبر تطبيقات التوصيل</span><output id="o-s" class="num">60%</output></label><input type="range" id="k-s" min="10" max="100" step="5" value="60"></div>
+      <div class="rng"><label for="k-c"><span>عمولة التطبيق</span><output id="o-c" class="num">20%</output></label><input type="range" id="k-c" min="5" max="35" step="1" value="20"></div>
+      <div class="share"><span>كم منها ينتقل إلى موقعك؟</span><div class="mode" id="k-m" role="group" aria-label="نسبة الطلبات التي تنتقل إلى موقعك"><button type="button" data-v="25" aria-pressed="false"><span class="num">25%</span></button><button type="button" data-v="50" aria-pressed="true"><span class="num">50%</span></button><button type="button" data-v="75" aria-pressed="false"><span class="num">75%</span></button></div></div>
     </div>
-    <div class="win" aria-hidden="true"><div class="tb"><i></i><i></i><i></i><span>المطبخ · 3 تذاكر</span></div>
-      <div class="kit">
-        <div class="tk"><div class="th hot">#1042 <span>منذ 6 د</span></div><ul><li>2 × برجر كلاسيك<small>بلا بصل</small></li><li>بطاطس كبير</li></ul><div class="done">جاهز</div></div>
-        <div class="tk"><div class="th">#1043 <span>منذ 2 د</span></div><ul><li>راب دجاج<small>حار</small></li><li>كولا</li></ul><div class="done">جاهز</div></div>
-        <div class="tk"><div class="th">#1044 <span>الآن</span></div><ul><li>بوكس العائلة</li></ul><div class="done">جاهز</div></div>
+    <div class="calc-out rv" style="--d:.08s" aria-live="polite">
+      <div><div class="lbl">توفّر كل شهر</div><div class="big"><span class="num" id="r-m">3,240</span><small>د.ل</small></div></div>
+      <div class="yr">أي <b class="num" id="r-y">38,880</b> د.ل في السنة</div>
+      <div class="cmp">
+        <div class="u-row"><span>العمولة الآن</span><b><span class="num" id="r-now">6,480</span> د.ل</b></div><div class="track"><i style="width:100%"></i></div>
+        <div class="u-row"><span>بعد موقعك</span><b><span class="num" id="r-aft">3,240</span> د.ل</b></div><div class="track aft"><i id="b-aft" style="width:50%"></i></div>
       </div>
-    </div>
-  </div>
-
-  <div class="panel" id="p-stk" role="tabpanel" aria-labelledby="t-stk" hidden>
-    <div>
-      <h3>كل بيع يخصم مواده</h3>
-      <p class="sub">لكل صنف وصفة، ولكل مادة وحدة شراء ووحدة استخدام. المخزون يتحرك وحده، وأنت تراقب الحدود وقائمة الشراء.</p>
-      <ul class="list">
-        <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>مواد خام بوحداتها: كيس، كرتونة، كيلو، لتر، وتحويل تلقائي</li>
-        <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>حد التنبيه لكل مادة، وقائمة شراء تُبنى من النقص</li>
-        <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>الموردون وفواتير الشراء، والدفع من الخزنة أو البنك</li>
-        <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>عدّ المخزون الدوري وفرق العدّ موثق</li>
-      </ul>
-    </div>
-    <div class="win" aria-hidden="true"><div class="tb"><i></i><i></i><i></i><span>المخزون · 42 مادة</span></div>
-      <div class="stk">
-        <div class="r h"><span>المادة</span><span>المتوفر</span><span>الحد</span><span></span></div>
-        <div class="r"><span>لحم برجر</span><span class="num">12.4 كغ</span><span class="num">10 كغ</span><span class="bar"><i style="--w:62%"></i></span></div>
-        <div class="r"><span>خبز برجر</span><span class="num">36 قطعة</span><span class="num">60 قطعة</span><span class="bar low"><i style="--w:30%"></i></span></div>
-        <div class="r"><span>بطاطس مجمدة</span><span class="num">3 أكياس</span><span class="num">2 كيس</span><span class="bar"><i style="--w:75%"></i></span></div>
-        <div class="r"><span>جبن شيدر</span><span class="num">2.1 كغ</span><span class="num">1.5 كغ</span><span class="bar"><i style="--w:55%"></i></span></div>
-        <div class="r"><span>كولا 330 مل</span><span class="num">48 علبة</span><span class="num">24 علبة</span><span class="bar"><i style="--w:88%"></i></span></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="panel" id="p-fin" role="tabpanel" aria-labelledby="t-fin" hidden>
-    <div>
-      <h3>خزنة مضبوطة وتقارير تُفهم</h3>
-      <p class="sub">المال يُعدّ عند كل تسليم، والمصروفات تُسجَّل حين تُدفع، ويُقفل اليوم فتظهر الأرباح وتوزيعها على الشركاء.</p>
-      <ul class="list">
-        <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>قائمة الدخل: المبيعات، تكلفة البضاعة، المصروفات، صافي الربح</li>
-        <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>تقرير النقد والبنوك، وبضاعة الفترة، وكشف لكل حساب</li>
-        <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>لا دين على الكاشير ولا على الزبون: ما لم يُدفع لا يخرج</li>
-        <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>كل رقم في التقرير يرجع إلى قيوده، ونسخة احتياطية كاملة بضغطة</li>
-      </ul>
-    </div>
-    <div class="win" aria-hidden="true"><div class="tb"><i></i><i></i><i></i><span>قائمة الدخل · أكتوبر</span></div>
-      <div class="fin">
-        <div class="l sum"><span>المبيعات</span><span class="num">48,920.000</span></div>
-        <div class="l in"><span>نقد</span><span class="num">31,400.000</span></div>
-        <div class="l in"><span>تحويل</span><span class="num">11,220.000</span></div>
-        <div class="l in"><span>تطبيقات التوصيل</span><span class="num">6,300.000</span></div>
-        <div class="l sum"><span>تكلفة البضاعة المباعة</span><span class="num">18,760.000</span></div>
-        <div class="l sum"><span>المصروفات</span><span class="num">9,540.000</span></div>
-        <div class="l net"><span>صافي الربح</span><span class="num">20,620.000 د.ل</span></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="panel" id="p-web" role="tabpanel" aria-labelledby="t-web" hidden>
-    <div>
-      <h3>موقع طلبات لزبائنك، بلا عمولة</h3>
-      <p class="sub">رابط واحد تضعه في حسابك على إنستغرام وفيسبوك. الزبون يطلب من هاتفه، والطلب يصل إلى شاشة الطلبات بانتظار القبول.</p>
-      <ul class="list">
-        <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>ست سمات جاهزة بألوان مختلفة، كلها مبنية للهاتف</li>
-        <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>صورة غلاف ورسالة ترحيب وشعار مطعمك</li>
-        <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>استلام أو توصيل، والدفع عند الاستلام نقدًا أو تحويلًا</li>
-        <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>شكاوى الزبائن تصل إليك مباشرة</li>
-      </ul>
-    </div>
-    <div class="phone-wrap" aria-hidden="true">
-      <div class="phone">
-        <div class="ph"><b>مطعم الريف</b><span>مفتوح الآن · التوصيل خلال 35 د</span></div>
-        <div class="cats"><span class="on">برجر</span><span>سندويتش</span><span>مشروبات</span></div>
-        <div class="dish"><div>برجر كلاسيك<small>لحم طازج، جبن، خس وطماطم</small></div><span class="num">30.000</span></div>
-        <div class="dish"><div>دبل تشيز<small>قطعتان وجبن مضاعف</small></div><span class="add">+</span></div>
-        <div class="dish"><div>راب دجاج<small>دجاج مشوي وصوص الثوم</small></div><span class="num">24.000</span></div>
-        <div class="ft"><span>السلة · 2</span><span class="num">68.000 د.ل</span></div>
-      </div>
+      <p class="fine-n">حساب تقريبي من أرقامك أنت.</p>
     </div>
   </div>
 </div></section>
 
-<section id="offline"><div class="wrap">
-  <div class="sh rv"><p class="kicker">العمل بلا إنترنت</p><h2>قد ينقطع الإنترنت. الكاشير لا يتوقف.</h2><p class="sub">النظام يحفظ على الجهاز أولًا ثم يرسل إلى السحابة. إن انقطع الاتصال في منتصف الزحمة، لا يشعر الكاشير بشيء.</p></div>
-  <div class="grid">
-    <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div><h3>البيع بلا اتصال</h3><p>يفتح الكاشير من ذاكرة الجهاز، يبيع ويطبع، وتبقى كل عملية محفوظة على الجهاز.</p></div>
-    <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 1-15.5 6.3M3 12a9 9 0 0 1 15.5-6.3"/><path d="M21 3v6h-6M3 21v-6h6"/></svg></div><h3>مزامنة تلقائية</h3><p>عند عودة الاتصال تُرسل العمليات بالترتيب ولا تُكرَّر. وإن سبقك جهاز آخر على آخر وحدة، يُعرض الرفض بوضوح.</p></div>
-    <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="7"/></svg></div><h3>طباعة حرارية</h3><p>إيصالات 80 مم و58 مم عبر USB أو الشبكة أو نافذة الطباعة. تطبيق الكمبيوتر يطبع صامتًا على طابعة الكاشير والمطبخ.</p></div>
-    <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>دائمًا في الواجهة</h3><p>شريط الحالة يُظهر الاتصال وعدد العمليات المنتظرة، فتعرف دائمًا أين تقف.</p></div>
+<section id="start" aria-labelledby="st-h"><div class="wrap">
+  <div class="sh rv"><div><p class="kicker">البداية</p><h2 id="st-h">ابدأ في ثلاث خطوات</h2></div><p class="lead">لا تحتاج تدريبًا ولا أجهزة خاصة. ودليل البدء داخل النظام يرافقك خطوة بخطوة.</p></div>
+  <ol class="steps">
+    <li class="step rv"><div class="fc-ui" aria-hidden="true"><div class="form"><div class="in">البريد الإلكتروني</div><div class="in f">مطعم الواحة</div><div class="u-btn">إنشاء حساب</div></div></div><h3>أنشئ حسابك</h3><p>بريدك وكلمة مرور، ثم اسم مطعمك.</p></li>
+    <li class="step rv" style="--d:.08s"><div class="fc-ui" aria-hidden="true"><div class="menu-l"><div class="ord"><b>برجر كلاسيك</b><span class="mut">برجر</span><span class="chip"><span class="num">30.000</span></span></div><div class="ord"><b>بطاطس مقلية</b><span class="mut">مقبلات</span><span class="chip"><span class="num">8.000</span></span></div><div class="new">+ صنف جديد</div></div></div><h3>أضف قائمتك</h3><p>الأصناف وأسعارها، ومعها الصور إن أردت.</p></li>
+    <li class="step rv" style="--d:.16s"><div class="fc-ui" aria-hidden="true"><div class="sell"><div class="u-btn">نقدًا</div><div class="ui u-paid"><span class="ok"><svg><use href="#i-check"/></svg></span>تم الدفع · <span class="num">68.000</span> د.ل</div></div></div><h3>ابدأ البيع</h3><p>افتح الوردية واستقبل أول طلب.</p></li>
+  </ol>
+</div></section>
+
+<section id="desktop" aria-labelledby="dev-h"><div class="wrap">
+  <div class="sh rv"><div><p class="kicker">التحميل</p><h2 id="dev-h">على كل أجهزتك</h2></div><p class="lead">افتحه من المتصفح على أي جهاز، أو ثبّته تطبيقًا على كمبيوتر الكاشير.</p></div>
+  <div class="dev">
+    <div class="dv rv"><span class="ic"><svg aria-hidden="true"><use href="#i-phone"/></svg></span><h3>الجوال والتابلت</h3><p>يعمل من المتصفح مباشرة، ويمكنك إضافته إلى الشاشة الرئيسية كأي تطبيق.</p><span class="gap"></span><a class="btn sm" href="app/">فتح النظام</a></div>
+    <div class="dv rv" id="dl-win" style="--d:.08s"><span class="ic"><svg aria-hidden="true"><use href="#i-screen"/></svg></span><h3>ويندوز</h3><p>لكمبيوتر الكاشير. يطبع الإيصالات وتذاكر المطبخ مباشرة على طابعاتك.</p><span class="chip act yours">جهازك الحالي</span><span class="gap"></span><a class="btn sm" data-dl="win" href="https://github.com/hussain98898/revo/releases/latest/download/Zeto-Setup.exe" rel="noopener"><svg aria-hidden="true"><use href="#i-down"/></svg>تحميل لويندوز</a></div>
+    <div class="dv rv" id="dl-mac" style="--d:.16s"><span class="ic"><svg aria-hidden="true"><use href="#i-laptop"/></svg></span><h3>ماك</h3><p>التطبيق نفسه لأجهزة ماك، مع الطباعة المباشرة على طابعاتك.</p><span class="chip act yours">جهازك الحالي</span><span class="gap"></span><a class="btn sm" data-dl="mac" href="https://github.com/hussain98898/revo/releases/latest/download/Zeto.dmg" rel="noopener"><svg aria-hidden="true"><use href="#i-down"/></svg>تحميل لماك</a></div>
   </div>
 </div></section>
 
-<section class="alt" id="types"><div class="wrap">
-  <div class="sh rv"><p class="kicker">أنواع المطاعم</p><h2>ما نوع مطعمك؟</h2><p class="sub">الإعداد نفسه يناسب الجميع، ودليل البدء داخل النظام يرتّب لك الخطوات حسب ما تختار.</p></div>
-  <div class="types">
-    <a class="type" href="app/#signup"><b>وجبات سريعة</b><span>كاشير سريع، تذاكر مطبخ، واستلام وتوصيل.</span><em>ابدأ مجانًا ›</em></a>
-    <a class="type" href="app/#signup"><b>مقهى وكافيه</b><span>مشروبات بخيارات الحجم والإضافات، وطاولات.</span><em>ابدأ مجانًا ›</em></a>
-    <a class="type" href="app/#signup"><b>مطعم بطاولات</b><span>طلبات على الطاولات، إضافة أصناف أثناء الجلسة، ودفع في النهاية.</span><em>ابدأ مجانًا ›</em></a>
-    <a class="type" href="app/#signup"><b>مطبخ سحابي للتوصيل</b><span>موقع طلبات وتطبيقات التوصيل في شاشة واحدة.</span><em>ابدأ مجانًا ›</em></a>
-    <a class="type" href="app/#signup"><b>شاورما وسناك</b><span>تحضير مسبق بالكمية الفعلية وخصم المواد الخام.</span><em>ابدأ مجانًا ›</em></a>
-    <a class="type" href="app/#signup"><b>بيتزا</b><span>خيارات العجينة والإضافات لكل حجم، وتذاكر للفرن.</span><em>ابدأ مجانًا ›</em></a>
-    <a class="type" href="app/#signup"><b>حلويات ومخبز</b><span>وصفات بالغرام، إنتاج يومي، وبيع بالقطعة أو الوزن.</span><em>ابدأ مجانًا ›</em></a>
-    <a class="type" href="app/#signup"><b>عصائر ومثلجات</b><span>قائمة بسيطة، بيع سريع، ومخزون فواكه بالحدود.</span><em>ابدأ مجانًا ›</em></a>
-  </div>
-</div></section>
-
-<section id="pricing"><div class="wrap">
-  <div class="sh center rv"><p class="kicker">الأسعار</p><h2>مجاني الآن، لكل المطاعم</h2><p class="sub">نحن في بداية الطريق ونريد أكبر عدد من المطاعم يجرّب ويقترح. كل شيء مفتوح الآن بلا بطاقة بنكية.</p></div>
+<section id="pricing" aria-labelledby="pr-h"><div class="wrap">
+  <div class="sh rv"><div><p class="kicker">الأسعار</p><h2 id="pr-h">ابدأ مجانًا، بكل المزايا</h2></div><p class="lead">كل ما في النظام مفتوح لك ولفريقك، بدون رسوم اشتراك.</p></div>
   <div class="price">
-    <div class="plan">
-      <span class="tag">الباقة الحالية</span>
-      <h3>مجاني</h3>
-      <div class="amt"><b class="num">0</b><span>د.ل / شهريًا</span></div>
-      <div class="was">كل الشاشات، كل الأجهزة، كل المستخدمين</div>
-      <ul class="list">
-        <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>الكاشير والمطبخ والمخزون والمشتريات والخزنة والتقارير</li>
-        <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>موقع طلبات لزبائنك بست سمات، بلا عمولة</li>
-        <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>أجهزة ومستخدمون بلا حد، على سجل واحد</li>
-        <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>العمل بلا إنترنت والمزامنة التلقائية</li>
-        <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>تطبيق الكمبيوتر لويندوز وماك مع الطباعة الصامتة</li>
-        <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>التحديثات ونسخة احتياطية كاملة في أي وقت</li>
+    <div class="plan rv">
+      <div class="amt"><b class="num">0</b><span>د.ل شهريًا</span></div>
+      <ul class="incl">
+        <li><svg aria-hidden="true"><use href="#i-check"/></svg>الكاشير والطلبات والمطبخ</li>
+        <li><svg aria-hidden="true"><use href="#i-check"/></svg>المخزون والمشتريات والموردون</li>
+        <li><svg aria-hidden="true"><use href="#i-check"/></svg>الخزنة والورديات والمصروفات</li>
+        <li><svg aria-hidden="true"><use href="#i-check"/></svg>التقارير وأرباح الشركاء</li>
+        <li><svg aria-hidden="true"><use href="#i-check"/></svg>موقع طلبات باسم مطعمك</li>
+        <li><svg aria-hidden="true"><use href="#i-check"/></svg>عدد مفتوح من الموظفين والأجهزة</li>
       </ul>
-      <a class="btn primary lg" href="app/#signup">ابدأ مجانًا</a>
+      <div class="btns"><a class="btn pri" href="app/#signup">ابدأ مجانًا</a><a class="btn" href="app/#demo">جرّب النظام</a></div>
     </div>
-    <div class="soon">
-      <div class="card"><h3>باقات مدفوعة لاحقًا</h3><p>مع نمو النظام ستُضاف باقات مدفوعة بميزات إضافية. من يبدأ الآن يُبلَّغ قبل أي تغيير بوقت كافٍ.</p></div>
-      <div class="card"><h3>بياناتك تبقى لك</h3><p>في أي وقت تستطيع تنزيل نسخة احتياطية كاملة من التقارير، وإعادة تحميلها على أي جهاز.</p></div>
-      <div class="card"><h3>بلا عمولة على الطلبات</h3><p>موقع الطلبات لا يأخذ نسبة من مبيعاتك. الدفع عند الاستلام نقدًا أو تحويلًا، بلا بوابات دفع إلكتروني.</p></div>
-    </div>
-  </div>
-</div></section>
-
-<section class="alt" id="desktop"><div class="wrap">
-  <div class="sh rv"><p class="kicker">التنزيل</p><h2>تطبيق الكمبيوتر لويندوز وماك، أو من المتصفح</h2><p class="sub">البرنامج نفسه بالحساب نفسه. على الكمبيوتر يطبع صامتًا على طابعة الكاشير وطابعات المطبخ من دون نافذة طباعة، ويعمل بلا إنترنت.</p></div>
-  <div class="dl">
-    <div class="card" id="dl-win">
-      <span class="yours">لجهازك</span>
-      <div class="os"><svg viewBox="0 0 24 24"><path d="M3 5.5l7.5-1v7H3zM11.5 4.3L21 3v8.5h-9.5zM3 12.5h7.5v7L3 18.5zM11.5 12.5H21V21l-9.5-1.3z"/></svg><h3>ويندوز</h3></div>
-      <div class="req">ويندوز 10 أو أحدث · 64 بت</div>
-      <a class="btn primary" href="https://github.com/hussain98898/revo/releases/latest/download/Zeto-Setup.exe" data-dl="win"><svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg>تنزيل لويندوز <span dir="ltr">(.exe)</span></a>
-      <div class="ver" data-ver></div>
-      <ol><li>افتح الملف بعد التنزيل واتبع خطوات التثبيت.</li><li>سجّل الدخول بحسابك واختر اسمك ورمزك.</li><li>من الإعدادات › الطابعات اختر طابعة الكاشير وطابعات المطبخ.</li></ol>
-    </div>
-    <div class="card" id="dl-mac">
-      <span class="yours">لجهازك</span>
-      <div class="os"><svg viewBox="0 0 24 24"><path d="M16.4 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9s-1.8-.8-3-.8c-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.8 3-.8s1.8.8 3 .7c1.3 0 2.1-1.1 2.8-2.3.9-1.3 1.3-2.6 1.3-2.7-.1 0-2.5-1-2.5-3.6zM14.1 5.8c.6-.8 1.1-1.8 1-2.8-.9 0-2 .6-2.7 1.4-.6.7-1.1 1.7-1 2.7 1 .1 2.1-.5 2.7-1.3z"/></svg><h3>ماك</h3></div>
-      <div class="req">macOS 12 أو أحدث · Apple Silicon وIntel</div>
-      <a class="btn primary" href="https://github.com/hussain98898/revo/releases/latest/download/Zeto.dmg" data-dl="mac"><svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg>تنزيل لماك <span dir="ltr">(.dmg)</span></a>
-      <div class="ver" data-ver></div>
-      <ol><li>افتح ملف dmg واسحب «زيتو» إلى مجلد التطبيقات.</li><li>عند أول فتح: زر يمين على التطبيق ثم «فتح».</li><li>سجّل الدخول واختر الطابعات من الإعدادات.</li></ol>
-    </div>
-    <div class="card">
-      <div class="os"><svg viewBox="0 0 24 24"><path d="M7 3h10a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zM11 18h2"/></svg><h3>الهاتف والمتصفح</h3></div>
-      <div class="req">أندرويد وآيفون وآيباد · Chrome وSafari وEdge</div>
-      <a class="btn" href="app/"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>فتح التطبيق في المتصفح</a>
-      <div class="ver"></div>
-      <ol><li>أندرويد: اضغط «تثبيت التطبيق» عندما تظهر، أو قائمة Chrome ثم «إضافة إلى الشاشة الرئيسية».</li><li>آيفون: زر المشاركة في Safari ثم «إضافة إلى الشاشة الرئيسية».</li><li>الكمبيوتر: أيقونة التثبيت في شريط العنوان، أو زر «تثبيت التطبيق» داخل النظام.</li></ol>
-    </div>
-  </div>
-  <details class="note"><summary>ظهر تحذير عند أول تشغيل؟</summary><p>التطبيق جديد ولم يُسجَّل بعد لدى مايكروسوفت وآبل، فقد يظهر تنبيه في المرة الأولى فقط. على ويندوز: «مزيد من المعلومات» ثم «التشغيل على أي حال». على ماك: زر يمين على التطبيق ثم «فتح»، أو من إعدادات النظام › الخصوصية والأمان › «فتح على أي حال».</p></details>
-</div></section>
-
-<section id="faq"><div class="wrap">
-  <div class="sh center rv"><p class="kicker">أسئلة شائعة</p><h2>أسئلة وأجوبة</h2></div>
-  <div class="faq">
-    <details class="q"><summary>ماذا أحتاج للبدء؟</summary><p>بريد إلكتروني وكلمة مرور واسم المطعم. يُنشأ حساب المطعم خلال ثوانٍ، ثم يرافقك دليل البدء داخل النظام خطوة خطوة: الأقسام والأصناف، المواد والوصفات، المال في الخزنة، ثم أول وردية.</p></details>
-    <details class="q"><summary>هل يعمل بدون إنترنت؟</summary><p>نعم. يفتح التطبيق ويبيع ويطبع بدون اتصال، وتُحفظ العمليات على الجهاز ثم تُرسل بالترتيب عند عودة الاتصال. إن سبقه جهاز آخر على آخر وحدة، تُعرض العملية المرفوضة بوضوح ولا تُكرَّر.</p></details>
-    <details class="q"><summary>ما الأجهزة التي يعمل عليها؟</summary><p>أي هاتف أو تابلت أو كمبيوتر بمتصفح حديث، ويُثبَّت كتطبيق على الشاشة الرئيسية. ولويندوز وماك يوجد تطبيق كمبيوتر يطبع صامتًا على الطابعات الحرارية.</p></details>
-    <details class="q"><summary>هل الطباعة مدعومة؟</summary><p>نعم: طابعات الإيصالات الحرارية 80 مم و58 مم (مثل Xprinter وEpson) عبر USB أو الشبكة أو نافذة الطباعة، وتصميم الورقة قابل للتعديل. تطبيق الكمبيوتر يطبع مباشرة من دون أي نافذة.</p></details>
-    <details class="q"><summary>أين تُحفظ البيانات وهل هي آمنة؟</summary><p>في قاعدة بيانات سحابية (Google Firebase) في أوروبا خاصة بمطعمك، لا يصل إليها إلا أعضاؤه بحساباتهم. نسخة من آخر حالة تبقى على كل جهاز للعمل بلا اتصال، ونسخة احتياطية كاملة متاحة في أي وقت.</p></details>
-    <details class="q"><summary>كيف أضيف موظفًا؟</summary><p>من الإعدادات › المستخدمون: أضف المستخدم بدوره ورمزه ثم «دعوة» وأرسل الرابط عبر واتساب. يفتح الرابط على هاتفه، ينشئ حسابه، ويدخل باسمه ورمزه كالمعتاد.</p></details>
-    <details class="q"><summary>هل سيبقى مجانيًا؟</summary><p>مجاني الآن بكل ميزاته. ستُضاف باقات مدفوعة لاحقًا، ومن يبدأ اليوم يُبلَّغ قبل أي تغيير بوقت كافٍ، وتبقى بياناته له ويستطيع تنزيلها في أي وقت.</p></details>
-    <details class="q"><summary>ماذا يحدث عند صدور تحديث؟</summary><p>يظهر شريط «نسخة جديدة جاهزة» وتختار أنت متى تُحدّث. البيانات لا تتأثر؛ يتعرّف النظام على الإصدار السابق ويرقّي السجل تلقائيًا.</p></details>
-  </div>
-</div></section>
-
-<section><div class="wrap">
-  <div class="final">
-    <h2>ابدأ مع زيتو اليوم</h2>
-    <p>حساب مجاني في دقيقة. بلا بطاقة بنكية، وبلا التزام. جرّب المطعم التجريبي أولًا إن أحببت.</p>
-    <div class="cta">
-      <a class="btn primary lg" href="app/#signup">ابدأ مجانًا</a>
-      <a class="btn ghost lg" href="app/#demo">جرّب مطعمًا تجريبيًا</a>
+    <div class="perks">
+      <div class="perk rv"><i><svg aria-hidden="true"><use href="#i-card"/></svg></i><b>بدون بطاقة ائتمان</b><span>أنشئ حسابك وابدأ مباشرة.</span></div>
+      <div class="perk rv" style="--d:.08s"><i><svg aria-hidden="true"><use href="#i-pct"/></svg></i><b>بدون عمولة</b><span>طلبات موقعك كلها لك.</span></div>
+      <div class="perk rv" style="--d:.16s"><i><svg aria-hidden="true"><use href="#i-box"/></svg></i><b>بياناتك ملكك</b><span>احفظ نسخة منها متى شئت.</span></div>
     </div>
   </div>
 </div></section>
 
-<section class="alt" id="legal" style="padding-block: 40px"><div class="wrap">
-  <div class="legal">
-    <details id="terms"><summary>شروط الاستخدام</summary><p>زيتو خدمة لإدارة المطاعم تُقدَّم حاليًا مجانًا كما هي. صاحب المطعم مسؤول عن صحة البيانات المدخلة وعن حفظ بيانات حسابه ورموز موظفيه. قد تُضاف باقات مدفوعة لاحقًا ويُبلَّغ المستخدمون قبل ذلك بوقت كافٍ. نوصي بتنزيل نسخة احتياطية دوريًا من التقارير.</p></details>
-    <details id="privacy"><summary>الخصوصية</summary><p>بيانات مطعمك (الأصناف، الطلبات، المخزون، الحسابات) تُحفظ في قاعدة بيانات Google Firebase في أوروبا ولا يصل إليها إلا أعضاء المطعم بحساباتهم. لا نبيع البيانات ولا نشاركها مع أي طرف. البريد الإلكتروني يُستخدم لتسجيل الدخول واستعادة كلمة المرور فقط. يمكنك طلب حذف حسابك وبيانات مطعمك في أي وقت.</p></details>
+<section id="faq" aria-labelledby="faq-h"><div class="wrap faq-g">
+  <div class="faq-t rv"><p class="kicker">الأسئلة الشائعة</p><h2 id="faq-h">أسئلة يطرحها أصحاب المطاعم</h2><p class="lead">لم تجد جوابك؟ جرّب النظام بنفسك، فالتجربة لا تحتاج تسجيلًا.</p><a class="btn" href="app/#demo">جرّب النظام</a></div>
+  <div class="faq-l rv" style="--d:.08s">
+    <details open><summary>هل أحتاج أجهزة خاصة؟</summary><p>لا. يعمل زيتو على أي جوال أو تابلت أو كمبيوتر عندك. وللطباعة تكفي أي طابعة إيصالات حرارية.</p></details>
+    <details><summary>ماذا يحدث إذا انقطع الإنترنت؟</summary><p>تواصل البيع والطباعة كالمعتاد. نحفظ طلباتك على الجهاز ونرسلها تلقائيًا عند عودة الاتصال.</p></details>
+    <details><summary>كم يستغرق الإعداد؟</summary><p>دقائق. أنشئ حسابك، أضف أصنافك وأسعارها، وابدأ البيع. ودليل البدء داخل النظام يرافقك خطوة بخطوة.</p></details>
+    <details><summary>هل يدعم التوصيل وتطبيقات التوصيل؟</summary><p>نعم. تسجّل طلبات التوصيل بمناطقها، وتتابع مستحقاتك لدى كل تطبيق توصيل بعد خصم نسبته.</p></details>
+    <details><summary>ما طرق الدفع التي يسجّلها؟</summary><p>النقد والتحويل المصرفي، مع مطابقة التحويلات على كشف المصرف حتى لا يفوتك تحويل.</p></details>
+    <details><summary>هل بياناتي آمنة؟</summary><p>حساب مطعمك خاص بك، ولا يدخله إلا من تدعوه. لكل موظف رمز دخول وصلاحيات تحددها أنت، ويمكنك حفظ نسخة احتياطية في أي وقت.</p></details>
+    <details><summary>هل أستطيع تجربته قبل التسجيل؟</summary><p>نعم. اضغط «جرّب النظام» لتدخل مطعمًا تجريبيًا جاهزًا بأصنافه وطلباته.</p></details>
   </div>
 </div></section>
+
+<section class="end" aria-labelledby="end-h"><div class="wrap"><div class="deep end-g">
+  <div class="end-t rv"><h2 id="end-h">مطعمك يستحق نظامًا يريحك</h2><p class="lead">ابدأ اليوم مجانًا، وجهّز مطعمك في دقائق.</p><div class="btns"><a class="btn acc" href="app/#signup">ابدأ مجانًا</a><a class="btn" href="app/#signin">تسجيل الدخول</a></div></div>
+  <div class="end-v rv" style="--d:.08s"><div class="ph"><img src="img/film/team.webp" width="1600" height="893" loading="lazy" alt="فريق مطعم يضحك خلف الكاونتر في المساء والزبائن على الطاولات"></div></div>
+</div></div></section>
 </main>
 
 <footer><div class="wrap">
-  <div class="fgrid">
-    <div><span class="brand"><span class="logo" style="width:30px;height:30px;border-radius:9px"><svg viewBox="0 0 24 24"><path d="M7 7.5h10c-4 1-8 5-10 9h10"/></svg></span>زيتو</span><p>الكاشير، المطبخ، المخزون، الخزنة والتقارير وموقع الطلبات للمطاعم. يعمل على كل جهاز وبلا إنترنت.</p></div>
-    <div><h4>النظام</h4><ul><li><a href="#system" data-tab="pos">الكاشير</a></li><li><a href="#system" data-tab="kit">المطبخ</a></li><li><a href="#system" data-tab="stk">المخزون والمشتريات</a></li><li><a href="#system" data-tab="fin">الخزنة والتقارير</a></li><li><a href="#system" data-tab="web">موقع الطلبات</a></li></ul></div>
-    <div><h4>زيتو</h4><ul><li><a href="#pricing">الأسعار</a></li><li><a href="#desktop">تطبيق الكمبيوتر</a></li><li><a href="app/#signup">ابدأ مجانًا</a></li><li><a href="app/#signin">تسجيل الدخول</a></li><li><a href="app/#demo">النسخة التجريبية</a></li></ul></div>
-    <div><h4>المساعدة</h4><ul><li><a href="#faq">أسئلة شائعة</a></li><li><a href="#offline">العمل بلا إنترنت</a></li><li><a href="#terms">شروط الاستخدام</a></li><li><a href="#privacy">الخصوصية</a></li></ul></div>
+  <div class="foot">
+    <div class="about"><a class="brand" href="#main" aria-label="زيتو، أعلى الصفحة"><svg class="wm" viewBox="0 0 2781.8 754" role="img" aria-label="Zeto"><path fill="currentColor" d="M2 734L32.7 560L399 337L74 337L105.4 159L746.4 159L715.7 333L349.4 556L678.4 556L647 734ZM1035.8 752Q928.8 752 851.1 713.5Q773.4 675 736.7 605.5Q699.9 536 716.1 444Q732.2 353 791.7 285Q851.2 217 939.9 179Q1028.6 141 1130.6 141Q1237.6 141 1304.8 185Q1372 229 1397.9 309.5Q1423.7 390 1404.3 500L966.3 500Q968 507 972 513Q987.1 546 1028.2 563Q1069.2 580 1136.2 580Q1201.2 580 1265.6 563.5Q1330 547 1387.4 516L1362 660Q1290.1 705 1204.5 728.5Q1118.8 752 1035.8 752ZM979.9 383L1200.9 383Q1198.5 368 1193.7 356Q1183.2 330 1161.1 316.5Q1139 303 1105 303Q1067 303 1037.5 320Q1008 337 989.9 366Q984.5 374 979.9 383ZM1418.8 344L1438 235L1561 178L1703.1 2L1846.1 2L1818.4 159L2043.4 159L2010.8 344L1785.8 344L1765 462Q1755.3 517 1772.3 539.5Q1789.3 562 1854.3 562Q1894.3 562 1926.8 556.5Q1959.3 551 1985.7 543L1953.2 727Q1917.5 737 1866.6 744.5Q1815.8 752 1761.8 752Q1659.8 752 1598.2 721.5Q1536.6 691 1513.8 633Q1491 575 1505.1 495L1531.8 344Z"/><path class="o" fill-rule="evenodd" d="M2329.8 752Q2215.8 752 2137 714Q2058.2 676 2022.9 607Q1987.6 538 2003.6 447Q2019.8 355 2079.5 286Q2139.2 217 2231.4 179Q2323.6 141 2437.6 141Q2551.6 141 2630.4 179Q2709.2 217 2744.5 286Q2779.8 355 2763.6 447Q2747.6 538 2687.9 607Q2628.2 676 2536 714Q2443.8 752 2329.8 752ZM2362.4 567Q2402.4 567 2432.4 553Q2462.4 539 2481.6 512Q2500.9 485 2507.6 447Q2514.5 408 2504.7 381Q2495 354 2470 340Q2444.9 326 2404.9 326Q2365.9 326 2335.5 340Q2305 354 2285.7 381Q2266.5 408 2259.8 446Q2252.9 485 2262.6 512Q2272.4 539 2297.9 553Q2323.4 567 2362.4 567Z"/></svg></a><p>نظام عربي لإدارة المطاعم: الكاشير والمطبخ والمخزون والحسابات وموقع الطلبات.</p></div>
+    <nav aria-label="المنتج"><h3>المنتج</h3><a href="#system">المزايا</a><a href="#site">موقع الطلبات</a><a href="#saving">احسب توفيرك</a><a href="#pricing">الأسعار</a><a href="#desktop">التحميل</a></nav>
+    <nav aria-label="الحساب"><h3>الحساب</h3><a href="app/#signup">إنشاء حساب</a><a href="app/#signin">تسجيل الدخول</a><a href="app/#demo">جرّب النظام</a><a href="#faq">الأسئلة الشائعة</a></nav>
+    <div class="legal"><h3>الشروط والخصوصية</h3>
+<details id="terms"><summary>شروط الاستخدام</summary><p>زيتو خدمة لإدارة المطاعم، وهي مجانية حاليًا. أنت مسؤول عن صحة ما تدخله من بيانات، وعن حفظ كلمة مرورك ورموز دخول موظفيك. إذا أضفنا باقات مدفوعة مستقبلًا فسنبلغك قبلها بوقت كافٍ. وننصحك بحفظ نسخة احتياطية من بياناتك بين حين وآخر من داخل النظام.</p></details>
+<details id="privacy"><summary>الخصوصية</summary><p>بيانات مطعمك (الأصناف والطلبات والمخزون والحسابات) محفوظة على خوادم Google السحابية في أوروبا، ولا يدخل إليها إلا أعضاء مطعمك بحساباتهم. لا نبيع بياناتك ولا نشاركها مع أي طرف. نستخدم بريدك الإلكتروني لتسجيل الدخول واستعادة كلمة المرور فقط. ويمكنك طلب حذف حسابك وبيانات مطعمك في أي وقت.</p></details>
+    </div>
   </div>
-  <div class="fbot"><span>© 2026 زيتو (Zeto). جميع الحقوق محفوظة.</span><span class="sp"></span><span>الإصدار 202611251724</span></div>
+  <div class="fine"><span>© 2026 زيتو (Zeto). جميع الحقوق محفوظة.</span><span>الصور تعبيرية.</span></div>
 </div></footer>
-
+<!-- 202611270956 -->
 <script>
 (function () {
-  // mobile menu
-  var hdr = document.getElementById('top'), btn = document.getElementById('menuBtn'), menu = document.getElementById('menu');
-  btn.addEventListener('click', function () { var open = !hdr.classList.contains('open'); hdr.classList.toggle('open', open); btn.setAttribute('aria-expanded', String(open)); });
-  menu.addEventListener('click', function (e) { if (e.target.closest('a')) { hdr.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); } });
-  // tabs
-  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tabs [role=tab]'));
-  function show(id) {
-    tabs.forEach(function (t) { var on = t.id === 't-' + id; t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1; var p = document.getElementById(t.getAttribute('aria-controls')); if (p) { p.classList.toggle('on', on); p.hidden = !on; } });
+  var all = function (q, r) { return Array.prototype.slice.call((r || document).querySelectorAll(q)); }, $ = function (id) { return document.getElementById(id); };
+  var mq = function (q) { return !!(window.matchMedia && window.matchMedia(q).matches); };
+  var calm = mq('(prefers-reduced-motion: reduce)'), fine = mq('(hover: hover)'), IO = 'IntersectionObserver' in window;
+  // the menu on a phone: opens under the bar, closes on a choice, on Escape and on a press outside
+  var hdr = $('top'), btn = $('menuBtn'), menu = $('menu');
+  var setMenu = function (open) { hdr.classList.toggle('open', open); btn.setAttribute('aria-expanded', String(open)); };
+  btn.addEventListener('click', function () { setMenu(!hdr.classList.contains('open')); });
+  menu.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && hdr.classList.contains('open')) { setMenu(false); btn.focus(); } });
+  document.addEventListener('click', function (e) { if (hdr.classList.contains('open') && !e.target.closest('.bar')) setMenu(false); });
+  // the bar steps aside while you read down and returns when you look up
+  var lastY = window.scrollY; window.addEventListener('scroll', function () { var y = window.scrollY; if (!hdr.classList.contains('open')) hdr.classList.toggle('away', y > 360 && y > lastY + 4 ? true : y < lastY - 4 ? false : hdr.classList.contains('away')); lastY = y; }, { passive: true });
+  hdr.addEventListener('focusin', function () { hdr.classList.remove('away'); });
+  // parts settle as they are reached. Only what is below the window when the page opens waits; if anything fails, all of it shows.
+  var rv = all('.rv'), show = function () { rv.forEach(function (el) { el.classList.remove('pre'); }); };
+  try { if (!calm && IO) { var vh = window.innerHeight; rv.forEach(function (el) { if (el.getBoundingClientRect().top > vh * .9) el.classList.add('pre'); });
+      var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.remove('pre'); io.unobserve(e.target); } }); }, { rootMargin: '0px 0px -8% 0px' }); rv.forEach(function (el) { io.observe(el); });
+      window.addEventListener('beforeprint', show); } } catch (e) { show(); }
+  // the small pieces of interface play their short loop only while they are in view
+  try { if (!calm && IO) { var po = new IntersectionObserver(function (es) { es.forEach(function (e) { e.target.classList.toggle('play', e.isIntersecting); }); }, { threshold: .2 }); all('.fc-ui, .hv, .off-v, .site-m').forEach(function (el) { po.observe(el); }); } } catch (e) { /* they stay still */ }
+  // the cards on the first photo follow the pointer a little (computers only)
+  var stage = $('stage'); if (stage && !calm && fine) { var parts = all('[data-par]', stage), raf = 0, px = 0, py = 0;
+    window.addEventListener('pointermove', function (e) { px = e.clientX / window.innerWidth - .5; py = e.clientY / window.innerHeight - .5; if (!raf) raf = requestAnimationFrame(function () { raf = 0; parts.forEach(function (el) { var k = Number(el.getAttribute('data-par')); el.style.transform = 'translate(' + (px * k).toFixed(1) + 'px,' + (py * k).toFixed(1) + 'px)'; }); }); }, { passive: true }); }
+  // the ordering site in the phone: try a colour, try the dark look. The text over the colour turns white or black, whichever reads better.
+  var phone = $('phone'); if (phone) {
+    var lin = function (v) { v /= 255; return v <= .03928 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4); };
+    var onColor = function (hex) { var L = .2126 * lin(parseInt(hex.substr(1, 2), 16)) + .7152 * lin(parseInt(hex.substr(3, 2), 16)) + .0722 * lin(parseInt(hex.substr(5, 2), 16)); return 1.05 / (L + .05) >= (L + .05) / .0553 ? '#FFFFFF' : '#141414'; };
+    all('#dots button').forEach(function (b) { b.addEventListener('click', function () { var c = b.getAttribute('data-c'); phone.style.setProperty('--pa', c); phone.style.setProperty('--pon', onColor(c)); all('#dots button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); }); }); });
+    all('#pmode button').forEach(function (b) { b.addEventListener('click', function () { phone.setAttribute('data-mode', b.getAttribute('data-m')); all('#pmode button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); }); }); });
   }
-  tabs.forEach(function (t, i) {
-    t.addEventListener('click', function () { show(t.id.slice(2)); });
-    t.addEventListener('keydown', function (e) { var d = e.key === 'ArrowLeft' ? 1 : e.key === 'ArrowRight' ? -1 : 0; if (!d) return; e.preventDefault(); var n = tabs[(i + d + tabs.length) % tabs.length]; n.focus(); show(n.id.slice(2)); });
-  });
-  document.querySelectorAll('[data-tab]').forEach(function (a) { a.addEventListener('click', function () { show(a.getAttribute('data-tab')); }); });
-  // sections fade in as they come into view
-  try { if ('IntersectionObserver' in window) { var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { rootMargin: '0px 0px -8% 0px' }); document.querySelectorAll('.rv').forEach(function (el) { io.observe(el); }); } else document.querySelectorAll('.rv').forEach(function (el) { el.classList.add('in'); }); } catch (e) { document.querySelectorAll('.rv').forEach(function (el) { el.classList.add('in'); }); }
-  // an account is already open on this browser: the sign-in links say what they will do
-  try { var ses = JSON.parse(localStorage.getItem('cloud:revo5.cloud.last') || 'null'); if (ses && ses.uid) Array.prototype.forEach.call(document.querySelectorAll('a[href="app/#signin"]'), function (a) { a.textContent = 'فتح النظام'; }); } catch (e) { /* storage blocked: the links stay as they are */ }
-  // legal: open the section the link points to
-  function openHash() { var el = location.hash && document.querySelector(location.hash); if (el && el.tagName === 'DETAILS') el.open = true; }
+  // an account is already open on this device: the sign-in links say what they will do
+  try { var ses = JSON.parse(localStorage.getItem('cloud:revo5.cloud.last') || 'null'); if (ses && ses.uid) all('a[href="app/#signin"]').forEach(function (a) { a.textContent = 'فتح النظام'; }); } catch (e) { /* the links stay as they are */ }
+  // terms and privacy: open the one the link points to
+  function openHash() { var el = null; try { el = location.hash && document.querySelector(location.hash); } catch (e) { el = null; } if (el && el.tagName === 'DETAILS') el.open = true; }
   window.addEventListener('hashchange', openHash); openHash();
-  // downloads: mark the card for this computer, and show the latest version when GitHub answers
+  // the saving estimate: plain arithmetic on the visitor's own numbers
+  var share = 50, shown = 3240, anim = 0;
+  var fmt = function (n) { return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); };
+  function calc() {
+    var o = +$('k-o').value, a = +$('k-a').value, s = +$('k-s').value, c = +$('k-c').value;
+    $('o-o').textContent = o; $('o-a').textContent = a; $('o-s').textContent = s + '%'; $('o-c').textContent = c + '%';
+    ['k-o', 'k-a', 'k-s', 'k-c'].forEach(function (id) { var el = $(id); el.style.setProperty('--p', ((el.value - el.min) / (el.max - el.min) * 100) + '%'); });
+    var now = o * a * 30 * (s / 100) * (c / 100), m = now * (share / 100), from = shown, t0 = performance.now(); cancelAnimationFrame(anim);
+    $('r-now').textContent = fmt(now); $('r-aft').textContent = fmt(now - m); $('b-aft').style.width = (now ? (now - m) / now * 100 : 0) + '%';
+    var step = function (t) { var k = calm ? 1 : Math.min(1, (t - t0) / 500), e = 1 - Math.pow(1 - k, 3); shown = from + (m - from) * e; $('r-m').textContent = fmt(shown); $('r-y').textContent = fmt(shown * 12); if (k < 1) anim = requestAnimationFrame(step); };
+    anim = requestAnimationFrame(step);
+  }
+  ['k-o', 'k-a', 'k-s', 'k-c'].forEach(function (id) { $(id).addEventListener('input', calc); });
+  all('#k-m button').forEach(function (b) { b.addEventListener('click', function () { share = +b.getAttribute('data-v'); all('#k-m button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); }); calc(); }); });
+  calc();
+  // downloads: mark the card for this computer. Each button already points at its file (the names never change between releases).
   var ua = navigator.userAgent || '', plat = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || '';
   var isMac = /Mac/i.test(plat) && !/iPhone|iPad/i.test(ua), isWin = /Win/i.test(plat);
-  if (isMac) document.getElementById('dl-mac').classList.add('yours-on'); else if (isWin) document.getElementById('dl-win').classList.add('yours-on');
-  var vers = document.querySelectorAll('[data-ver]');
-  try {
-    fetch('https://api.github.com/repos/hussain98898/revo/releases/latest', { headers: { Accept: 'application/vnd.github+json' } }).then(function (r) { return r.ok ? r.json() : null; }).then(function (rel) {
-      if (!rel || !rel.assets) { vers.forEach(function (v) { v.textContent = 'النسخة قيد التجهيز، ستظهر هنا عند صدورها.'; }); document.querySelectorAll('[data-dl]').forEach(function (a) { a.href = 'https://github.com/hussain98898/revo/releases'; }); return; }
-      var tag = (rel.tag_name || '').replace(/^desktop-v|^v/, ''), date = rel.published_at ? new Date(rel.published_at).toLocaleDateString('ar', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
-      document.querySelectorAll('[data-dl]').forEach(function (a) {
-        var want = a.getAttribute('data-dl') === 'win' ? /\.exe$/i : /\.dmg$/i; var list = rel.assets.filter(function (x) { return want.test(x.name); }); var asset = list.filter(function (x) { return /^Zeto/i.test(x.name); })[0] || list.sort(function (a, b) { return new Date(b.updated_at || 0) - new Date(a.updated_at || 0); })[0];
-        var v = a.parentNode.querySelector('[data-ver]');
-        if (asset) { a.href = asset.browser_download_url; v.textContent = 'الإصدار ' + tag + (date ? ' · ' + date : '') + ' · ' + Math.round(asset.size / 1048576) + ' م.ب'; }
-        else { v.textContent = 'النسخة قيد التجهيز، ستظهر هنا عند صدورها.'; a.href = rel.html_url || 'https://github.com/hussain98898/revo/releases'; }
-      });
-    }).catch(function () {});
-  } catch (e) {}
+  if (isMac) $('dl-mac').classList.add('yours-on'); else if (isWin) $('dl-win').classList.add('yours-on');
 })();
 </script>
 </body>

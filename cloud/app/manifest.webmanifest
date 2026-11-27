@@ -8,8 +8,8 @@
   "orientation": "any",
   "dir": "rtl",
   "lang": "ar",
-  "background_color": "#ffffff",
-  "theme_color": "#0B5CFF",
+  "background_color": "#F4F5EF",
+  "theme_color": "#0F2A1B",
   "icons": [
     {
       "src": "icons/icon-192.png",
